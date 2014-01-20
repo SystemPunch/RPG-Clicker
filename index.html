@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPG Clicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="character.js"></script>
+    <script type="text/javascript" src="upgrades.js"></script>
+    <script type="text/javascript" src="places.js"></script>
+    <script type="text/javascript" src="monsters.js"></script>
+
+    <script src="/resources/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap-navbar-fixed-top.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap-sticky-footer.css" rel="stylesheet">
+    <style>
+        .nav-tabs {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="/">SystemPunch</a></div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/rpg-clicker">RPG Clicker</a></li>
+                    <li><a href="/nba-superstars">NBA Superstars</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#mainTab" data-toggle="tab">Main</a></li>
+            <li><a href="#inventoryTab" data-toggle="tab">Inventory</a></li>
+            <li><a href="#combatTab" data-toggle="tab">Combat</a></li>
+            <li><a href="#locationTab" data-toggle="tab">Places</a></li>
+            <li><a href="#upgradesTab" data-toggle="tab">Perks</a></li>
+            <li><a href="#optionsTab" data-toggle="tab">Options</a></li>
+        </ul>
+        <div class="tab-content col-md-9">
+            <div class="tab-pane fade in active" id="mainTab">
+                <div id="characterStats" style="float:left;padding-right:40px;"></div>
+                <div id="characterStatsValues" style="float:left;padding-right:80px;"></div>
+                <div id="proficiencies" style="float:left;padding-right:40px;"></div>
+                <div id="proficienciesValues" style="float:left;padding-right:80px;"></div>
+                <div id="gameStats" style="float:left;margin-right:40px;"></div>
+                <div id="gameStatsValues" style="float:left;"></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="tab-pane fade" id="inventoryTab">
+                Inventory
+            </div>
+            <div class="tab-pane fade" id="combatTab">
+                Combat
+            </div>
+            <div class="tab-pane fade" id="locationTab">
+                Places
+            </div>
+            <div class="tab-pane fade" id="upgradesTab">
+                <div id="upgradeCounter"></div>
+            </div>
+            <div class="tab-pane fade" id="optionsTab">
+                <p>
+
+                <p>
+                    <button type="button" class="btn btn-primary" onclick="toggleAutoSaving()">Toggle Auto-Saving
+                    </button>
+                    Auto-Saving is currently: <span id="autoSaveStatus"></span></p>
+                <p>
+                    <button type="button" class="btn btn-primary" onclick="saveGame()">Save Game</button>
+                    <button type="button" class="btn btn-primary" onclick="loadGame()">Load Game</button>
+                </p>
+                <p>Time since last save: <span id="timeSinceLastSave"></span> second(s)</p>
+
+                <p>
+                    <button type="button" class="btn btn-primary"
+                            onclick="character.name = prompt('What is your name?') || 'Grabnar';">Change Character Name
+                    </button>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-primary" onclick="newGame()">Reset Save</button>
+                </p>
+                </p>
+            </div>
+            <div class="tab-pane fade" id="changelogTab">
+                <h2><span style="text-decoration:underline;">Changelog</span></h2>
+                <h4 style="margin-bottom:0;">Version 0.0.8</h4>
+                <ul style="margin-top:0;">
+                    <li>Switched to all Bootstrap stuff</li>
+                    <li>Game is now mobile-friendly!</li>
+                    <li>Tweaked developer version checking</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.7</h4>
+                <ul style="margin-top:0;">
+                    <li>Enabled saving of perks (EVERYTHING IS SAVED NOW. LET ME KNOW IF STUFF IS BROKEN)</li>
+                    <li>Added ability to reset save</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.6</h4>
+                <ul style="margin-top:0;">
+                    <li>Fixed bug with GPS saving, but mine resetting it</li>
+                    <li>"Fixed" perks</li>
+                    <li>Enabled saving of the Gold Mine</li>
+                    <li>Added manual save/load buttons</li>
+                    <li>Added ability to toggle auto-saving</li>
+                    <li>Added ability to change character name</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.5</h4>
+                <ul style="margin-top:0;">
+                    <li>Enabled character saving</li>
+                    <li>Lowered cost of mine</li>
+                    <li>Made XP "curve" linear a la DnD</li>
+                    <li>Minor housekeeping</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.4</h4>
+                <ul style="margin-top:0;">
+                    <li>Added some more Perks</li>
+                    <li>Added version checking</li>
+                    <li>Balanced gold mine costs</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.3</h4>
+                <ul style="margin-top:0;">
+                    <li>Added gold mine!</li>
+                    <li>Added stuff to the previously-feared-useless "Main" tab</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.2</h4>
+                <ul style="margin-top:0;">
+                    <li>Added first pair of perks!</li>
+                    <li>Resized tabs</li>
+                    <li>Refined notification system. They now stack at the bottom of the screen and will push older
+                        notifications up to make room - THIS SHIT'S COOL YO<br/>
+                        <input type="button" onclick="bottomNotify('I\'m a notification!', 'info')"
+                               value="Spam this button to try it out!"/>
+                    </li>
+                    <li>Lots of behind the scenes reworking</li>
+                </ul>
+                <h4 style="margin-bottom:0;">Version 0.0.1</h4>
+                <ul style="margin-top:0;">
+                    <li>Initial release</li>
+                </ul>
+                <h2><span style="text-decoration:underline;">Planned Features</span></h2>
+                <ul>
+                    <li>EXCITING ARENA COMBAT</li>
+                    <li>INTERESTING AND COMPELLING QUESTS</li>
+                    <li>CHALLENGING DUNGEONS</li>
+                    <li>PHAT LOOT</li>
+                    <li>CRAFTING</li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default col-md-3">
+            <div class="panel-body">
+                <div id="charName"></div>
+                <div id="level"></div>
+                <div id="XP"></div>
+                <button type="button" class="btn btn-primary btn-xs" onclick="character.gainXP(character.clickXP)">Gain
+                    XP
+                </button>
+                <br/><br/>
+
+                <div id="gold"></div>
+                <button type="button" class="btn btn-primary btn-xs" onclick="character.gainGold(character.clickGold)">
+                    Gain
+                    Gold
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="noteContainer">
+        <div class="notificationBar" id="versionBar" style="display:none">There is a new version available! Refresh the
+            page
+            to update! (You may need to force a cache override; CTRL+F5)
+        </div>
+    </div>
+</div>
+    <!-- Sticky Footer -->
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-muted">
+                    Copyright &copy; 2014 SystemPunch. All rights reserved.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-muted text-right">
+                    <a href="/contact.html">Contact</a> | <a href="/about.html">About</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer>Current stable version:<span id="version">0.0.8</span><br/>
+    <a href="/rpg-clicker/dev" style="color:#AAA;">Latest dev version: <span id="devVersion"></span></a><br/>
+    <span id="changelogTab" style="color:#AAA;"><a href="#changelogTab" data-toggle="tab">Changelog</a></span><br/>
+</footer>
+</html>
