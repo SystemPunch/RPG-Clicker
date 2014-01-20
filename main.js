@@ -195,6 +195,8 @@ function saveGame() {
     return saveState;
 }
 
+var test = "test";
+
 function loadGame() {
     var loadState = JSON.parse(window.localStorage.getItem("saveState"));
     var loadEverything = function() {
