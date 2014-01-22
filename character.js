@@ -80,4 +80,4 @@ var character = {
     }
 };
 
-var defaultCharacter = {};
+var defaultCharacter;

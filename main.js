@@ -25,6 +25,7 @@ $(document).ready(function () {
     });
 
     defaultCharacter = $.extend(true, {}, character);
+    defaultPlaceMine = $.extend(true, {}, placeMine);
 
     loadGame();
     window.setInterval(updateGame, 100);
