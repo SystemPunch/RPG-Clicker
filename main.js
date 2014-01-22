@@ -185,7 +185,7 @@ function checkVersion() {
         if (data != $("#version").html()) $("#versionBar").css("display", "block");
     });
 
-    $.get("devversion.txt", function (data) {
+    $.get("/rpg-clicker/dev/devversion.txt", function (data) {
         $("#devVersion").html(data);
     });
 }
