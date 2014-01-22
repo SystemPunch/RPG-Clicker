@@ -42,20 +42,26 @@ var character = {
         this.neededXP = this.level * 100;
         this.currentXP = 0;
 
-        var stats = ["attack", "spA", "defense", "spD", "speed", "maxHP"];
-        var statPoints = randomFromInterval(16, 24);
+        var stats = ["attack", "spA", "defense", "spD", "speed"];
 
-        while(statPoints) {
-            var whichStat = stats[Math.floor(Math.random()*stats.length)];
+        var whichStats = [];
 
-            console.log("Now have "+ statPoints +" stat points.");
-            console.log("Putting point into "+ whichStat +".");
+        while(whichStats.length < 3) {
+            var which = randomFromInterval(0, stats.length-1);
 
-            if(whichStat === "maxHP") this.maxHP += 2;
-            else this[whichStat]++;
+            console.log("Which is: "+ which);
 
-            statPoints--;
+            if(whichStats.indexOf(which) === -1) whichStats.push(which);
         }
+
+        for(var i=0; i<whichStats.length; i++) {
+            var k = whichStats[i];
+
+            console.log("Adding stat to "+ stats[k]);
+            this[stats[k]] += randomFromInterval(2, 4);
+        }
+
+        this.maxHP += randomFromInterval(2, 4);
 
         this.HP = this.maxHP;
         this.critChance = this.speed / 512;
