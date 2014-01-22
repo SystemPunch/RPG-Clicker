@@ -76,20 +76,18 @@ function updateCharacterPanel() {
 
     $("#proficiencies").html("\
         <div style='font-size:1.3em'>Proficiencies</div>\
-        <div>Light Blades</div>\
-        <div>Heavy Blades</div>\
+        <div>Blades</div>\
         <div>Bows</div>\
-        <div>Staves</div>\
         <div>Shields</div>\
+        <div>Magic</div>\
     ");
 
     $("#proficienciesValues").html("\
         <div style='font-size:1.3em;'>&nbsp;</div>\
-        <div>" + character.lightBladeProf + "</div>\
-        <div>" + character.heavyBladeProf + "</div>\
+        <div>" + character.bladeProf + "</div>\
         <div>" + character.bowProf + "</div>\
-        <div>" + character.staffProf + "</div>\
         <div>" + character.shieldProf + "</div>\
+        <div>" + character.magicProf + "</div>\
     ");
 
     $("#gameStats").html("\
