@@ -17,6 +17,15 @@ $(document).ready(function () {
         }
     });
 
+    $("#fightMonster").click(function(e) {
+        var menu = document.getElementById("monsterList");
+        var selectedMonster = menu.options[menu.selectedIndex].value;
+
+        alert("You selected: "+ monsters.list[selectedMonster].name);
+    });
+
+    defaultCharacter = $.extend(true, {}, character);
+
     loadGame();
     window.setInterval(updateGame, 100);
 });
@@ -42,8 +51,10 @@ function updateCharacterPanel() {
         <div>" + character.HP + "/" + character.maxHP + " HP</div>\
         <div>" + character.currentXP + " / " + character.neededXP + " XP</div><br />\
         <div>Attack</div>\
+        <div>Special Attack</div>\
         <div>Defense</div>\
-        <div>Evasion Chance</div><br />\
+        <div>Special Defense</div>\
+        <div>Speed</div><br />\
         <div>Crit Chance</div>\
         <div>Crit Power</div>\
     ");
@@ -54,9 +65,11 @@ function updateCharacterPanel() {
         <br />\
         <br /><br />\
         <div>" + character.attack + "</div>\
+        <div>" + character.spA + "</div>\
         <div>" + character.defense + "</div>\
-        <div>" + character.evasion * 100.0 + "%</div><br />\
-        <div>" + character.critChance * 100.0 + "%</div>\
+        <div>" + character.spD + "</div>\
+        <div>" + character.speed + "</div><br />\
+        <div>" + (character.critChance * 100.0).toFixed(2) + "%</div>\
         <div>" + Math.round(character.critPower * 10000.0) / 100.0 + "%</div>\
     ");
 
@@ -156,7 +169,8 @@ function newGame() {
 
     character.name = prompt("What is your name?") || "Grabnar";
 
-    updatePlaces();
+    updatePlaces()
+    monsters.populateList();
 
     saveGame();
 }
@@ -213,6 +227,9 @@ function loadGame() {
         unlockedUpgradesCount = loadState.unlockedUpgradesCount;
         character.calculateGPS();
         settings = loadState.settings;
+
+        updatePlaces();
+        monsters.populateList();
     }
 
     if (loadState) {
@@ -230,4 +247,8 @@ Do you want to attempt to load this save file? (Press OK to load, Cancel to star
     bottomNotify("Game loaded!", "info");
 
     return loadState;
+}
+
+function randomFromInterval(from, to) {
+    return Math.floor(Math.random()*(to-from+1)+from);
 }
