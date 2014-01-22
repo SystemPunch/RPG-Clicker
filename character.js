@@ -33,6 +33,8 @@ var character = {
     GPS: 0,
     clickGold: 1,
 
+    totalClicks: 0,
+
     inventory: [],
 
     levelUp: function () {
@@ -72,6 +74,14 @@ var character = {
     gainGold: function (num) {
         this.gold += num;
         updateCharacterPanel();
+    },
+
+    clickXPButton: function() {
+        this.gainXP(this.clickXP);
+    },
+
+    clickGoldButton: function() {
+        this.gainGold(this.clickGold);
     },
 
     calculateGPS: function () {

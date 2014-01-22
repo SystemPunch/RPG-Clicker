@@ -99,7 +99,8 @@ function updateCharacterPanel() {
         <div>Gold per Click</div>\
         <div>Gold per Second</div><br />\
         <div>Enemies Killed</div>\
-        <div>Times Died</div>\
+        <div>Times Died</div><br />\
+        <div>Total Clicks</div>\
     ");
 
     $("#gameStatsValues").html("\
@@ -109,7 +110,8 @@ function updateCharacterPanel() {
         <div>" + character.clickGold + "</div>\
         <div>" + character.GPS.toFixed(1) + "</div><br />\
         <div>" + character.enemiesKilled + "</div>\
-        <div>" + character.timesDied + "</div>\
+        <div>" + character.timesDied + "</div><br />\
+        <div>" + character.totalClicks +"</div>\
     ");
 }
 
