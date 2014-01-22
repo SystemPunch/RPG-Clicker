@@ -78,10 +78,12 @@ var character = {
 
     clickXPButton: function() {
         this.gainXP(this.clickXP);
+        this.totalClicks++;
     },
 
     clickGoldButton: function() {
         this.gainGold(this.clickGold);
+        this.totalClicks++;
     },
 
     calculateGPS: function () {
