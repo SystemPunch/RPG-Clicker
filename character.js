@@ -17,6 +17,9 @@ var character = {
     critChance: 10 / 512,
     critPower: 7 / 6,
 
+    unarmedProf: 1,
+    unarmedXP: 0,
+    unarmedXPNeeded: 10,
     bladeProf: 1,
     bladeXP: 0,
     bladeXPNeeded: 10,

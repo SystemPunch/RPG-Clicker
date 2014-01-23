@@ -76,6 +76,7 @@ function updateCharacterPanel() {
 
     $("#proficiencies").html("\
         <div style='font-size:1.3em'>Proficiencies</div>\
+        <div>Unarmed</div>\
         <div>Blades</div>\
         <div>Bows</div>\
         <div>Shields</div>\
@@ -84,6 +85,7 @@ function updateCharacterPanel() {
 
     $("#proficienciesValues").html("\
         <div style='font-size:1.3em;'>&nbsp;</div>\
+        <div>" + character.unarmedProf + "</div>\
         <div>" + character.bladeProf + "</div>\
         <div>" + character.bowProf + "</div>\
         <div>" + character.shieldProf + "</div>\
