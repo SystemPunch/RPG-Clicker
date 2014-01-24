@@ -47,6 +47,10 @@ var character = {
 
     inventory: [],
 
+    moveset: [
+        movePunch
+    ],
+
     levelUp: function () {
         this.level++;
         this.neededXP = this.level * 100;
