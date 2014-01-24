@@ -107,6 +107,10 @@ var character = {
     calculateGPS: function () {
         this.GPS =
             placeMine.goldBonus;
+    },
+
+    learnMove: function(move) {
+        this.moveset.push(move);
     }
 };
 
