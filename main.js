@@ -17,13 +17,6 @@ $(function () {
         }
     });
 
-    $("#fightMonster").click(function(e) {
-        var menu = document.getElementById("monsterList");
-        var selectedMonster = menu.options[menu.selectedIndex].value;
-
-        alert("You selected: "+ monsters.list[selectedMonster].name);
-    });
-
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
 
