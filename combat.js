@@ -34,13 +34,27 @@ function combat(mon) {
 }
 
 function enableCombatUI() {
-    $(".skillButton").each(function(index) {
-        $(this).show();
-    });
+    $("#skillButtons").empty();
+
+    for(var i=0; i<character.moveset.length; i++) {
+        var $skillButtonDiv = $(document.createElement("div"));
+        $skillButtonDiv.attr({
+            class: "col-md-6 skillButton"
+        });
+
+        var $skillButton = $(document.createElement("button"));
+        $skillButton.attr({
+            type: "button",
+            class: "btn btn-danger btn-lg btn-block"
+        });
+        $skillButton.html(character.moveset[i].name);
+
+        $skillButtonDiv.append($skillButton);
+
+        $("#skillButtons").append($skillButtonDiv);
+    }
 }
 
 function disableCombatUI() {
-    $(".skillButton").each(function(index) {
-        $(this).hide();
-    });
+    $("#skillButtons").empty();
 }

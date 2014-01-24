@@ -1,11 +1,11 @@
-var Move = function() {
-    this.name = arguments["name"];
-    this.type = arguments["type"];
-    this.weapon = arguments["weapon"];
-    this.power = arguments["power"];
-    this.ailments = arguments["ailments"];
-    this.ailmentChances = arguments["ailmentChances"];
-    this.priority = arguments["priority"] || 0;
+function Move(args) {
+    this.name = args["name"];
+    this.type = args["type"];
+    this.weapon = args["weapon"];
+    this.power = args["power"];
+    this.ailments = args["ailments"];
+    this.ailmentChances = args["ailmentChances"];
+    this.priority = args["priority"] || 0;
 };
 
 /*-----

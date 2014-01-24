@@ -47,9 +47,7 @@ var character = {
 
     inventory: [],
 
-    moveset: [
-        movePunch
-    ],
+    moveset: [],
 
     levelUp: function () {
         this.level++;
@@ -111,5 +109,7 @@ var character = {
             placeMine.goldBonus;
     }
 };
+
+character.moveset.push(movePunch);
 
 var defaultCharacter;
