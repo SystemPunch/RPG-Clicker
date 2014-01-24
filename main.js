@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     //$(document).tooltip();
 
     $("span#changelogTab").click(function () {
