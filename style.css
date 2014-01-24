@@ -49,6 +49,10 @@ ul li.selected {
     border: 1px dashed #BBB;
 }
 
+.skillButton {
+    padding: 10px 15px;
+}
+
 .upgradeBar {
     color: #EFEFEF;
     border-radius: 8px;
