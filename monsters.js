@@ -24,7 +24,10 @@ var monsters = {
 };
 
 var monRat = new Monster("Rat", 10);
+monRat.moveset.push(moveBite);
+
 var monGoblin = new Monster("Goblin", 20);
+monGoblin.moveset.push(movePunch);
 
 monsters.list.push(monRat);
 monsters.list.push(monGoblin);
