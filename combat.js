@@ -13,8 +13,14 @@ $(function() {
     disableCombatUI();
 });
 
+var inCombat = false;
+var enemyHP = 0;
+
 // Player selects monster to fight
-function startCombat(mon) {
+function startCombat(enemy) {
+    if(inCombat) return;
+    inCombat = true;
+
     // show combat pane with skill selection
     enableCombatUI();
 
@@ -36,6 +42,14 @@ function startCombat(mon) {
     // show appropriate messages, give rewards, hide UI
 
     //disableCombatUI();
+}
+
+function continueCombat() {
+
+}
+
+function endCombat() {
+    inCombat = false;
 }
 
 function enableCombatUI() {
