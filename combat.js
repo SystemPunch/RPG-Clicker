@@ -3,14 +3,18 @@ $(function() {
         var menu = document.getElementById("monsterList");
         var selectedMonster = menu.options[menu.selectedIndex].value;
 
-        combat(monsters.list[selectedMonster]);
+        startCombat(monsters.list[selectedMonster]);
+    });
+
+    $("#skillButtons").on("click", "button", function(e) {
+        alert(character.moveset[this.name].name);
     });
 
     disableCombatUI();
 });
 
 // Player selects monster to fight
-function combat(mon) {
+function startCombat(mon) {
     // show combat pane with skill selection
     enableCombatUI();
 
@@ -29,8 +33,9 @@ function combat(mon) {
 
             // do any other status stuff like poison, burn, etc.
 
-    // if battle is over
-        // show appropriate messages, give rewards
+    // show appropriate messages, give rewards, hide UI
+
+    //disableCombatUI();
 }
 
 function enableCombatUI() {
@@ -45,7 +50,8 @@ function enableCombatUI() {
         var $skillButton = $(document.createElement("button"));
         $skillButton.attr({
             type: "button",
-            class: "btn btn-danger btn-lg btn-block"
+            class: "btn btn-danger btn-lg btn-block",
+            name: i
         });
         $skillButton.html(character.moveset[i].name);
 

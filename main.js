@@ -122,7 +122,6 @@ function updateGame() {
     character.gainGold(character.GPS / 10.0);
 
     updateCharacterPanel();
-    updateUpgrades();
 
     checkVersion();
 

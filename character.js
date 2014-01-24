@@ -91,6 +91,7 @@ var character = {
 
     gainGold: function (num) {
         this.gold += num;
+        updateUpgrades();
         updateCharacterPanel();
     },
 
