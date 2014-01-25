@@ -15,33 +15,17 @@ $(function() {
 
 var inCombat = false;
 var enemyHP = 0;
+var enemyMaxHP = 0;
 
 // Player selects monster to fight
 function startCombat(enemy) {
     if(inCombat) return;
     inCombat = true;
 
-    // show combat pane with skill selection
+    enemyMaxHP = enemy.maxHP;
+    enemyHP = enemyMaxHP;
+
     enableCombatUI();
-
-    alert("You selected: "+ mon.name);
-
-    // while battle isn't over
-        // player selects skill
-            // select move for monster
-
-            // if one is paralyzed, make other go first
-
-            // otherwise compare priority, speed, etc. to determine order
-
-            // do damage, print messages, check for victory, etc.
-                // increase proficiency as needed
-
-            // do any other status stuff like poison, burn, etc.
-
-    // show appropriate messages, give rewards, hide UI
-
-    //disableCombatUI();
 }
 
 function continueCombat() {
@@ -50,6 +34,7 @@ function continueCombat() {
 
 function endCombat() {
     inCombat = false;
+    disableCombatUI();
 }
 
 function enableCombatUI() {
@@ -88,4 +73,6 @@ function printToCombatLog(text) {
     $newLine.html(text);
 
     $("#combatLog").append($newLine);
+
+    $("#combatLogPanel").scrollTop($("#combatLogPanel")[0].scrollHeight);
 }
