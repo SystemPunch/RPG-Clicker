@@ -1,10 +1,11 @@
 var Monster = function(args) {
     this.name = args.name;
     this.HP = args.HP;
+    this.maxHP = args.HP;
 
     this.attack = args.attack;
     this.spA = args.spA;
-    this.defense = args.defese;
+    this.defense = args.defense;
     this.spD = args.spD;
     this.speed = args.speed;
 

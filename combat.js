@@ -15,8 +15,6 @@ $(function() {
 
 var inCombat = false;
 var enemy;
-var enemyHP = 0;
-var enemyMaxHP = 0;
 
 // Player selects monster to fight
 function startCombat(mon) {
@@ -27,6 +25,8 @@ function startCombat(mon) {
     inCombat = true;
 
     enemy = $.extend(true, {}, mon);
+    calculateEnemyStats();
+    enemy.HP = enemy.maxHP;
 
     enableCombatUI();
 
@@ -35,7 +35,7 @@ function startCombat(mon) {
 
 function continueCombat(move) {
     if(!inCombat) {
-        bottomNotify("You are not in combat!", "danger");
+        printToCombatLog("You are not in combat!", "danger");
         endCombat();
     }
 
@@ -104,4 +104,13 @@ function printToCombatLog(text) {
     $("#combatLog").append($newLine);
 
     $("#combatLog").scrollTop($("#combatLog")[0].scrollHeight);
+}
+
+function calculateEnemyStats() {
+    enemy.maxHP = Math.round(randomFromInterval( enemy.maxHP * 0.8 , enemy.maxHP * 1.1 ));
+    enemy.attack = Math.round(randomFromInterval( enemy.attack * 0.8 , enemy.attack * 1.1 ));
+    enemy.spA = Math.round(randomFromInterval( enemy.spA * 0.8 , enemy.spA * 1.1 ));
+    enemy.defense = Math.round(randomFromInterval( enemy.defense * 0.8 , enemy.defense * 1.1 ));
+    enemy.spD = Math.round(randomFromInterval( enemy.spD * 0.8 , enemy.spD * 1.1 ));
+    enemy.speed = Math.round(randomFromInterval( enemy.speed * 0.8 , enemy.speed * 1.1 ));
 }
