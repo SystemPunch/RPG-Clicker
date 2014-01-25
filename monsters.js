@@ -11,6 +11,8 @@ var Monster = function(args) {
 
     this.moveset = [];
 
+    this.ailments = [];
+
     return this;
 };
 
