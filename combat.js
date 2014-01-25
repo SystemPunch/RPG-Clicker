@@ -22,7 +22,9 @@ function startCombat(mon) {
         printToCombatLog("You are already in combat!");
         return;
     }
-    inCombat = true;
+    inCombat = true
+
+    $("#fightMonster").attr("disabled", true);
 
     enemy = $.extend(true, {}, mon);
     calculateEnemyStats();
@@ -41,7 +43,14 @@ function continueCombat(move) {
 
     var characterMove = move;
     var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
+    var playerSpeed = calculateCombatSpeed(character);
+    alert("Character's calculated speed is "+ playerSpeed);
+    var enemySpeed = calculateCombatSpeed(enemy);
+    alert("Enemy's calculated speed is "+ enemySpeed);
+    var first = "";
 
+    if(randomFromInterval(0,1)) first = "player";
+    else first = "enemy";
 }
 
 function checkCombatEnd() {
@@ -63,6 +72,8 @@ function endCombat(result) {
         default:
             break;
     }
+
+    $("#fightMonster").attr("disabled", false);
 }
 
 function enableCombatUI() {
@@ -87,6 +98,7 @@ function enableCombatUI() {
         $("#skillButtons").append($skillButtonDiv);
     }
 
+    updateHealthBars();
     $("#healthBars").show();
 }
 
@@ -115,4 +127,23 @@ function calculateEnemyStats() {
     enemy.defense = Math.round(randomFromInterval( enemy.defense * 0.8 , enemy.defense * 1.1 ));
     enemy.spD = Math.round(randomFromInterval( enemy.spD * 0.8 , enemy.spD * 1.1 ));
     enemy.speed = Math.round(randomFromInterval( enemy.speed * 0.8 , enemy.speed * 1.1 ));
+}
+
+function updateHealthBars() {
+    var playerHealth = ""+ Math.round((character.HP / character.maxHP) * 100);
+    var enemyHealth = ""+ Math.round((enemy.HP / enemy.maxHP) * 100);
+
+    $("#playerHealth").css("width", playerHealth +"%");
+    $("#enemyHealth").css("width", enemyHealth +"%");
+
+    $("#playerHealth").html(character.HP +" / "+ character.maxHP);
+    $("#enemyHealth").html(enemy.HP +" / "+ enemy.maxHP);
+}
+
+function calculateCombatSpeed(mob) {
+    var speed = mob.speed;
+
+    if(mob.ailments.indexOf("paralyzed") !== -1) speed /= 4;
+
+    return speed;
 }

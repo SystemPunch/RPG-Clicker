@@ -33,6 +33,8 @@ var character = {
     magicXP: 0,
     magicXPNeeded: 10,
 
+    ailments: [],
+
     enemiesKilled: 0,
     timesDied: 0,
 
