@@ -42,7 +42,6 @@ function continueCombat(move) {
     var characterMove = move;
     var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
 
-
 }
 
 function checkCombatEnd() {
@@ -87,10 +86,13 @@ function enableCombatUI() {
 
         $("#skillButtons").append($skillButtonDiv);
     }
+
+    $("#healthBars").show();
 }
 
 function disableCombatUI() {
     $("#skillButtons").empty();
+    $("#healthBars").hide();
 }
 
 function printToCombatLog(text) {
