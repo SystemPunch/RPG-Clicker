@@ -49,6 +49,10 @@ ul li.selected {
     border: 1px dashed #BBB;
 }
 
+#combatLogPanel {
+    max-height: 400px;
+}
+
 .skillButton {
     padding: 10px 15px;
 }

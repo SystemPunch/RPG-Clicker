@@ -78,3 +78,14 @@ function enableCombatUI() {
 function disableCombatUI() {
     $("#skillButtons").empty();
 }
+
+function printToCombatLog(text) {
+    var $newLine = $(document.createElement("li"));
+    $newLine.attr({
+        class: "list-group-item"
+    });
+
+    $newLine.html(text);
+
+    $("#combatLog").append($newLine);
+}
