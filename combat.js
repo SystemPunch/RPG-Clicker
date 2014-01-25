@@ -26,12 +26,19 @@ function startCombat(mon) {
     }
     inCombat = true;
 
-    enemy = $.extend(null, mon);
+    enemy = $.extend(true, {}, mon);
 
     enableCombatUI();
+
+    printToCombatLog("You are attacked by "+ enemy.name +"!");
 }
 
 function continueCombat(move) {
+    if(!inCombat) {
+        bottomNotify("You are not in combat!", "danger");
+        endCombat();
+    }
+
     var characterMove = move;
     var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
 
@@ -53,6 +60,8 @@ function endCombat(result) {
             break;
         case "lose":
             character.timesDied++;
+            break;
+        default:
             break;
     }
 }

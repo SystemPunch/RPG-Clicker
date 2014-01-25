@@ -1,7 +1,13 @@
-var Monster = function(name, maxHP) {
-    this.name = name;
-    this.HP = maxHP;
-    this.maxHP = maxHP;
+var Monster = function(args) {
+    this.name = args.name;
+    this.HP = args.HP;
+
+    this.attack = args.attack;
+    this.spA = args.spA;
+    this.defense = args.defese;
+    this.spD = args.spD;
+    this.speed = args.speed;
+
     this.moveset = [];
 
     return this;
@@ -23,10 +29,26 @@ var monsters = {
     }
 };
 
-var monRat = new Monster("Rat", 10);
+var monRat = new Monster({
+    name: "Rat",
+    HP: 20,
+    attack: 8,
+    spA: 2,
+    defense: 4,
+    spD: 2,
+    speed: 8
+});
 monRat.moveset.push(moveBite);
 
-var monGoblin = new Monster("Goblin", 20);
+var monGoblin = new Monster({
+    name: "Goblin",
+    HP: 35,
+    attack: 14,
+    spA: 8,
+    defense: 10,
+    spD: 10,
+    speed: 10
+});
 monGoblin.moveset.push(movePunch);
 
 monsters.list.push(monRat);
