@@ -49,7 +49,7 @@ ul li.selected {
     border: 1px dashed #BBB;
 }
 
-#combatLogPanel {
+#combatLog {
     max-height: 350px;
     overflow-y: scroll;
 }

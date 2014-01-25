@@ -74,5 +74,5 @@ function printToCombatLog(text) {
 
     $("#combatLog").append($newLine);
 
-    $("#combatLogPanel").scrollTop($("#combatLogPanel")[0].scrollHeight);
+    $("#combatLog").scrollTop($("#combatLog")[0].scrollHeight);
 }
