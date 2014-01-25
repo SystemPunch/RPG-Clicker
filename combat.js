@@ -14,27 +14,47 @@ $(function() {
 });
 
 var inCombat = false;
+var enemy;
 var enemyHP = 0;
 var enemyMaxHP = 0;
 
 // Player selects monster to fight
-function startCombat(enemy) {
-    if(inCombat) return;
+function startCombat(mon) {
+    if(inCombat) {
+        printToCombatLog("You are already in combat!");
+        return;
+    }
     inCombat = true;
 
-    enemyMaxHP = enemy.maxHP;
-    enemyHP = enemyMaxHP;
+    enemy = $.extend(null, mon);
 
     enableCombatUI();
 }
 
-function continueCombat() {
+function continueCombat(move) {
+    var characterMove = move;
+    var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
+
 
 }
 
-function endCombat() {
+function checkCombatEnd() {
+    if(character.HP <= 0) endCombat("lose");
+    else if(enemy.HP <= 0) endCombat("win");
+}
+
+function endCombat(result) {
     inCombat = false;
     disableCombatUI();
+
+    switch(result) {
+        case "win":
+            character.enemiesKilled++;
+            break;
+        case "lose":
+            character.timesDied++;
+            break;
+    }
 }
 
 function enableCombatUI() {
