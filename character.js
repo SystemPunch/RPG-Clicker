@@ -85,6 +85,11 @@ var character = {
 
         this.HP = this.maxHP;
 
+        for(var i=0; i<this.moveset.length; i++) {
+            this.moveset[i].AP = this.moveset[i].maxAP;
+        }
+        updateSkillButtons();
+
         updateCharacterPanel();
         bottomNotify("Level up! You are now level " + this.level, "success");
     },

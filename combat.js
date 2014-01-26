@@ -7,12 +7,22 @@ $(function() {
     });
 
     $("#skillButtons").on("click", "button", function(e) {
-        continueCombat(character.moveset[this.name]);
+        if(character.moveset[this.name].AP) {
+            character.moveset[this.name].AP--;
+            continueCombat(character.moveset[this.name]);
+            updateSkillButtons();
+        } else printToCombatLog("You have no AP left for that move!");
     });
 
     enableCombatUI();
     disableCombatUI();
 });
+
+function updateSkillButtons() {
+    $(".skillButton button").each(function() {
+        $(this).html(character.moveset[this.name].name +"<br />"+ character.moveset[this.name].AP +" / "+ character.moveset[this.name].maxAP +" AP");
+    });
+}
 
 var inCombat = false;
 var enemy;
@@ -23,7 +33,7 @@ function startCombat(mon) {
         printToCombatLog("You are already in combat!");
         return;
     }
-    inCombat = true
+    inCombat = true;
 
     $("#fightMonster").attr("disabled", true);
 
@@ -36,12 +46,19 @@ function startCombat(mon) {
     enableCombatUI();
 
     printToCombatLog("You are attacked by "+ enemy.name +"!");
+
+    for(var i=0; i<character.moveset.length; i++) {
+        if(character.moveset[i].AP > 0) return;
+    }
+
+    continueCombat(moveStruggle);
 }
 
 function continueCombat(move) {
     if(!inCombat) {
         printToCombatLog("You are not in combat!", "danger");
         endCombat();
+        return;
     }
 
     var playerMove = move;
@@ -74,6 +91,14 @@ function continueCombat(move) {
             doEnemyAttack(enemyMove);
             break;
     }
+
+    for(var i=0; i<character.moveset.length; i++) {
+        if(character.moveset[i].AP > 0) {
+            return;
+        }
+    }
+
+    continueCombat(moveStruggle);
 }
 
 function doPlayerAttack(move) {
@@ -140,12 +165,7 @@ function calculateDamage(move, user, target) {
 
     damage = Math.floor( ( ( ( (2 * user.level / 5 + 2) * attack * move.power / defense ) / 10 ) + 2 ) * randomFromInterval(85, 100)/100);
 
-    console.log(multiplier);
     return [damage*multiplier, multiplier > 1];
-}
-
-function testDamage() {
-    calculateDamage(character.moveset[0], character, monGoblin);
 }
 
 function checkCombatEnd() {
@@ -218,7 +238,9 @@ function enableCombatUI() {
             class: "btn btn-primary btn-lg btn-block",
             name: i
         });
-        $skillButton.html(character.moveset[i].name);
+        $skillButton.html(character.moveset[i].name +"<br />"+ character.moveset[i].AP +" / "+ character.moveset[i].maxAP +" AP");
+
+        if(character.moveset[i].AP <= 0) $skillButton.attr("disabled", true);
 
         $skillButtonDiv.append($skillButton);
 

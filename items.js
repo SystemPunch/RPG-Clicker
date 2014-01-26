@@ -38,8 +38,18 @@ var potionHP1 = new Consumable({
             this.quantity--;
             bottomNotify("You have used a Vitality Tincture I", "info");
         } else bottomNotify("You are already at full health!", "warning");
-    }
+    },
+
+    description: "Restores 20 HP"
 });
+
+var potionAP1 = new Consumable({
+    name: "Energy Tincture I",
+    id: 1,
+    effect: function() {
+
+    }
+})
 
 function updateInventory() {
     $("#equipmentList").empty();

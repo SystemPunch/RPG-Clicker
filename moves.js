@@ -8,7 +8,17 @@ function Move(args) {
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
     this.AP = args["AP"] || 10;
-};
+    this.maxAP = this.AP;
+}
+
+// Ya'll motherfuckers know what this is
+var moveStruggle = new Move({
+    name: "STRUGGLE",
+    type: "physical",
+    weapon: "unarmed",
+    power: 50,
+    AP: 1
+});
 
 /*-----
 Unarmed
@@ -28,6 +38,14 @@ var moveBite = new Move({
     weapon: "unarmed",
     power: 30,
     AP: 35
+});
+
+var moveSweepKick = new Move({
+    name: "SWEEP KICK",
+    type: "physical",
+    weapon: "unarmed",
+    power: 40,
+    AP: 30
 });
 
 /*----
