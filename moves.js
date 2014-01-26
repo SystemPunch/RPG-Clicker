@@ -6,6 +6,7 @@ function Move(args) {
     this.ailments = args["ailments"];
     this.ailmentChances = args["ailmentChances"];
     this.priority = args["priority"] || 0;
+    this.critRate = args["critRate"] || 0;
 };
 
 /*-----

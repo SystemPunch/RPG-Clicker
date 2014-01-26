@@ -3,6 +3,8 @@ var Monster = function(args) {
     this.HP = args.HP;
     this.maxHP = args.HP;
 
+    this.level = args.level;
+
     this.attack = args.attack;
     this.spA = args.spA;
     this.defense = args.defense;
@@ -35,6 +37,7 @@ var monsters = {
 var monRat = new Monster({
     name: "Rat",
     HP: 20,
+    level: 1,
     attack: 8,
     spA: 2,
     defense: 4,
@@ -46,6 +49,7 @@ monRat.moveset.push(moveBite);
 var monGoblin = new Monster({
     name: "Goblin",
     HP: 35,
+    level: 5,
     attack: 14,
     spA: 8,
     defense: 10,

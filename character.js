@@ -14,9 +14,6 @@ var character = {
     spD: 10,
     speed: 10,
 
-    critChance: 10 / 512,
-    critPower: 7 / 6,
-
     unarmedProf: 1,
     unarmedXP: 0,
     unarmedXPNeeded: 10,
@@ -51,6 +48,14 @@ var character = {
 
     moveset: [],
 
+    victory: function() {
+        this.enemiesKilled++;
+    },
+
+    die: function() {
+        this.timesDied++;
+    },
+
     levelUp: function () {
         this.level++;
         this.neededXP = this.level * 100;
@@ -63,23 +68,18 @@ var character = {
         while(whichStats.length < 3) {
             var which = randomFromInterval(0, stats.length-1);
 
-            console.log("Which is: "+ which);
-
             if(whichStats.indexOf(which) === -1) whichStats.push(which);
         }
 
         for(var i=0; i<whichStats.length; i++) {
             var k = whichStats[i];
 
-            console.log("Adding stat to "+ stats[k]);
             this[stats[k]] += randomFromInterval(2, 4);
         }
 
         this.maxHP += randomFromInterval(2, 4);
 
         this.HP = this.maxHP;
-        this.critChance = this.speed / 512;
-        this.critPower = (2*this.level + 5) / (this.level + 5);
 
         updateCharacterPanel();
         bottomNotify("Level up! You are now level " + this.level, "success");

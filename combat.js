@@ -7,7 +7,7 @@ $(function() {
     });
 
     $("#skillButtons").on("click", "button", function(e) {
-        alert(character.moveset[this.name].name);
+        continueCombat(character.moveset[this.name]);
     });
 
     disableCombatUI();
@@ -41,16 +41,107 @@ function continueCombat(move) {
         endCombat();
     }
 
-    var characterMove = move;
+    var playerMove = move;
     var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
+
     var playerSpeed = calculateCombatSpeed(character);
-    alert("Character's calculated speed is "+ playerSpeed);
     var enemySpeed = calculateCombatSpeed(enemy);
-    alert("Enemy's calculated speed is "+ enemySpeed);
     var first = "";
 
     if(randomFromInterval(0,1)) first = "player";
     else first = "enemy";
+
+    if(playerSpeed > enemySpeed) first = "player";
+    else if(enemySpeed > playerSpeed) first = "enemy";
+
+    if(playerMove.priority > enemyMove.priority) first = "player";
+    else if(enemyMove.priority > playerMove.priority) first = "enemy";
+
+    switch(first) {
+        case "player":
+            doPlayerAttack(playerMove);
+            doEnemyAttack(enemyMove);
+            break;
+        case "enemy":
+            doEnemyAttack(enemyMove);
+            doPlayerAttack(playerMove);
+            break;
+        default:
+            doPlayerAttack(playerMove);
+            doEnemyAttack(enemyMove);
+            break;
+    }
+}
+
+function doPlayerAttack(move) {
+    if(!inCombat) return;
+
+    var attackResult = calculateDamage(move, character, enemy);
+
+    var damage = attackResult[0];
+    var didCrit = attackResult[1];
+
+    var summary = "You used "+ move.name +"!";
+
+    if(didCrit) summary += " CRITICAL HIT!";
+
+    summary += " It inflicted "+ damage +" damage!";
+
+    printToCombatLog(summary);
+    enemy.HP -= damage;
+    updateHealthBars();
+    checkCombatEnd();
+}
+
+function doEnemyAttack(move) {
+    if(!inCombat) return;
+
+    var attackResult = calculateDamage(move, enemy, character);
+
+    var damage = attackResult[0];
+    var didCrit = attackResult[1];
+
+    var summary = enemy.name +" used "+ move.name +"!";
+
+    if(didCrit) summary += " CRITICAL HIT!";
+
+    summary += " It inflicted "+ damage +" damage!";
+
+    printToCombatLog(summary);
+    character.HP -= damage;
+    updateHealthBars();
+    checkCombatEnd();
+}
+
+function calculateDamage(move, user, target) {
+    var damage = 0;
+    var multiplier = 1;
+    var critStage = 0;
+    var attack = 0;
+    var defense = 0;
+
+    console.log(move);
+
+    if(move.type === "physical") {
+        attack = user.attack;
+        defense = target.defense;
+    }
+    else {
+        attack = user.spA;
+        defense = target.spD;
+    }
+
+    critStage += move.critRate;
+
+    if(randomFromInterval(1, Math.round(16/(critStage*2))) === 1) multiplier++;
+
+    damage = Math.floor( ( ( ( (2 * user.level / 5 + 2) * attack * move.power / defense ) / 10 ) + 2 ) * randomFromInterval(85, 100)/100);
+
+    return [damage*multiplier, multiplier > 1];
+}
+
+function testDamage() {
+    calculateDamage(character.moveset[0], character, monGoblin);
 }
 
 function checkCombatEnd() {
@@ -64,10 +155,12 @@ function endCombat(result) {
 
     switch(result) {
         case "win":
-            character.enemiesKilled++;
+            printToCombatLog("You have defeated "+ enemy.name +"!");
+            character.victory();
             break;
         case "lose":
-            character.timesDied++;
+            printToCombatLog("You were defeated by "+ enemy.name +"!");
+            character.die();
             break;
         default:
             break;
@@ -88,7 +181,7 @@ function enableCombatUI() {
         var $skillButton = $(document.createElement("button"));
         $skillButton.attr({
             type: "button",
-            class: "btn btn-danger btn-lg btn-block",
+            class: "btn btn-primary btn-lg btn-block",
             name: i
         });
         $skillButton.html(character.moveset[i].name);
