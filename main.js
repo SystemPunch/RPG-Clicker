@@ -25,6 +25,8 @@ $(function () {
     window.setInterval(updateGame, 100);
 });
 
+var VERSION = "0.1.4";
+
 var settings = {
     autoSave: "ON"
 };
@@ -174,8 +176,6 @@ function newGame() {
 
     saveGame();
 }
-
-var VERSION = "0.1.3";
 
 function checkVersion() {
     $("#version").html(VERSION);
