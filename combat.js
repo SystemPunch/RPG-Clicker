@@ -13,8 +13,8 @@ $(function() {
     var transitionEnd = whichTransitionEvent();
     //$(".progress-bar").on(transitionEnd, checkCombatEnd);
 
+    enableCombatUI();
     disableCombatUI();
-    $("#healthBars").hide();
 });
 
 var inCombat = false;
@@ -163,10 +163,14 @@ function endCombat(result) {
         case "win":
             printToCombatLog("You have defeated "+ enemy.name +"!");
             character.enemiesKilled++;
+            var rewardMultiplier = enemy.level / character.level;
+            if(rewardMultiplier < 1) rewardMultiplier /= 2;
             var XPGain = randomFromInterval( Math.round(enemy.level * 8 * 0.9) , Math.round(enemy.level * 8 * 1.1) );
+            XPGain = Math.round(XPGain * rewardMultiplier);
             printToCombatLog("You gained "+ XPGain +" experience!");
             character.gainXP(XPGain);
             var goldGain = randomFromInterval( Math.round(enemy.level * 9 * 0.9) , Math.round(enemy.level * 9 * 1.1) );
+            goldGain = Math.round(goldGain * rewardMultiplier);
             printToCombatLog("You found "+ goldGain +" gold on the corpse!");
             character.gainGold(goldGain);
             break;
@@ -216,7 +220,7 @@ function disableCombatUI() {
         $(this).attr("disabled", true);
     });
     //$("#healthBars").hide();
-    //$("#enemyHealth").hide();
+    $("#enemyHealth").css("width", "0%");
 }
 
 function printToCombatLog(text) {

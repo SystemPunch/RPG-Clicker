@@ -268,7 +268,7 @@ var upgrades = [            // All upgrades stored in here
 
             character.gold -= this.cost;
 
-            bottomNotify("You now recover "+ character.autoheal +" HP per second!", "info");
+            bottomNotify("You now recover "+ (character.autoheal).toFixed(2) +" HP per second!", "info");
 
             this.bought = true;
         },
