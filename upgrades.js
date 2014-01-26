@@ -230,7 +230,7 @@ var upgrades = [            // All upgrades stored in here
 
     {
         name: "Expert Pickaxe Smithing",
-        desc: "Smithing pickaxes is hard, but you're getting better at it. And thats what matters. You now gain an additional 16 gold per click!",
+        desc: "Smithing pickaxes is hard, but you're getting better at it. And that's what matters. You now gain an additional 16 gold per click!",
         id: 10,
 
         cost: 8000,
@@ -249,6 +249,31 @@ var upgrades = [            // All upgrades stored in here
         },
 
         unlock: function () {
+            return true;
+        }
+    },
+
+    {
+        name: "Quickened Recovery",
+        desc: "Your body is used to be torn down and built up again, and so you can now recover more quickly. You now recover an additional 0.1 HP per second!",
+        id: 11,
+
+        cost: 500,
+        bought: false,
+        unlocked: false,
+        inList: false,
+
+        buy: function() {
+            character.autoheal += 0.1;
+
+            character.gold -= this.cost;
+
+            bottomNotify("You now recover "+ character.autoheal +" HP per second!", "info");
+
+            this.bought = true;
+        },
+
+        unlock: function() {
             return true;
         }
     }

@@ -32,6 +32,8 @@ var character = {
 
     ailments: [],
 
+    autoheal: 0.2,
+
     enemiesKilled: 0,
     timesDied: 0,
 

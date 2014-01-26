@@ -42,7 +42,7 @@ function updateCharacterPanel() {
     $("#characterStats").html("\
         <div style='font-size:1.3em;'>" + character.name + "</div>\
         <div>Level " + character.level + "</div>\
-        <div>" + character.HP + "/" + character.maxHP + " HP</div>\
+        <div>" + Math.round(character.HP) + "/" + character.maxHP + " HP</div>\
         <div>" + character.currentXP + " / " + character.neededXP + " XP</div><br />\
         <div>Attack</div>\
         <div>Special Attack</div>\
@@ -133,6 +133,10 @@ function updateGame() {
 
     timeSinceLastSave = saveTimer / 1000;
     $("#timeSinceLastSave").html(timeSinceLastSave.toFixed(1));
+
+    if(!inCombat && character.HP < character.maxHP) character.HP += character.autoheal/10;
+
+    updateHealthBars();
 }
 
 function bottomNotify(text, type, time) {

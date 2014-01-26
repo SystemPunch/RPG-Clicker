@@ -216,6 +216,7 @@ function disableCombatUI() {
         $(this).attr("disabled", true);
     });
     //$("#healthBars").hide();
+    //$("#enemyHealth").hide();
 }
 
 function printToCombatLog(text) {
@@ -242,13 +243,14 @@ function calculateEnemyStats() {
 
 function updateHealthBars() {
     var playerHealth = ""+ Math.round((character.HP / character.maxHP) * 100);
-    var enemyHealth = ""+ Math.round((enemy.HP / enemy.maxHP) * 100);
-
     $("#playerHealth").css("width", playerHealth +"%");
-    $("#enemyHealth").css("width", enemyHealth +"%");
+    $("#playerHealth").html(Math.round(character.HP) +" / "+ character.maxHP);
 
-    $("#playerHealth").html(character.HP +" / "+ character.maxHP);
-    $("#enemyHealth").html(enemy.HP +" / "+ enemy.maxHP);
+    if(enemy) {
+        var enemyHealth = ""+ Math.round((enemy.HP / enemy.maxHP) * 100);
+        $("#enemyHealth").css("width", enemyHealth +"%");
+        $("#enemyHealth").html(enemy.HP +" / "+ enemy.maxHP)
+    }
 }
 
 function calculateCombatSpeed(mob) {
