@@ -27,6 +27,7 @@ function Consumable(args) {
     consumableList.push(this);
 }
 
+// CONSUMABLES
 var potionHP1 = new Consumable({
     name: "Vitality Tincture I",
     id: 0,
@@ -55,7 +56,7 @@ function updateInventory() {
             var useButton = $(document.createElement("button"));
             useButton.attr({
                 type: "button",
-                class: "btn btn-default btn-sm",
+                class: "btn btn-default btn-xs",
                 name: i
             });
             useButton.html("Use");
@@ -71,7 +72,7 @@ function updateInventory() {
 
 function searchInventory(item) {
     for(var i=0; i<character.inventory.length; i++) {
-        if(character.inventory[i].id === item.id) return i;
+        if(character.inventory[i].id === item.id && character.inventory[i].type === item.type) return i;
     }
 
     return -1;

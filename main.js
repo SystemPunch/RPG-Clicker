@@ -19,6 +19,7 @@ $(function () {
 
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
+    defaultUpgrades = $.extend(true, {}, upgrades);
 
     loadGame();
     window.setInterval(updateGame, 100);
@@ -169,10 +170,12 @@ function newGame() {
     updatePlaces();
     monsters.populateList();
 
+    updateInventory();
+
     saveGame();
 }
 
-var VERSION = "0.1.0";
+var VERSION = "0.1.3";
 
 function checkVersion() {
     $("#version").html(VERSION);

@@ -136,10 +136,11 @@ function calculateDamage(move, user, target) {
 
     critStage += move.critRate;
 
-    if(randomFromInterval(1, Math.round(16/(critStage*2))) === 1) multiplier++;
+    if(randomFromInterval(1, Math.round(16/((critStage*2) || 1))) === 1) multiplier++;
 
     damage = Math.floor( ( ( ( (2 * user.level / 5 + 2) * attack * move.power / defense ) / 10 ) + 2 ) * randomFromInterval(85, 100)/100);
 
+    console.log(multiplier);
     return [damage*multiplier, multiplier > 1];
 }
 
@@ -165,7 +166,6 @@ function endCombat(result) {
             var range = (5/80)*enemy.level + 3.75;
             if(character.level < enemy.level-range || character.level > enemy.level+range) {
                 rewardMultiplier = enemy.level / character.level;
-                if(rewardMultiplier < 1) rewardMultiplier /= 2;
             }
 
             var XPGain = randomFromInterval( Math.round(enemy.level * 8 * 0.9) , Math.round(enemy.level * 8 * 1.1) );
