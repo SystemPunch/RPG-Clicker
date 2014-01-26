@@ -163,7 +163,6 @@ function endCombat(result) {
             character.enemiesKilled++;
             var rewardMultiplier = 1;
             var range = (5/80)*enemy.level + 3.75;
-
             if(character.level < enemy.level-range || character.level > enemy.level+range) {
                 rewardMultiplier = enemy.level / character.level;
                 if(rewardMultiplier < 1) rewardMultiplier /= 2;
@@ -171,12 +170,23 @@ function endCombat(result) {
 
             var XPGain = randomFromInterval( Math.round(enemy.level * 8 * 0.9) , Math.round(enemy.level * 8 * 1.1) );
             XPGain = Math.round(XPGain * rewardMultiplier);
-            printToCombatLog("You gained "+ XPGain +" experience!");
             character.gainXP(XPGain);
+
             var goldGain = randomFromInterval( Math.round(enemy.level * 9 * 0.9) , Math.round(enemy.level * 9 * 1.1) );
             goldGain = Math.round(goldGain * rewardMultiplier);
-            printToCombatLog("You found "+ goldGain +" gold on the corpse!");
             character.gainGold(goldGain);
+
+            printToCombatLog("You gained "+ XPGain +" experience!");
+            printToCombatLog("<strong>You found the following on the corpse:</strong>");
+            printToCombatLog(goldGain +" gold");
+
+            for(var i=0; i<enemy.lootTable.length; i++) {
+                if(randomFromInterval(1, 100) <= enemy.lootTable[i][1]) {
+                    character.gainItem(enemy.lootTable[i][0]);
+                    printToCombatLog(enemy.lootTable[i][0].name);
+                }
+            }
+
             break;
         case "lose":
             printToCombatLog("<strong>Defeat!</strong>");

@@ -237,7 +237,10 @@ function loadGame() {
 
         updatePlaces();
         monsters.populateList();
-    }
+
+        character.fixInventory();
+        updateInventory();
+    };
 
     if (loadState) {
         if(loadState.version !== VERSION) {

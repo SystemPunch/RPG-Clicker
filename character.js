@@ -89,6 +89,25 @@ var character = {
         bottomNotify("Level up! You are now level " + this.level, "success");
     },
 
+    fixInventory: function() {
+        for(var i= 0; i<this.inventory.length; i++) {
+            var item = this.inventory[i];
+
+            switch(item.type) {
+                case "consumable":
+                    item.effect = consumableList[item.id].effect;
+            }
+        }
+    },
+
+    gainItem: function(item) {
+        if(searchInventory(item) === -1) this.inventory.push(item);
+
+        this.inventory[searchInventory(item)].quantity++;
+
+        updateInventory();
+    },
+
     gainXP: function (num) {
         this.currentXP += num;
         if (this.currentXP >= this.neededXP) this.levelUp();

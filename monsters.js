@@ -15,6 +15,8 @@ var Monster = function(args) {
 
     this.ailments = [];
 
+    this.lootTable = [];
+
     return this;
 };
 
@@ -47,6 +49,7 @@ var monRat = new Monster({
     speed: 8
 });
 monRat.moveset.push(moveBite);
+monRat.lootTable.push([potionHP1, 1]);
 
 var monGoblin = new Monster({
     name: "Goblin",
@@ -59,6 +62,7 @@ var monGoblin = new Monster({
     speed: 12
 });
 monGoblin.moveset.push(movePunch);
+monGoblin.lootTable.push([potionHP1, 10]);
 
 monsters.list.push(monRat);
 monsters.list.push(monGoblin);
