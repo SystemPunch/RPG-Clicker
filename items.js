@@ -47,9 +47,28 @@ var potionAP1 = new Consumable({
     name: "Energy Tincture I",
     id: 1,
     effect: function() {
+        var isFull = true;
+        var move;
 
+        var i;
+
+        for(i=0; i<character.moveset.length; i++) {
+            move = character.moveset[i];
+            if(move.AP < move.maxAP) isFull = false;
+        }
+
+        if(!isFull) {
+            for(i=0; i<character.moveset.length; i++) {
+                move = character.moveset[i];
+                move.AP += 5;
+                if(move.AP > move.maxAP) move.AP = move.maxAP;
+            }
+            updateSkillButtons();
+            this.quantity--;
+            bottomNotify("You have used an Energy Tincture I", "info");
+        } else bottomNotify("All of your moves already have full AP!", "warning");
     }
-})
+});
 
 function updateInventory() {
     $("#equipmentList").empty();
