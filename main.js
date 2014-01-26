@@ -49,6 +49,7 @@ function updateCharacterPanel() {
         <div>Defense</div>\
         <div>Special Defense</div>\
         <div>Speed</div><br />\
+        <div>HP Regen/second</div>\
     ");
 
     $("#characterStatsValues").html("\
@@ -61,6 +62,7 @@ function updateCharacterPanel() {
         <div>" + character.defense + "</div>\
         <div>" + character.spD + "</div>\
         <div>" + character.speed + "</div><br />\
+        <div>" + character.autoheal.toFixed(2) + "</div>\
     ");
 
     $("#proficiencies").html("\
@@ -246,21 +248,4 @@ Do you want to attempt to load this save file? (Press OK to load, Cancel to star
 
 function randomFromInterval(from, to) {
     return Math.floor(Math.random()*(to-from+1)+from);
-}
-
-function whichTransitionEvent() {
-    var t;
-    var el = document.createElement("fakeelement");
-    var transitions = {
-        "transition": "transitionend",
-        "OTransition": "otransitionend",
-        "MozTransition": "transitionend",
-        "WebkitTransition": "webkitTransitionEnd"
-    }
-
-    for(t in transitions) {
-        if(el.style[t] !== undefined) {
-            return transitions[t];
-        }
-    }
 }

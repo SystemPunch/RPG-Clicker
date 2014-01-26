@@ -10,9 +10,6 @@ $(function() {
         continueCombat(character.moveset[this.name]);
     });
 
-    var transitionEnd = whichTransitionEvent();
-    //$(".progress-bar").on(transitionEnd, checkCombatEnd);
-
     enableCombatUI();
     disableCombatUI();
 });
@@ -157,14 +154,21 @@ function checkCombatEnd() {
 
 function endCombat(result) {
     inCombat = false;
+    enemy.HP = 0;
     disableCombatUI();
 
     switch(result) {
         case "win":
-            printToCombatLog("You have defeated "+ enemy.name +"!");
+            printToCombatLog("<strong>Victory!</strong>");
             character.enemiesKilled++;
-            var rewardMultiplier = enemy.level / character.level;
-            if(rewardMultiplier < 1) rewardMultiplier /= 2;
+            var rewardMultiplier = 1;
+            var range = (5/80)*enemy.level + 3.75;
+
+            if(character.level < enemy.level-range || character.level > enemy.level+range) {
+                rewardMultiplier = enemy.level / character.level;
+                if(rewardMultiplier < 1) rewardMultiplier /= 2;
+            }
+
             var XPGain = randomFromInterval( Math.round(enemy.level * 8 * 0.9) , Math.round(enemy.level * 8 * 1.1) );
             XPGain = Math.round(XPGain * rewardMultiplier);
             printToCombatLog("You gained "+ XPGain +" experience!");
@@ -175,7 +179,7 @@ function endCombat(result) {
             character.gainGold(goldGain);
             break;
         case "lose":
-            printToCombatLog("You were defeated by "+ enemy.name +"!");
+            printToCombatLog("<strong>Defeat!</strong>");
             character.timesDied++;
             var goldLoss = randomFromInterval( Math.round(character.gold * 0.1 * 0.9) , Math.round(character.gold * 0.1 * 1.1) );
             printToCombatLog("You dropped "+ goldLoss +" gold in your rush to run away!");

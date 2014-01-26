@@ -29,7 +29,7 @@ var monsters = {
 
             $mon.attr("value", i);
 
-            $mon.html(this.list[i].name);
+            $mon.html(this.list[i].name +" - Lvl. "+ this.list[i].level);
 
             $("#monsterList").append($mon);
         }

@@ -7,6 +7,7 @@ function Move(args) {
     this.ailmentChances = args["ailmentChances"];
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
+    this.AP = args["AP"] || 10;
 };
 
 /*-----
@@ -17,14 +18,16 @@ var movePunch = new Move({
     name: "PUNCH",
     type: "physical",
     weapon: "unarmed",
-    power: 30
+    power: 30,
+    AP: 35
 });
 
 var moveBite = new Move({
     name: "BITE",
     type: "physical",
     weapon: "unarmed",
-    power: 30
+    power: 30,
+    AP: 35
 });
 
 /*----
