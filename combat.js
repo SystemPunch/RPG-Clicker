@@ -90,7 +90,7 @@ function doPlayerAttack(move) {
     printToCombatLog(summary);
     enemy.HP -= damage;
     updateHealthBars();
-    checkCombatEnd();
+    setInterval(checkCombatEnd, 1000);
 }
 
 function doEnemyAttack(move) {
@@ -110,7 +110,7 @@ function doEnemyAttack(move) {
     printToCombatLog(summary);
     character.HP -= damage;
     updateHealthBars();
-    checkCombatEnd();
+    setInterval(checkCombatEnd, 1000);
 }
 
 function calculateDamage(move, user, target) {
@@ -119,8 +119,6 @@ function calculateDamage(move, user, target) {
     var critStage = 0;
     var attack = 0;
     var defense = 0;
-
-    console.log(move);
 
     if(move.type === "physical") {
         attack = user.attack;

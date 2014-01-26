@@ -54,6 +54,7 @@ var character = {
 
     die: function() {
         this.timesDied++;
+        this.HP = this.maxHP;
     },
 
     levelUp: function () {

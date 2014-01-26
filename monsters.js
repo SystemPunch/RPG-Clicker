@@ -22,6 +22,8 @@ var monsters = {
     list: [],
 
     populateList: function() {
+        $("#monsterList").empty();
+
         for(var i=0; i<this.list.length; i++) {
             var $mon = $(document.createElement("option"));
 
