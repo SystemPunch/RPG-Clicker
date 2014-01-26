@@ -47,11 +47,13 @@ function startCombat(mon) {
 
     printToCombatLog("You are attacked by "+ enemy.name +"!");
 
-    for(var i=0; i<character.moveset.length; i++) {
-        if(character.moveset[i].AP > 0) return;
-    }
+    if(inCombat) {
+        for(var i=0; i<character.moveset.length; i++) {
+            if(character.moveset[i].AP > 0) return;
+        }
 
-    continueCombat(moveStruggle);
+        continueCombat(moveStruggle);
+    }
 }
 
 function continueCombat(move) {
@@ -92,13 +94,15 @@ function continueCombat(move) {
             break;
     }
 
-    for(var i=0; i<character.moveset.length; i++) {
-        if(character.moveset[i].AP > 0) {
-            return;
+    if(inCombat) {
+        for(var i=0; i<character.moveset.length; i++) {
+            if(character.moveset[i].AP > 0) {
+                return;
+            }
         }
-    }
 
-    continueCombat(moveStruggle);
+        continueCombat(moveStruggle);
+    }
 }
 
 function doPlayerAttack(move) {
@@ -119,6 +123,18 @@ function doPlayerAttack(move) {
 
     printToCombatLog(summary);
     enemy.HP -= damage;
+
+    // BEGIN AILMENTS CHECKING
+
+    if(move.ailments.hasOwnProperty("recoil")) {
+        if(randomFromInterval(1,100) <= move.ailments.recoil) {
+            character.HP -= Math.round(damage/4);
+            printToCombatLog("You take "+ Math.round(damage/4) +" <strong>recoil damage!</strong>");
+        }
+    }
+
+    // END AILMENTS CHECKING
+
     updateHealthBars();
     checkCombatEnd();
 }

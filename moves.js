@@ -4,7 +4,6 @@ function Move(args) {
     this.weapon = args["weapon"];
     this.power = args["power"];
     this.ailments = args["ailments"];
-    this.ailmentChances = args["ailmentChances"];
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
     this.AP = args["AP"] || 10;
@@ -17,7 +16,11 @@ var moveStruggle = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 50,
-    AP: 1
+    AP: 1,
+
+    ailments: {
+        recoil: 100
+    }
 });
 
 /*-----
