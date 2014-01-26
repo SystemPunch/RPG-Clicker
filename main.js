@@ -166,7 +166,7 @@ function newGame() {
 
     character.name = prompt("What is your name?") || "Grabnar";
 
-    updatePlaces()
+    updatePlaces();
     monsters.populateList();
 
     saveGame();
@@ -177,13 +177,23 @@ var VERSION = "0.1.0";
 function checkVersion() {
     $("#version").html(VERSION);
 
-    $.get("version.txt", function (data) {
-        if (data != VERSION) $("#versionBar").css("display", "block");
-    });
+    var currentVersion = $.ajax({
+        url: "version.txt",
+        cache: false
+    })
+        .done(function(d) {
+            if(VERSION !== d) {
+                $("#versionBar").show();
+            }
+        });
 
-    $.get("/rpg-clicker/dev/devversion.txt", function (data) {
-        $("#devVersion").html(data);
-    });
+    var devVersion = $.ajax({
+        url: "/rpg-clicker/dev/devversion.txt",
+        cache: false,
+    })
+        .done(function(d) {
+            $("#devVersion").html(d);
+        });
 }
 
 function saveGame() {
