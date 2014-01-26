@@ -50,13 +50,13 @@ monRat.moveset.push(moveBite);
 
 var monGoblin = new Monster({
     name: "Goblin",
-    HP: 35,
+    HP: 40,
     level: 5,
-    attack: 14,
-    spA: 8,
-    defense: 10,
+    attack: 20,
+    spA: 10,
+    defense: 16,
     spD: 10,
-    speed: 10
+    speed: 12
 });
 monGoblin.moveset.push(movePunch);
 

@@ -48,13 +48,14 @@ var character = {
 
     moveset: [],
 
-    victory: function() {
-        this.enemiesKilled++;
-    },
-
-    die: function() {
-        this.timesDied++;
-        this.HP = this.maxHP;
+    gainProfXP: function(prof) {
+        this[prof +"XP"]++;
+        if(this[prof +"XP"] >= this[prof +"XPNeeded"]) {
+            this[prof +"Prof"]++;
+            this[prof +"XP"] = 0;
+            this[prof +"XPNeeded"] *= 1.1;
+            bottomNotify("Your "+ prof +" proficiency has increased!", "success");
+        }
     },
 
     levelUp: function () {

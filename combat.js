@@ -10,6 +10,9 @@ $(function() {
         continueCombat(character.moveset[this.name]);
     });
 
+    var transitionEnd = whichTransitionEvent();
+    //$(".progress-bar").on(transitionEnd, checkCombatEnd);
+
     disableCombatUI();
 });
 
@@ -83,6 +86,8 @@ function doPlayerAttack(move) {
 
     var summary = "You used "+ move.name +"!";
 
+    character.gainProfXP(move.weapon);
+
     if(didCrit) summary += " CRITICAL HIT!";
 
     summary += " It inflicted "+ damage +" damage!";
@@ -90,7 +95,7 @@ function doPlayerAttack(move) {
     printToCombatLog(summary);
     enemy.HP -= damage;
     updateHealthBars();
-    setInterval(checkCombatEnd, 1000);
+    checkCombatEnd();
 }
 
 function doEnemyAttack(move) {
@@ -110,7 +115,7 @@ function doEnemyAttack(move) {
     printToCombatLog(summary);
     character.HP -= damage;
     updateHealthBars();
-    setInterval(checkCombatEnd, 1000);
+    checkCombatEnd();
 }
 
 function calculateDamage(move, user, target) {
@@ -154,11 +159,18 @@ function endCombat(result) {
     switch(result) {
         case "win":
             printToCombatLog("You have defeated "+ enemy.name +"!");
-            character.victory();
+            character.enemiesKilled++;
+            var goldGain = randomFromInterval( Math.round(enemy.level * 9 * 0.9) , Math.round(enemy.level * 9 * 1.1) );
+            printToCombatLog("You found "+ goldGain +" gold on the corpse!");
+            character.gainGold(goldGain);
             break;
         case "lose":
             printToCombatLog("You were defeated by "+ enemy.name +"!");
-            character.die();
+            character.timesDied++;
+            var goldLoss = randomFromInterval( Math.round(character.gold * 0.1 * 0.9) , Math.round(character.gold * 0.1 * 1.1) );
+            printToCombatLog("You dropped "+ goldLoss +" gold in your rush to run away!");
+            character.gold -= goldLoss;
+            character.HP = character.maxHP;
             break;
         default:
             break;

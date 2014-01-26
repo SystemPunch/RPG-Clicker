@@ -49,8 +49,6 @@ function updateCharacterPanel() {
         <div>Defense</div>\
         <div>Special Defense</div>\
         <div>Speed</div><br />\
-        <div>Crit Chance</div>\
-        <div>Crit Power</div>\
     ");
 
     $("#characterStatsValues").html("\
@@ -63,8 +61,6 @@ function updateCharacterPanel() {
         <div>" + character.defense + "</div>\
         <div>" + character.spD + "</div>\
         <div>" + character.speed + "</div><br />\
-        <div>" + (character.critChance * 100.0).toFixed(2) + "%</div>\
-        <div>" + Math.round(character.critPower * 10000.0) / 100.0 + "%</div>\
     ");
 
     $("#proficiencies").html("\
@@ -246,4 +242,21 @@ Do you want to attempt to load this save file? (Press OK to load, Cancel to star
 
 function randomFromInterval(from, to) {
     return Math.floor(Math.random()*(to-from+1)+from);
+}
+
+function whichTransitionEvent() {
+    var t;
+    var el = document.createElement("fakeelement");
+    var transitions = {
+        "transition": "transitionend",
+        "OTransition": "otransitionend",
+        "MozTransition": "transitionend",
+        "WebkitTransition": "webkitTransitionEnd"
+    }
+
+    for(t in transitions) {
+        if(el.style[t] !== undefined) {
+            return transitions[t];
+        }
+    }
 }
