@@ -14,6 +14,7 @@ $(function() {
     //$(".progress-bar").on(transitionEnd, checkCombatEnd);
 
     disableCombatUI();
+    $("#healthBars").hide();
 });
 
 var inCombat = false;
@@ -86,11 +87,11 @@ function doPlayerAttack(move) {
     var damage = attackResult[0];
     var didCrit = attackResult[1];
 
-    var summary = "You used "+ move.name +"!";
+    var summary = "You used <strong>"+ move.name +"</strong>!";
 
     character.gainProfXP(move.weapon);
 
-    if(didCrit) summary += " CRITICAL HIT!";
+    if(didCrit) summary += " <strong>CRITICAL HIT!</strong>";
 
     summary += " It inflicted "+ damage +" damage!";
 
@@ -108,9 +109,9 @@ function doEnemyAttack(move) {
     var damage = attackResult[0];
     var didCrit = attackResult[1];
 
-    var summary = enemy.name +" used "+ move.name +"!";
+    var summary = enemy.name +" used <strong>"+ move.name +"</strong>!";
 
-    if(didCrit) summary += " CRITICAL HIT!";
+    if(didCrit) summary += " <strong>CRITICAL HIT!</strong>";
 
     summary += " It inflicted "+ damage +" damage!";
 
@@ -211,8 +212,10 @@ function enableCombatUI() {
 }
 
 function disableCombatUI() {
-    $("#skillButtons").empty();
-    $("#healthBars").hide();
+    $(".skillButton button").each(function() {
+        $(this).attr("disabled", true);
+    });
+    //$("#healthBars").hide();
 }
 
 function printToCombatLog(text) {
