@@ -29,6 +29,8 @@ function startCombat(mon) {
 
     $("#fightMonster").attr("disabled", true);
 
+    $("#combatLog").empty();
+
     enemy = $.extend(true, {}, mon);
     calculateEnemyStats();
     enemy.HP = enemy.maxHP;
@@ -160,6 +162,9 @@ function endCombat(result) {
         case "win":
             printToCombatLog("You have defeated "+ enemy.name +"!");
             character.enemiesKilled++;
+            var XPGain = randomFromInterval( Math.round(enemy.level * 8 * 0.9) , Math.round(enemy.level * 8 * 1.1) );
+            printToCombatLog("You gained "+ XPGain +" experience!");
+            character.gainXP(XPGain);
             var goldGain = randomFromInterval( Math.round(enemy.level * 9 * 0.9) , Math.round(enemy.level * 9 * 1.1) );
             printToCombatLog("You found "+ goldGain +" gold on the corpse!");
             character.gainGold(goldGain);

@@ -172,7 +172,7 @@ function checkVersion() {
     $("#version").html(VERSION);
 
     $.get("version.txt", function (data) {
-        if (data != $("#version").html()) $("#versionBar").css("display", "block");
+        if (data != VERSION) $("#versionBar").css("display", "block");
     });
 
     $.get("/rpg-clicker/dev/devversion.txt", function (data) {
