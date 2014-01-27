@@ -27,7 +27,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 30 seconds.", "warning", 30000);
 });
 
-var VERSION = "0.1.5";
+var VERSION = "0.1.6";
 
 var settings = {
     autoSave: "ON"
