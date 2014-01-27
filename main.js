@@ -19,7 +19,11 @@ $(function () {
 
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
-    defaultUpgrades = upgrades.slice();
+    defaultUpgrades = [];
+    for(var i=0; i<upgrades.length; i++) {
+        var u = $.extend(true, {}, upgrades[i]);
+        defaultUpgrades.push(u);
+    }
 
     loadGame();
     window.setInterval(updateGame, 100);

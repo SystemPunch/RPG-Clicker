@@ -1,3 +1,5 @@
+var defaultUpgrades = [];
+
 //var nextUpgrades = [];      // Used to store next upgrades to unlock (so the game has a smaller array to loop through every tick)
 var upgrades = [            // All upgrades stored in here
     {
