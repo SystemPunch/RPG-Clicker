@@ -126,10 +126,12 @@ function doPlayerAttack(move) {
 
     // BEGIN AILMENTS CHECKING
 
-    if(move.ailments.hasOwnProperty("recoil")) {
-        if(randomFromInterval(1,100) <= move.ailments.recoil) {
-            character.HP -= Math.round(damage/4);
-            printToCombatLog("You take "+ Math.round(damage/4) +" <strong>recoil damage!</strong>");
+    if(move.hasOwnProperty("ailments")) {
+        if(move.ailments.hasOwnProperty("recoil")) {
+            if(randomFromInterval(1,100) <= move.ailments.recoil) {
+                character.HP -= Math.round(damage/4);
+                printToCombatLog("You take "+ Math.round(damage/4) +" <strong>recoil damage!</strong>");
+            }
         }
     }
 

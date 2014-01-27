@@ -3,7 +3,7 @@ function Move(args) {
     this.type = args["type"];
     this.weapon = args["weapon"];
     this.power = args["power"];
-    this.ailments = args["ailments"] || {};
+    this.ailments = args["ailments"];
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
     this.AP = args["AP"] || 10;
