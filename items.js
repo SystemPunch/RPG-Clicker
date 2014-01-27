@@ -24,6 +24,8 @@ function Consumable(args) {
     this.id = args.id;
     this.effect = args.effect;
 
+    this.description = args.description;
+
     consumableList.push(this);
 }
 
@@ -67,7 +69,9 @@ var potionAP1 = new Consumable({
             this.quantity--;
             bottomNotify("You have used an Energy Tincture I", "info");
         } else bottomNotify("All of your moves already have full AP!", "warning");
-    }
+    },
+
+    description: "Restores AP of all skills by 5"
 });
 
 function updateInventory() {
@@ -91,6 +95,11 @@ function updateInventory() {
             useButton.html("Use");
 
             itemRow.append($(document.createElement("td")).append(useButton));
+
+            $(itemRow).tooltip({
+                placement: "auto",
+                title: item.description
+            });
 
             $("#consumableList").append(itemRow);
         } else if(item.type === "equipment") {

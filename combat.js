@@ -126,7 +126,7 @@ function doPlayerAttack(move) {
 
     // BEGIN AILMENTS CHECKING
 
-    if(move.hasOwnProperty("ailments")) {
+    if(move.hasOwnProperty("ailments") && move.ailments !== undefined) {
         if(move.ailments.hasOwnProperty("recoil")) {
             if(randomFromInterval(1,100) <= move.ailments.recoil) {
                 character.HP -= Math.round(damage/4);

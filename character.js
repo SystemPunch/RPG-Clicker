@@ -148,3 +148,7 @@ var character = {
 character.moveset.push(movePunch);
 
 var defaultCharacter;
+
+function cheat() {
+    while(character.level < 100) character.levelUp();
+}
