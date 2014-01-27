@@ -7,11 +7,13 @@ $(function() {
     });
 
     $("#skillButtons").on("click", "button", function(e) {
-        if(character.moveset[this.name].AP) {
-            character.moveset[this.name].AP--;
-            continueCombat(character.moveset[this.name]);
-            updateSkillButtons();
-        } else printToCombatLog("You have no AP left for that move!");
+        if(inCombat) {
+            if(character.moveset[this.name].AP <= character.AP) {
+                character.AP -= character.moveset[this.name].AP;
+                continueCombat(character.moveset[this.name]);
+                updateSkillButtons();
+            } else printToCombatLog("You don't have enough AP!");
+        } else printToCombatLog("You are not in combat!");
     });
 
     enableCombatUI();
@@ -20,7 +22,10 @@ $(function() {
 
 function updateSkillButtons() {
     $(".skillButton button").each(function() {
-        $(this).html(character.moveset[this.name].name +"<br />"+ character.moveset[this.name].AP +" / "+ character.moveset[this.name].maxAP +" AP");
+        $(this).html(character.moveset[this.name].name +"<br />"+ character.moveset[this.name].AP +" AP");
+        if(character.moveset[this.name].AP > character.AP) {
+            $(this).attr("disabled", true);
+        } else if(inCombat) $(this).attr("disabled", false);
     });
 }
 
@@ -256,7 +261,6 @@ function enableCombatUI() {
             class: "btn btn-primary btn-lg btn-block",
             name: i
         });
-        $skillButton.html(character.moveset[i].name +"<br />"+ character.moveset[i].AP +" / "+ character.moveset[i].maxAP +" AP");
 
         if(character.moveset[i].AP <= 0) $skillButton.attr("disabled", true);
 
@@ -264,6 +268,8 @@ function enableCombatUI() {
 
         $("#skillButtons").append($skillButtonDiv);
     }
+
+    updateSkillButtons();
 
     updateHealthBars();
     $("#healthBars").show();
@@ -302,7 +308,11 @@ function calculateEnemyStats() {
 function updateHealthBars() {
     var playerHealth = ""+ Math.round((character.HP / character.maxHP) * 100);
     $("#playerHealth").css("width", playerHealth +"%");
-    $("#playerHealth").html(Math.round(character.HP) +" / "+ character.maxHP);
+    $("#playerHealth").html("HP: "+ Math.round(character.HP) +" / "+ character.maxHP);
+
+    var playerAP = ""+ Math.round((character.AP / character.maxAP) * 100);
+    $("#playerAP").css("width", playerAP +"%");
+    $("#playerAP").html("AP: "+ Math.round(character.AP) +" / "+ character.maxAP);
 
     if(enemy) {
         var enemyHealth = ""+ Math.round((enemy.HP / enemy.maxHP) * 100);

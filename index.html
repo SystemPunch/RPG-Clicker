@@ -123,9 +123,13 @@
                     </div>
                     <div class="col-md-9">
                         <div class="row" id="healthBars">
-                            <label>Your HP:</label>
-                            <div class="progress">
+                            <label>Your HP and AP:</label>
+                            <div class="progress" style="margin-bottom:5px;">
                                 <div class="progress-bar progress-bar-success" id="playerHealth" style="width: 50%;">
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" id="playerAP" style="width: 50%;">
                                 </div>
                             </div>
                             <label>Enemy HP:</label>
@@ -180,6 +184,10 @@
             </div>
             <div class="tab-pane fade" id="changelogTab">
                 <h2><span style="text-decoration:underline;">Changelog</span></h2>
+                <h4 style="margin-bottom:0px;">Version 0.1.10</h4>
+                <ul style="margin-top:0px;">
+                    <li>Switch to AP pool based combat, rather than Pokemon-like AP system</li>
+                </ul>
                 <h4 style="margin-bottom:0px;">Version 0.1.9</h4>
                 <ul style="margin-top:0px;">
                     <li>ACTUALLY fixed bug with perks not unlocking</li>

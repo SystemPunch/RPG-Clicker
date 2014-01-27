@@ -39,7 +39,7 @@ var potionHP1 = new Consumable({
             if(character.HP > character.maxHP) character.HP = character.maxHP;
             this.quantity--;
             bottomNotify("You have used a Vitality Tincture I", "info");
-        } else bottomNotify("You are already at full health!", "warning");
+        } else bottomNotify("You are already at full HP!", "warning");
     },
 
     description: "Restores 20 HP"
@@ -49,29 +49,15 @@ var potionAP1 = new Consumable({
     name: "Energy Tincture I",
     id: 1,
     effect: function() {
-        var isFull = true;
-        var move;
-
-        var i;
-
-        for(i=0; i<character.moveset.length; i++) {
-            move = character.moveset[i];
-            if(move.AP < move.maxAP) isFull = false;
-        }
-
-        if(!isFull) {
-            for(i=0; i<character.moveset.length; i++) {
-                move = character.moveset[i];
-                move.AP += 5;
-                if(move.AP > move.maxAP) move.AP = move.maxAP;
-            }
-            updateSkillButtons();
+        if(character.AP < character.maxAP) {
+            character.AP += 20;
+            if(character.AP > character.maxAP) character.AP = character.maxAP;
             this.quantity--;
-            bottomNotify("You have used an Energy Tincture I", "info");
-        } else bottomNotify("All of your moves already have full AP!", "warning");
+            bottomNotify("You have used an Energy Tincture I");
+        } else bottomNotify("You are already at full AP!", "warning");
     },
 
-    description: "Restores AP of all skills by 5"
+    description: "Restores 20 AP"
 });
 
 function updateInventory() {

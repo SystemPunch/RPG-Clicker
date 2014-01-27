@@ -8,6 +8,9 @@ var character = {
     HP: 30,
     maxHP: 30,
 
+    AP: 100,
+    maxAP: 100,
+
     attack: 10,
     spA: 10,
     defense: 10,
@@ -82,12 +85,11 @@ var character = {
         }
 
         this.maxHP += randomFromInterval(2, 4);
+        this.maxAP += randomFromInterval(4, 8);
 
         this.HP = this.maxHP;
+        this.AP = this.maxAP;
 
-        for(var i=0; i<this.moveset.length; i++) {
-            this.moveset[i].AP = this.moveset[i].maxAP;
-        }
         updateSkillButtons();
 
         updateCharacterPanel();

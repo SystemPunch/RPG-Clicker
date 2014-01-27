@@ -6,8 +6,7 @@ function Move(args) {
     this.ailments = args["ailments"];
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
-    this.AP = args["AP"] || 10;
-    this.maxAP = this.AP;
+    this.AP = args["AP"] || 0;
 }
 
 // Ya'll motherfuckers know what this is
@@ -16,7 +15,7 @@ var moveStruggle = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 50,
-    AP: 1,
+    AP: 0,
 
     ailments: {
         recoil: 100
@@ -32,7 +31,7 @@ var movePunch = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 30,
-    AP: 35
+    AP: 5
 });
 
 var moveBite = new Move({
@@ -40,7 +39,7 @@ var moveBite = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 30,
-    AP: 35
+    AP: 5
 });
 
 var moveSweepKick = new Move({
@@ -48,7 +47,7 @@ var moveSweepKick = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 40,
-    AP: 30
+    AP: 8
 });
 
 /*----
