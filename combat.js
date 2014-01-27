@@ -16,6 +16,12 @@ $(function() {
         } else printToCombatLog("You are not in combat!");
     });
 
+    $("#struggle").click(function(e) {
+        if(inCombat) {
+            continueCombat(moveStruggle);
+        } else bottomNotify("You are not in combat!", "warning");
+    });
+
     enableCombatUI();
     disableCombatUI();
 });
@@ -25,7 +31,10 @@ function updateSkillButtons() {
         $(this).html(character.moveset[this.name].name +"<br />"+ character.moveset[this.name].AP +" AP");
         if(character.moveset[this.name].AP > character.AP) {
             $(this).attr("disabled", true);
-        } else if(inCombat) $(this).attr("disabled", false);
+        } else if(inCombat) {
+            $(this).attr("disabled", false);
+            $("#struggleDiv").hide();
+        }
     });
 }
 
@@ -271,6 +280,17 @@ function enableCombatUI() {
 
     updateSkillButtons();
 
+    var outOfAP = true;
+    $(".skillButton button").each(function() {
+        if(character.moveset[this.name].AP <= character.AP) {
+            outOfAP = false;
+        }
+    });
+
+    if(outOfAP && inCombat) {
+        $("#struggleDiv").show();
+    }
+
     updateHealthBars();
     $("#healthBars").show();
 }
@@ -279,6 +299,7 @@ function disableCombatUI() {
     $(".skillButton button").each(function() {
         $(this).attr("disabled", true);
     });
+    $("#struggleDiv").hide();
     //$("#healthBars").hide();
     $("#enemyHealth").css("width", "0%");
 }
