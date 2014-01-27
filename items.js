@@ -53,7 +53,8 @@ var potionAP1 = new Consumable({
             character.AP += 20;
             if(character.AP > character.maxAP) character.AP = character.maxAP;
             this.quantity--;
-            bottomNotify("You have used an Energy Tincture I");
+            updateSkillButtons();
+            bottomNotify("You have used an Energy Tincture I", "info");
         } else bottomNotify("You are already at full AP!", "warning");
     },
 
