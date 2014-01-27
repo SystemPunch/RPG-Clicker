@@ -19,7 +19,7 @@ $(function() {
     $("#struggle").click(function(e) {
         if(inCombat) {
             continueCombat(moveStruggle);
-        } else bottomNotify("You are not in combat!", "warning");
+        } else printToCombatLog("You are not in combat!");
     });
 
     enableCombatUI();
@@ -27,15 +27,23 @@ $(function() {
 });
 
 function updateSkillButtons() {
+    var outOfAP = true;
+
     $(".skillButton button").each(function() {
         $(this).html(character.moveset[this.name].name +"<br />"+ character.moveset[this.name].AP +" AP");
-        if(character.moveset[this.name].AP > character.AP) {
-            $(this).attr("disabled", true);
-        } else if(inCombat) {
+        if(character.moveset[this.name].AP <= character.AP && inCombat) {
             $(this).attr("disabled", false);
             $("#struggleDiv").hide();
+            outOfAP = false;
+        } else {
+            $(this).attr("disabled", true);
         }
     });
+
+    if(outOfAP && inCombat) {
+        $("#struggleDiv").show();
+        $("#skillButtons").hide();
+    } else $("#skillButtons").show();
 }
 
 var inCombat = false;
@@ -279,17 +287,6 @@ function enableCombatUI() {
     }
 
     updateSkillButtons();
-
-    var outOfAP = true;
-    $(".skillButton button").each(function() {
-        if(character.moveset[this.name].AP <= character.AP) {
-            outOfAP = false;
-        }
-    });
-
-    if(outOfAP && inCombat) {
-        $("#struggleDiv").show();
-    }
 
     updateHealthBars();
     $("#healthBars").show();

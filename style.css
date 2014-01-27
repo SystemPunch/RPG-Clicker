@@ -50,7 +50,7 @@ ul li.selected {
 }
 
 #combatLog {
-    height: 200px;
+    height: 150px;
     overflow-y: scroll;
 }
 

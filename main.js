@@ -28,10 +28,11 @@ $(function () {
     loadGame();
     window.setInterval(updateGame, 100);
 
-    bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 30 seconds.", "warning", 30000);
+    bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
+    bottomNotify("Version 0.1.11 made significant changes to the combat system, and as a result, old save files will almost definitely be broken. You will need to reset your savefile. I'm sorry for the inconvenience.", "danger", 30000);
 });
 
-var VERSION = "0.1.11";
+var VERSION = "0.1.12";
 
 var settings = {
     autoSave: "ON"
@@ -52,6 +53,7 @@ function updateCharacterPanel() {
         <div style='font-size:1.3em;'>" + character.name + "</div>\
         <div>Level " + character.level + "</div>\
         <div>" + Math.round(character.HP) + "/" + character.maxHP + " HP</div>\
+        <div>" + Math.round(character.AP) + "/" + character.maxAP + " AP</div>\
         <div>" + character.currentXP + " / " + character.neededXP + " XP</div><br />\
         <div>Attack</div>\
         <div>Special Attack</div>\
@@ -152,7 +154,14 @@ function updateGame() {
 
 function bottomNotify(text, type, time) {
     var t = time || 3000;
-    var notificationBar = "<div class='alert alert-" + type + " col-md-8 col-md-offset-2'>" + text + "</div>";
+    var notificationBar = $(document.createElement("div"));
+
+    notificationBar.attr({
+        class: "alert alert-"+ type +" alert-dismissable col-md-8 col-md-offset-2"
+    });
+    notificationBar.append("<button type='button' class='close' data-dismiss='alert'>&times;</button>");
+    notificationBar.append(text);
+
     $(".noteContainer").append(notificationBar);
     var n = $(".alert:last");
 
