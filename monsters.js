@@ -49,8 +49,8 @@ var monRat = new Monster({
     speed: 8
 });
 monRat.moveset.push(moveBite);
-monRat.lootTable.push([potionHP1, 1]);
-monRat.lootTable.push([potionAP1, 5]);
+monRat.lootTable.push([potionHP1, 5]);
+monRat.lootTable.push([potionAP1, 10]);
 
 var monGoblin = new Monster({
     name: "Goblin",
@@ -63,8 +63,8 @@ var monGoblin = new Monster({
     speed: 12
 });
 monGoblin.moveset.push(movePunch);
-monGoblin.lootTable.push([potionHP1, 10]);
-monGoblin.lootTable.push([potionAP1, 15]);
+monGoblin.lootTable.push([potionHP1, 15]);
+monGoblin.lootTable.push([potionAP1, 20]);
 
 monsters.list.push(monRat);
 monsters.list.push(monGoblin);

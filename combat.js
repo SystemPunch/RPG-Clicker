@@ -219,7 +219,7 @@ function endCombat(result) {
             printToCombatLog(goldGain +" gold");
 
             for(var i=0; i<enemy.lootTable.length; i++) {
-                if(randomFromInterval(1, 100) <= enemy.lootTable[i][1]) {
+                if(Math.random() < enemy.lootTable[i][1]/100) {
                     character.gainItem(enemy.lootTable[i][0]);
                     printToCombatLog(enemy.lootTable[i][0].name);
                 }
