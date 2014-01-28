@@ -67,6 +67,7 @@ function updateCharacterPanel() {
         <div style='font-size:1.3em;'>&nbsp;</div>\
         <br />\
         <br />\
+        <br />\
         <br /><br />\
         <div>" + character.attack + "</div>\
         <div>" + character.spA + "</div>\
