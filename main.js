@@ -32,7 +32,7 @@ $(function () {
     bottomNotify("Version 0.1.11 made significant changes to the combat system, and as a result, old save files will almost definitely be broken. You will need to reset your savefile. I'm sorry for the inconvenience.", "danger", 30000);
 });
 
-var VERSION = "0.1.12";
+var VERSION = "0.2.0";
 
 var settings = {
     autoSave: "ON"

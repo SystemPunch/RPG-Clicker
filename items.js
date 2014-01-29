@@ -12,10 +12,26 @@ $(function() {
 
         updateInventory();
     });
+
+    $("#consumableShopList").on("click", "button", function(e) {
+        var index = this.name;
+
+        buyItem(consumableShop[index]);
+    });
+
+    $("#consumableShopList").on("click", "button", function(e) {
+        var index = this.name;
+
+        buyItem(equipmentShop[index]);
+    });
+
+    updateShop();
 });
 
 var consumableList = [];
+var consumableShop = [];
 var equipmentList = [];
+var equipmentShop = [];
 
 function Consumable(args) {
     this.type = "consumable";
@@ -26,7 +42,27 @@ function Consumable(args) {
 
     this.description = args.description;
 
+    this.cost = args.cost || 0;
+
     consumableList.push(this);
+
+    if(args.inShop) consumableShop.push(this);
+}
+
+function Equipment(args) {
+    this.type = "equipment";
+    this.quantity = 0;
+    this.name = args.name;
+    this.id = args.id;
+
+    this.slot = args.slot;
+    this.attackMod = args.attackMod || 0;
+    this.spAMod = args.spAMo || 0;
+    this.defenseMod = args.defenseMod || 0;
+    this.spDMod = args.spDMod || 0;
+    this.speedMod = args.speedMod || 0;
+
+    this.equipped = false;
 }
 
 // CONSUMABLES
@@ -42,7 +78,11 @@ var potionHP1 = new Consumable({
         } else bottomNotify("You are already at full HP!", "warning");
     },
 
-    description: "Restores 20 HP"
+    description: "Restores 20 HP",
+
+    cost: 100,
+
+    inShop: true
 });
 
 var potionAP1 = new Consumable({
@@ -58,7 +98,11 @@ var potionAP1 = new Consumable({
         } else bottomNotify("You are already at full AP!", "warning");
     },
 
-    description: "Restores 20 AP"
+    description: "Restores 20 AP",
+
+    cost: 100,
+
+    inShop: true
 });
 
 function updateInventory() {
@@ -93,6 +137,66 @@ function updateInventory() {
 
         }
     }
+}
+
+function updateShop() {
+    for(var i=0; i<consumableShop.length; i++) {
+        var item = consumableShop[i];
+
+        var itemRow = $(document.createElement("tr"));
+        itemRow.append("<td>"+ item.name +"</td>");
+        itemRow.append("<td>"+ item.cost +"</td>");
+
+        var buyButton = $(document.createElement("button"));
+        buyButton.attr({
+            type: "button",
+            class: "btn btn-default btn-xs",
+            name: i
+        });
+        buyButton.html("Buy");
+
+        itemRow.append($(document.createElement("td")).append(buyButton));
+
+        $(itemRow).tooltip({
+            placement: "auto",
+            title: item.description
+        });
+
+        $("#consumableShopList").append(itemRow);
+    }
+
+    for(var i=0; i<equipmentShop.length; i++) {
+        var item = equipmentShop[i];
+
+        var itemRow = $(document.createElement("tr"));
+        itemRow.append("<td>"+ item.name +"</td>");
+        itemRow.append("<td>"+ item.cost +"</td>");
+
+        var buyButton = $(document.createElement("button"));
+        buyButton.attr({
+            type: "button",
+            class: "btn btn-default btn-xs",
+            name: i
+        });
+        buyButton.html("Buy");
+
+        itemRow.append($(document.createElement("td")).append(buyButton));
+
+        $(itemRow).tooltip({
+            placement: "auto",
+            title: item.description
+        });
+
+        $("#equipmentShopList").append(itemRow);
+    }
+}
+
+function buyItem(item) {
+    if(item.cost <= character.gold) {
+        character.gold -= item.cost;
+        character.gainItem(item);
+        bottomNotify("You have bought "+ item.name, "info");
+    } else bottomNotify("You don't have enough gold!", "warning");
 }
 
 function searchInventory(item) {
