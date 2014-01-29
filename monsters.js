@@ -42,9 +42,9 @@ var monRat = new Monster({
     name: "Rat",
     HP: 25,
     level: 1,
-    attack: 14,
+    attack: 10,
     spA: 2,
-    defense: 8,
+    defense: 6,
     spD: 2,
     speed: 8
 });

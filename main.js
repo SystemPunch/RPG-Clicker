@@ -1,20 +1,14 @@
 $(function () {
-    //$(document).tooltip();
-
-    $("span#changelogTab").click(function () {
-        $(".menuTabs li").removeClass("selected");
-        $("div.tabContent").fadeOut("fast", function () {
-            $("div.page").css("display", "none");
-            $(".page#changelogTab").css("display", "block");
-        });
-        $("div.tabContent").fadeIn("fast");
-    });
-
     $(window).keydown(function (e) {
         if (e.keyCode == 13) {
             e.preventDefault();
             return false;
         }
+    });
+
+    $("a#changelogTabLink").click(function(e) {
+        e.preventDefault();
+        $(this).tab("show");
     });
 
     defaultCharacter = $.extend(true, {}, character);
@@ -32,7 +26,7 @@ $(function () {
     bottomNotify("Version 0.1.11 made significant changes to the combat system, and as a result, old save files will almost definitely be broken. You will need to reset your savefile. I'm sorry for the inconvenience.", "danger", 30000);
 });
 
-var VERSION = "0.2.0";
+var VERSION = "0.2.1";
 
 var settings = {
     autoSave: "ON"
@@ -49,73 +43,62 @@ function updateCharacterPanel() {
 
     $("#gold").html(Math.floor(character.gold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " gold");
 
-    $("#characterStats").html("\
-        <div style='font-size:1.3em;'>" + character.name + "</div>\
-        <div>Level " + character.level + "</div>\
-        <div>" + Math.round(character.HP) + "/" + character.maxHP + " HP</div>\
-        <div>" + Math.round(character.AP) + "/" + character.maxAP + " AP</div>\
-        <div>" + character.currentXP + " / " + character.neededXP + " XP</div><br />\
-        <div>Attack</div>\
-        <div>Special Attack</div>\
-        <div>Defense</div>\
-        <div>Special Defense</div>\
-        <div>Speed</div><br />\
-        <div>HP Regen/second</div>\
-    ");
+    var characterTable = $(document.createElement("table"));
+    characterTable.attr({
+        class: "table table-condensed"
+    });
+    characterTable.append("<thead><tr><th>"+ character.name +"</th><th></th></tr></thead>");
+    characterTable.append("<tbody>" +
+        "<tr><td>Level "+ character.level +"</td><td></td></tr>" +
+        "<tr><td>"+ character.HP +" / "+ character.maxHP +" HP</td><td></td></tr>" +
+        "<tr><td>"+ character.AP +" / "+ character.maxAP +" AP</td><td></td></tr>" +
+        "<tr><td>"+ character.currentXP +" / "+ character.neededXP +" XP</td><td></td></tr>" +
+        "<tr><td>&nbsp;</td><td></td></tr>" +
+        "<tr><td>Attack</td><td>"+ character.attack +"</td></tr>" +
+        "<tr><td>Special Attack</td><td>"+ character.spA +"</td></tr>" +
+        "<tr><td>Defense</td><td>"+ character.defense +"</td></tr>" +
+        "<tr><td>Special Defense</td><td>"+ character.spD +"</td></tr>" +
+        "<tr><td>Speed</td><td>"+ character.speed +"</td></tr>" +
+        "<tr><td>&nbsp;</td><td></td></tr>" +
+        "<tr><td>HP Regen/second</td><td>"+ character.autoheal +"</td></tr></tbody>");
 
-    $("#characterStatsValues").html("\
-        <div style='font-size:1.3em;'>&nbsp;</div>\
-        <br />\
-        <br />\
-        <br />\
-        <br /><br />\
-        <div>" + character.attack + "</div>\
-        <div>" + character.spA + "</div>\
-        <div>" + character.defense + "</div>\
-        <div>" + character.spD + "</div>\
-        <div>" + character.speed + "</div><br />\
-        <div>" + character.autoheal.toFixed(2) + "</div>\
-    ");
+    $("#characterStats").empty();
+    $("#characterStats").append(characterTable);
 
-    $("#proficiencies").html("\
-        <div style='font-size:1.3em'>Proficiencies</div>\
-        <div>Unarmed</div>\
-        <div>Blades</div>\
-        <div>Bows</div>\
-        <div>Shields</div>\
-        <div>Magic</div>\
-    ");
+    var proficienciesTable = $(document.createElement("table"));
+    proficienciesTable.attr({
+        class: "table table-condensed"
+    });
+    proficienciesTable.append("<thead><tr><th>Proficiencies</th><th></th></tr></thead>");
+    proficienciesTable.append("<tbody>" +
+        "<tr><td>Unarmed</td><td>"+ character.unarmedProf +"</td></tr>" +
+        "<tr><td>Blades</td><td>"+ character.bladeProf +"</td></tr>" +
+        "<tr><td>Bows</td><td>"+ character.bowProf +"</td></tr>" +
+        "<tr><td>Shields</td><td>"+ character.shieldProf +"</td></tr>" +
+        "<tr><td>Magic</td><td>"+ character.magicProf +"</td></tr></tbody>");
 
-    $("#proficienciesValues").html("\
-        <div style='font-size:1.3em;'>&nbsp;</div>\
-        <div>" + character.unarmedProf + "</div>\
-        <div>" + character.bladeProf + "</div>\
-        <div>" + character.bowProf + "</div>\
-        <div>" + character.shieldProf + "</div>\
-        <div>" + character.magicProf + "</div>\
-    ");
+    $("#proficiencies").empty();
+    $("#proficiencies").append(proficienciesTable);
 
-    $("#gameStats").html("\
-        <div style='font-size:1.3em;'>Game Stats</div>\
-        <div>XP per Click</div>\
-        <div>XP per Second</div><br />\
-        <div>Gold per Click</div>\
-        <div>Gold per Second</div><br />\
-        <div>Enemies Killed</div>\
-        <div>Times Died</div><br />\
-        <div>Total Clicks</div>\
-    ");
+    var gameStatsTable = $(document.createElement("table"));
+    gameStatsTable.attr({
+        class: "table table-condensed"
+    });
+    gameStatsTable.append("<thead><tr><th>Game Stats</th><th></th></tr></thead>");
+    gameStatsTable.append("<tbody>" +
+        "<tr><td>XP per Click</td><td>"+ character.clickXP +"</td></tr>" +
+        "<tr><td>XP per Second</td><td>"+ character.XPS +"</td></tr>" +
+        "<tr><td>&nbsp;</td><td></td></tr>" +
+        "<tr><td>Gold per Click</td><td>"+ character.clickGold +"</td></tr>" +
+        "<tr><td>Gold per Second</td><td>"+ character.GPS +"</td></tr>" +
+        "<tr><td>&nbsp;</td><td></td></tr>" +
+        "<tr><td>Enemies Killed</td><td>"+ character.enemiesKilled +"</td></tr>" +
+        "<tr><td>Times Died</td><td>"+ character.timesDied +"</td></tr>" +
+        "<tr><td>&nbsp;</td><td></td></tr>" +
+        "<tr><td>Total Clicks</td><td>"+ character.totalClicks +"</td></tr></tbody>");
 
-    $("#gameStatsValues").html("\
-        <div style='font-size:1.3em;'>&nbsp;</div>\
-        <div>" + character.clickXP + "</div>\
-        <div>" + character.XPS.toFixed(1) + "</div><br />\
-        <div>" + character.clickGold + "</div>\
-        <div>" + character.GPS.toFixed(1) + "</div><br />\
-        <div>" + character.enemiesKilled + "</div>\
-        <div>" + character.timesDied + "</div><br />\
-        <div>" + character.totalClicks +"</div>\
-    ");
+    $("#gameStats").empty();
+    $("#gameStats").append(gameStatsTable);
 }
 
 var saveInterval = 120000;
@@ -263,7 +246,7 @@ function loadGame() {
 
     if (loadState) {
         if(loadState.version !== VERSION) {
-            if(confirm("We have detected that your save file is from a different (probably older) version of RPG Clicker.\n\n\
+            if(confirm("We have detected that your save file is from a different (probably older, or possibly newer if you've been playing the dev version) version of RPG Clicker.\n\n\
 Attempting to load this save file could result in unwanted side-effects, including breaking the game, which would require a game reset.\n\n\
 Do you want to attempt to load this save file? (Press OK to load, Cancel to start a new game)")) {
                 loadEverything();
