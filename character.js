@@ -51,6 +51,10 @@ var character = {
 
     inventory: [],
 
+    equipped: {
+        weapon:
+    },
+
     moveset: [],
 
     gainProfXP: function(prof) {

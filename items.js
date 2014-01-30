@@ -56,13 +56,15 @@ function Equipment(args) {
     this.id = args.id;
 
     this.slot = args.slot;
+    this.weaponType = args.weaponType;
+
     this.attackMod = args.attackMod || 0;
     this.spAMod = args.spAMo || 0;
     this.defenseMod = args.defenseMod || 0;
     this.spDMod = args.spDMod || 0;
     this.speedMod = args.speedMod || 0;
 
-    this.equipped = false;
+    this.equipped = args.equipped || false;
 }
 
 // CONSUMABLES
@@ -84,7 +86,6 @@ var potionHP1 = new Consumable({
 
     inShop: true
 });
-
 var potionAP1 = new Consumable({
     name: "Energy Tincture I",
     id: 1,
@@ -103,6 +104,15 @@ var potionAP1 = new Consumable({
     cost: 100,
 
     inShop: true
+});
+
+// EQUIPMENT
+var weaponFists = new Equipment({
+    name: "fists",
+    id: 0,
+    slot: "weapon",
+    weaponType: "unarmed",
+    equipped: true
 });
 
 function updateInventory() {
