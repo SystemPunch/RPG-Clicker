@@ -56,7 +56,7 @@ var moveSweepKick = new Move({
     weapon: "unarmed",
     power: 40,
     AP: 8,
-    requiredProf: 5
+    requiredProf: 10
 });
 
 /*----
