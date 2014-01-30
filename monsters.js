@@ -63,8 +63,10 @@ var monGoblin = new Monster({
     speed: 12
 });
 monGoblin.moveset.push(movePunch);
+monGoblin.moveset.push(moveStab);
 monGoblin.lootTable.push([potionHP1, 15]);
 monGoblin.lootTable.push([potionAP1, 20]);
+monGoblin.lootTable.push([weaponCrackedKnife, 5]);
 
 monsters.list.push(monRat);
 monsters.list.push(monGoblin);

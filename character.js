@@ -98,7 +98,7 @@ var character = {
         this.HP = this.maxHP;
         this.AP = this.maxAP;
 
-        updateSkillButtons();
+        enableCombatUI();
 
         updateCharacterPanel();
         bottomNotify("Level up! You are now level " + this.level, "success");

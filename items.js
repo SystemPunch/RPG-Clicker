@@ -65,9 +65,14 @@ function Equipment(args) {
     this.speedMod = args.speedMod || 0;
 
     this.equipped = args.equipped || false;
-}
 
-// CONSUMABLES
+    this.description = args.description;
+
+    equipmentList.push(this);
+}
+/////////////////
+// CONSUMABLES //
+/////////////////
 var potionHP1 = new Consumable({
     name: "Vitality Tincture I",
     id: 0,
@@ -108,11 +113,28 @@ var potionAP1 = new Consumable({
 
 // EQUIPMENT
 var weaponFists = new Equipment({
-    name: "fists",
+    name: "Fists",
     id: 0,
     slot: "weapon",
     weaponType: "unarmed",
-    equipped: true
+    equipped: true,
+
+    description: "Your fists."
+});
+
+////////////
+// BLADES //
+////////////
+var weaponCrackedKnife = new Equipment({
+    name: "Cracked Knife",
+    id: 1,
+    slot: "weapon",
+    weaponType: "blade",
+    equipped: false,
+
+    attackMod: 10,
+
+    description: "A cracked knife."
 });
 
 function updateInventory() {
@@ -143,8 +165,27 @@ function updateInventory() {
             });
 
             $("#consumableList").append(itemRow);
-        } else if(item.type === "equipment") {
+        } else if(item.type === "equipment" && !item.equipped) {
+            var itemRow = $(document.createElement("tr"));
+            itemRow.append("<td>"+ item.name +"</td>");
+            itemRow.append("<td>"+ item.quantity +"</td>");
 
+            var equipButton = $(document.createElement("button"));
+            equipButton.attr({
+                type: "button",
+                class: "btn btn-default btn-xs",
+                name: i
+            });
+            equipButton.html("Equip");
+
+            itemRow.append($(document.createElement("td")).append(equipButton));
+
+            $(itemRow).tooltip({
+                placement: "auto",
+                title: item.description
+            });
+
+            $("#equipmentList").append(itemRow);
         }
     }
 }
@@ -215,4 +256,12 @@ function searchInventory(item) {
     }
 
     return -1;
+}
+
+function unequipItem(item) {
+
+}
+
+function equipItem(item) {
+
 }
