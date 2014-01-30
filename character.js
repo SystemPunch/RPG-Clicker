@@ -52,7 +52,7 @@ var character = {
     inventory: [],
 
     equipped: {
-        weapon:
+        weapon: weaponFists
     },
 
     moveset: [],

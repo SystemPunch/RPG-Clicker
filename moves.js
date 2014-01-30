@@ -1,3 +1,7 @@
+var unarmed = [];
+
+var defaultUnarmed = [];
+
 function Move(args) {
     this.name = args["name"];
     this.type = args["type"];
@@ -7,6 +11,10 @@ function Move(args) {
     this.priority = args["priority"] || 0;
     this.critRate = args["critRate"] || 0;
     this.AP = args["AP"] || 0;
+
+    this.requiredProf = args.requiredProf || 0;
+
+    if(this.requiredProf) eval(this.weapon).push(this);
 }
 
 // Ya'll motherfuckers know what this is
@@ -31,7 +39,7 @@ var movePunch = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 30,
-    AP: 5
+    AP: 5,
 });
 
 var moveBite = new Move({
@@ -47,7 +55,8 @@ var moveSweepKick = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 40,
-    AP: 8
+    AP: 8,
+    requiredProf: 5
 });
 
 /*----
@@ -55,5 +64,22 @@ Blades
 ----*/
 
 function unlockMoves(prof) {
+    var moveArray = eval(prof);
 
+    for(var i=0; i<moveArray.length; i++) {
+        var move = moveArray[i];
+
+        if(move.requiredProf <= character[prof +"Prof"]) {
+            moveArray.splice(i, 1);
+            learnMove(move);
+        }
+    }
+}
+
+function learnMove(move) {
+    if(character.moveset.length < 4) {
+        character.moveset.push(move);
+        bottomNotify("You have learned a new "+ move.weapon +" skill: "+ move.name, "success");
+        enableCombatUI();
+    }
 }

@@ -8,11 +8,8 @@ $(function() {
 
     $("#skillButtons").on("click", "button", function(e) {
         if(inCombat) {
-            if(character.moveset[this.name].AP <= character.AP) {
-                character.AP -= character.moveset[this.name].AP;
-                continueCombat(character.moveset[this.name]);
-                updateSkillButtons();
-            } else printToCombatLog("You don't have enough AP!");
+            if(character.moveset[this.name].AP <= character.AP) continueCombat(character.moveset[this.name]);
+            else printToCombatLog("You don't have enough AP!");
         } else printToCombatLog("You are not in combat!");
     });
 
@@ -88,6 +85,9 @@ function continueCombat(move) {
     var playerMove = move;
     var enemyMove = enemy.moveset[randomFromInterval(0, enemy.moveset.length-1)];
 
+    character.AP -= playerMove.AP;
+    updateSkillButtons();
+
     var playerSpeed = calculateCombatSpeed(character);
     var enemySpeed = calculateCombatSpeed(enemy);
     var first = "";
@@ -137,7 +137,7 @@ function doPlayerAttack(move) {
 
     var summary = "You used <strong>"+ move.name +"</strong>!";
 
-    character.gainProfXP(move.weapon);
+    character.gainProfXP(character.equipped.weapon.weaponType);
 
     if(didCrit) summary += " <strong>CRITICAL HIT!</strong>";
 

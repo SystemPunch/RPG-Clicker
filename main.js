@@ -11,6 +11,7 @@ $(function () {
         $(this).tab("show");
     });
 
+    // INITIALIZE DEFAULTS
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
     defaultUpgrades = [];
@@ -18,15 +19,19 @@ $(function () {
         var u = $.extend(true, {}, upgrades[i]);
         defaultUpgrades.push(u);
     }
+    defaultUnarmed = [];
+    for(var i=0; i<unarmed.length; i++) {
+        var u = $.extend(true, {}, unarmed[i]);
+        defaultUnarmed.push(u);
+    }
 
     loadGame();
     window.setInterval(updateGame, 100);
 
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
-    bottomNotify("Version 0.1.11 made significant changes to the combat system, and as a result, old save files will almost definitely be broken. You will need to reset your savefile. I'm sorry for the inconvenience.", "danger", 30000);
 });
 
-var VERSION = "0.2.1";
+var VERSION = "0.2.2";
 
 var settings = {
     autoSave: "ON"
@@ -245,6 +250,8 @@ function loadGame() {
 
         character.fixInventory();
         updateInventory();
+
+        fixSaveFile();
     };
 
     if (loadState) {
@@ -266,4 +273,9 @@ Do you want to attempt to load this save file? (Press OK to load, Cancel to star
 
 function randomFromInterval(from, to) {
     return Math.floor(Math.random()*(to-from+1)+from);
+}
+
+function fixSaveFile() {
+    if(character.equipped.weapon.weaponType === undefined) character.equipped.weapon = weaponFists;
+    if(character.moveset[0].maxAP === undefined) character.moveset = [movePunch];
 }
