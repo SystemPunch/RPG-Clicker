@@ -50,7 +50,7 @@ function updateCharacterPanel() {
     characterTable.append("<thead><tr><th>"+ character.name +"</th><th></th></tr></thead>");
     characterTable.append("<tbody>" +
         "<tr><td>Level "+ character.level +"</td><td></td></tr>" +
-        "<tr><td>"+ character.HP +" / "+ character.maxHP +" HP</td><td></td></tr>" +
+        "<tr><td>"+ Math.floor(character.HP) +" / "+ character.maxHP +" HP</td><td></td></tr>" +
         "<tr><td>"+ character.AP +" / "+ character.maxAP +" AP</td><td></td></tr>" +
         "<tr><td>"+ character.currentXP +" / "+ character.neededXP +" XP</td><td></td></tr>" +
         "<tr><td>&nbsp;</td><td></td></tr>" +
@@ -131,7 +131,10 @@ function updateGame() {
     timeSinceLastSave = saveTimer / 1000;
     $("#timeSinceLastSave").html(timeSinceLastSave.toFixed(1));
 
-    if(!inCombat && character.HP < character.maxHP) character.HP += character.autoheal/10;
+    if(!inCombat && character.HP < character.maxHP) {
+        character.HP += character.autoheal/10;
+        if(character.HP > character.maxHP) character.HP = character.maxHP;
+    }
 
     updateHealthBars();
 }

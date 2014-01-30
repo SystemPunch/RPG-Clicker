@@ -326,11 +326,11 @@ function calculateEnemyStats() {
 function updateHealthBars() {
     var playerHealth = ""+ Math.round((character.HP / character.maxHP) * 100);
     $("#playerHealth").css("width", playerHealth +"%");
-    $("#playerHealth").html("HP: "+ Math.round(character.HP) +" / "+ character.maxHP);
+    $("#playerHealth").html("HP: "+ Math.floor(character.HP) +" / "+ character.maxHP);
 
     var playerAP = ""+ Math.round((character.AP / character.maxAP) * 100);
     $("#playerAP").css("width", playerAP +"%");
-    $("#playerAP").html("AP: "+ Math.round(character.AP) +" / "+ character.maxAP);
+    $("#playerAP").html("AP: "+ Math.floor(character.AP) +" / "+ character.maxAP);
 
     if(enemy) {
         var enemyHealth = ""+ Math.round((enemy.HP / enemy.maxHP) * 100);
