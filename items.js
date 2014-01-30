@@ -25,6 +25,18 @@ $(function() {
         buyItem(equipmentShop[index]);
     });
 
+    $("#equipmentList").on("click", "button", function(e) {
+        var index = this.name;
+
+        equipItem(character.inventory[index]);
+    });
+
+    $("#equippedList").on("click", "button", function(e) {
+        var slot = this.name;
+
+        unequipItem(character.equipped[slot]);
+    });
+
     updateShop();
 });
 
@@ -113,22 +125,26 @@ var potionAP1 = new Consumable({
 var weaponNothing = new Equipment({
     name: "Nothing",
     id: 0,
-    slot: "weapon"
+    slot: "weapon",
+    description: "You're unarmed!"
 });
 var bodyNothing = new Equipment({
     name: "Nothing",
     id: 2,
-    slot: "body"
+    slot: "body",
+    description: "You're naked!"
 });
 var handsNothing = new Equipment({
     name: "Nothing",
     id: 3,
-    slot: "hands"
+    slot: "hands",
+    description: "Your bare hands!"
 });
 var feetNothing = new Equipment({
     name: "Nothing",
     id: 4,
-    slot: "feet"
+    slot: "feet",
+    description: "You're barefoot!"
 });
 
 ////////////
@@ -142,7 +158,7 @@ var weaponCrackedKnife = new Equipment({
 
     attackMod: 10,
 
-    description: "A cracked knife."
+    description: "A cracked knife. Probably not all that effective."
 });
 
 function updateInventory() {
@@ -151,6 +167,11 @@ function updateInventory() {
 
     for(var i=0; i<character.inventory.length; i++) {
         var item = character.inventory[i];
+
+        if(item.quantity <= 0) {
+            character.inventory.splice(searchInventory(item), 1);
+            continue;
+        }
 
         if(item.type === "consumable") {
             var itemRow = $(document.createElement("tr"));
@@ -200,8 +221,33 @@ function updateInventory() {
     for(var key in character.equipped) {
         if(character.equipped.hasOwnProperty(key)) {
             var item = character.equipped[key];
+            var itemInfo = $("#equipped"+ item.slot.capitalize() +" .panel-body");
 
+            itemInfo.empty();
 
+            itemInfo.append("<dl><dt>"+ item.name +"</dt><dd>"+ item.description +"</dd></dl>");
+            itemInfo.append("<dl class='dl-horizontal'>" +
+                "<dt>Attack</dt>" +
+                "<dd>"+ item.attackMod +"</dd>" +
+                "<dt>Special Attack</dt>" +
+                "<dd>"+ item.spAMod +"</dd>" +
+                "<dt>Defense</dt>" +
+                "<dd>"+ item.defenseMod +"</dd>" +
+                "<dt>Special Defense</dt>" +
+                "<dd>"+ item.spDMod +"</dd>" +
+                "<dt>Speed</dt>" +
+                "<dd>"+ item.speedMod +"</dd></dl>");
+
+            if(item.name !== "Nothing") {
+                var unequipButton = $(document.createElement("button"));
+                unequipButton.attr({
+                    class: "btn btn-default btn-block",
+                    name: item.slot
+                });
+                unequipButton.html("Unequip");
+
+                itemInfo.append(unequipButton);
+            }
         }
     }
 }
@@ -275,9 +321,25 @@ function searchInventory(item) {
 }
 
 function unequipItem(item) {
-    character.equipped[eval(item.slot)] = eval(item.slot +"Nothing");
+    character.equipped[item.slot] = eval(item.slot +"Nothing");
+
+    if(item.name !== "Nothing") {
+        bottomNotify("You have unequipped your "+ item.name, "info");
+        character.gainItem(item);
+    }
+
+    character.calculateStatMods();
+
+    updateInventory();
 }
 
 function equipItem(item) {
-    character.equipped[eval(item.slot)] = item;
+    unequipItem(character.equipped[item.slot]);
+    character.equipped[item.slot] = item;
+    bottomNotify("You have equipped your "+ item.name, "info");
+    character.calculateStatMods();
+
+    item.quantity--;
+
+    updateInventory();
 }

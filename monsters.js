@@ -57,6 +57,7 @@ var monRat = new Monster({
 monRat.moveset.push(moveBite);
 monRat.lootTable.push([potionHP1, 5]);
 monRat.lootTable.push([potionAP1, 10]);
+monsters.list.push(monRat);
 
 var monGoblin = new Monster({
     name: "Goblin",
@@ -73,7 +74,20 @@ monGoblin.moveset.push(moveStab);
 monGoblin.lootTable.push([potionHP1, 15]);
 monGoblin.lootTable.push([potionAP1, 20]);
 monGoblin.lootTable.push([weaponCrackedKnife, 5]);
-
-monsters.list.push(monRat);
 monsters.list.push(monGoblin);
 
+var monCorruptedGnome = new Monster({
+    name: "Corrupted Gnome",
+    HP: 60,
+    level: 10,
+    attack: 25,
+    spA: 18,
+    defense: 30,
+    spD: 28,
+    speed: 22
+});
+monCorruptedGnome.moveset.push(movePunch);
+monCorruptedGnome.moveset.push(moveSweepKick);
+monCorruptedGnome.lootTable.push([potionHP1, 30]);
+monCorruptedGnome.lootTable.push([potionAP1, 35]);
+monsters.list.push(monCorruptedGnome);

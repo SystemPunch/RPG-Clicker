@@ -24,7 +24,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.2.4";
+var VERSION = "0.3.0";
 
 var settings = {
     autoSave: "ON"
@@ -278,3 +278,7 @@ function fixSaveFile() {
     if(character.equipped.weapon.weaponType === undefined) character.equipped.weapon = weaponFists;
     if(character.moveset[0].maxAP !== undefined) character.moveset = [movePunch];
 }
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
