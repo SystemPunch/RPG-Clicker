@@ -53,3 +53,7 @@ var moveSweepKick = new Move({
 /*----
 Blades
 ----*/
+
+function unlockMoves(prof) {
+
+}

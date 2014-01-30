@@ -60,6 +60,8 @@ var character = {
             this[prof +"XP"] = 0;
             this[prof +"XPNeeded"] *= 1.1;
             bottomNotify("Your "+ prof +" proficiency has increased!", "success");
+
+            unlockMoves(prof);
         }
     },
 
