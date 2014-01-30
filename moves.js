@@ -57,7 +57,7 @@ var moveSweepKick = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 40,
-    AP: 8,
+    AP: 7,
     requiredProf: 10
 });
 
@@ -69,7 +69,7 @@ var moveStab = new Move({
     name: "STAB",
     type: "physical",
     weapon: "blade",
-    power: 40,
+    power: 50,
     AP: 8,
     requiredProf: 5
 });
