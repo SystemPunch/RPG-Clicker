@@ -2,7 +2,7 @@
 
 $(function() {
     $("#consumableList").on("click", "button", function(e) {
-        var index = this.name;
+        var index = +this.name;
 
         character.inventory[index].effect();
 
@@ -14,19 +14,19 @@ $(function() {
     });
 
     $("#consumableShopList").on("click", "button", function(e) {
-        var index = this.name;
+        var index = +this.name;
 
         buyItem(consumableShop[index]);
     });
 
-    $("#consumableShopList").on("click", "button", function(e) {
-        var index = this.name;
+    $("#equipmentShopList").on("click", "button", function(e) {
+        var index = +this.name;
 
         buyItem(equipmentShop[index]);
     });
 
     $("#equipmentList").on("click", "button", function(e) {
-        var index = this.name;
+        var index = +this.name;
 
         equipItem(character.inventory[index]);
     });
