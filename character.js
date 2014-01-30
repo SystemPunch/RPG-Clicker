@@ -1,3 +1,5 @@
+var defaultCharacter;
+
 var character = {
     name: "",
 
@@ -55,7 +57,7 @@ var character = {
         weapon: weaponFists
     },
 
-    moveset: [],
+    moveset: [movePunch],
 
     gainProfXP: function(prof) {
         this[prof +"XP"]++;
@@ -152,10 +154,6 @@ var character = {
         this.moveset.push(move);
     }
 };
-
-character.moveset.push(movePunch);
-
-var defaultCharacter;
 
 function cheat() {
     while(character.level < 100) character.levelUp();

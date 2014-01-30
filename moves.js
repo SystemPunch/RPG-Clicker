@@ -1,6 +1,8 @@
 var unarmed = [];
+var blade = [];
 
 var defaultUnarmed = [];
+var defaultBlade = [];
 
 function Move(args) {
     this.name = args["name"];
@@ -62,6 +64,15 @@ var moveSweepKick = new Move({
 /*----
 Blades
 ----*/
+
+var moveStab = new Move({
+    name: "STAB",
+    type: "physical",
+    weapon: "blade",
+    power: 40,
+    AP: 8,
+    requiredProf: 5
+});
 
 function unlockMoves(prof) {
     var moveArray = eval(prof);

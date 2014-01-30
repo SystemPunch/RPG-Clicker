@@ -14,16 +14,9 @@ $(function () {
     // INITIALIZE DEFAULTS
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
-    defaultUpgrades = [];
-    for(var i=0; i<upgrades.length; i++) {
-        var u = $.extend(true, {}, upgrades[i]);
-        defaultUpgrades.push(u);
-    }
-    defaultUnarmed = [];
-    for(var i=0; i<unarmed.length; i++) {
-        var u = $.extend(true, {}, unarmed[i]);
-        defaultUnarmed.push(u);
-    }
+    defaultUpgrades = $.extend(true, [], upgrades);
+    defaultUnarmed = $.extend(true, [], unarmed);
+    defaultBlade = $.extend(true, [], blade);
 
     loadGame();
     window.setInterval(updateGame, 100);
@@ -31,7 +24,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.2.2";
+var VERSION = "0.2.3";
 
 var settings = {
     autoSave: "ON"
@@ -171,6 +164,8 @@ function newGame() {
     character = defaultCharacter;
     placeMine = defaultPlaceMine;
     upgrades = defaultUpgrades;
+    unarmed = defaultUnarmed;
+    blade = defaultBlade;
     $("div#upgradesTab").html('<div id="upgradeCounter"></div>');
     unlockedUpgradesCount = 0;
 
@@ -216,6 +211,8 @@ function saveGame() {
     saveState.settings = settings;
     saveState.upgrades = upgrades;
     saveState.unlockedUpgradesCount = unlockedUpgradesCount;
+    saveState.unarmed = unarmed;
+    saveState.blade = blade;
 
     window.localStorage.setItem("saveState", JSON.stringify(saveState));
 
@@ -241,6 +238,8 @@ function loadGame() {
             }
             upgrades[i].inList = false;
         }
+        unarmed = loadState.unarmed;
+        blade = loadState.blade;
         unlockedUpgradesCount = loadState.unlockedUpgradesCount;
         character.calculateGPS();
         settings = loadState.settings;
@@ -277,5 +276,5 @@ function randomFromInterval(from, to) {
 
 function fixSaveFile() {
     if(character.equipped.weapon.weaponType === undefined) character.equipped.weapon = weaponFists;
-    if(character.moveset[0].maxAP === undefined) character.moveset = [movePunch];
+    if(character.moveset[0].maxAP !== undefined) character.moveset = [movePunch];
 }
