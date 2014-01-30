@@ -56,7 +56,7 @@ function Equipment(args) {
     this.id = args.id;
 
     this.slot = args.slot;
-    this.weaponType = args.weaponType;
+    this.weaponType = args.weaponType || "unarmed";
 
     this.attackMod = args.attackMod || 0;
     this.spAMod = args.spAMo || 0;
@@ -64,9 +64,7 @@ function Equipment(args) {
     this.spDMod = args.spDMod || 0;
     this.speedMod = args.speedMod || 0;
 
-    this.equipped = args.equipped || false;
-
-    this.description = args.description;
+    this.description = args.description || "";
 
     equipmentList.push(this);
 }
@@ -112,14 +110,25 @@ var potionAP1 = new Consumable({
 });
 
 // EQUIPMENT
-var weaponFists = new Equipment({
-    name: "Fists",
+var weaponNothing = new Equipment({
+    name: "Nothing",
     id: 0,
-    slot: "weapon",
-    weaponType: "unarmed",
-    equipped: true,
-
-    description: "Your fists."
+    slot: "weapon"
+});
+var bodyNothing = new Equipment({
+    name: "Nothing",
+    id: 2,
+    slot: "body"
+});
+var handsNothing = new Equipment({
+    name: "Nothing",
+    id: 3,
+    slot: "hands"
+});
+var feetNothing = new Equipment({
+    name: "Nothing",
+    id: 4,
+    slot: "feet"
 });
 
 ////////////
@@ -130,7 +139,6 @@ var weaponCrackedKnife = new Equipment({
     id: 1,
     slot: "weapon",
     weaponType: "blade",
-    equipped: false,
 
     attackMod: 10,
 
@@ -186,6 +194,14 @@ function updateInventory() {
             });
 
             $("#equipmentList").append(itemRow);
+        }
+    }
+
+    for(var key in character.equipped) {
+        if(character.equipped.hasOwnProperty(key)) {
+            var item = character.equipped[key];
+
+
         }
     }
 }
@@ -259,9 +275,9 @@ function searchInventory(item) {
 }
 
 function unequipItem(item) {
-
+    character.equipped[eval(item.slot)] = eval(item.slot +"Nothing");
 }
 
 function equipItem(item) {
-
+    character.equipped[eval(item.slot)] = item;
 }

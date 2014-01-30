@@ -11,6 +11,12 @@ var Monster = function(args) {
     this.spD = args.spD;
     this.speed = args.speed;
 
+    this.attackMod = 0;
+    this.spAMod = 0;
+    this.defenseMod = 0;
+    this.spDMod = 0;
+    this.speed = 0;
+
     this.moveset = [];
 
     this.ailments = [];

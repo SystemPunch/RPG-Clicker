@@ -191,12 +191,12 @@ function calculateDamage(move, user, target) {
     var defense = 0;
 
     if(move.type === "physical") {
-        attack = user.attack;
-        defense = target.defense;
+        attack = user.attack + user.attackMod;
+        defense = target.defense + target.defenseMod;
     }
     else {
-        attack = user.spA;
-        defense = target.spD;
+        attack = user.spA + user.spAMod;
+        defense = target.spD + target.spDMod;
     }
 
     critStage += move.critRate;
@@ -340,7 +340,7 @@ function updateHealthBars() {
 }
 
 function calculateCombatSpeed(mob) {
-    var speed = mob.speed;
+    var speed = mob.speed + mob.speedMod;
 
     if(mob.ailments.indexOf("paralyzed") !== -1) speed /= 4;
 

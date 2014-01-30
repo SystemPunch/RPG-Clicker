@@ -19,6 +19,12 @@ var character = {
     spD: 10,
     speed: 10,
 
+    attackMod: 0,
+    spAMod: 0,
+    defenseMod: 0,
+    spDMod: 0,
+    speedMod: 0,
+
     unarmedProf: 1,
     unarmedXP: 0,
     unarmedXPNeeded: 10,
@@ -54,7 +60,10 @@ var character = {
     inventory: [],
 
     equipped: {
-        weapon: weaponFists
+        weapon: weaponNothing,
+        body: bodyNothing,
+        hands: handsNothing,
+        feet: feetNothing
     },
 
     moveset: [movePunch],
@@ -152,6 +161,24 @@ var character = {
 
     learnMove: function(move) {
         this.moveset.push(move);
+    },
+
+    calculateStatMods: function() {
+        this.attackMod = 0;
+        this.spAMod = 0;
+        this.defenseMod = 0;
+        this.spDMod = 0;
+        this.speedMod = 0;
+
+        for(var key in this.equipped) {
+            var item = this.equipped[key];
+
+            this.attackMod += item.attackMod;
+            this.spAMod += item.spAMod;
+            this.defenseMod += item.defenseMod;
+            this.spDMod += item.spDMod;
+            this.speedMod += item.speedMod;
+        }
     }
 };
 
