@@ -71,6 +71,7 @@ var monGoblin = new Monster({
 });
 monGoblin.moveset.push(movePunch);
 monGoblin.moveset.push(moveStab);
+monGoblin.moveset.push(moveUppercut);
 monGoblin.lootTable.push([potionHP1, 15]);
 monGoblin.lootTable.push([potionAP1, 20]);
 monGoblin.lootTable.push([weaponCrackedKnife, 5]);
@@ -80,9 +81,9 @@ var monCorruptedGnome = new Monster({
     name: "Corrupted Gnome",
     HP: 60,
     level: 10,
-    attack: 25,
+    attack: 20,
     spA: 18,
-    defense: 30,
+    defense: 50,
     spD: 28,
     speed: 22
 });
