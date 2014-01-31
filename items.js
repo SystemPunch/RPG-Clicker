@@ -120,6 +120,23 @@ var potionAP1 = new Consumable({
 
     inShop: true
 });
+var potionParalyzeHeal = new Consumable({
+    name: "Smelling Salts",
+    id: 2,
+    effect: function() {
+        if(character.ailments.indexOf("paralyzed") !== -1) {
+            this.quantity--;
+            character.ailments.splice(character.ailments.indexOf("paralyzed"), 1);
+            bottomNotify("You have cured your paralysis!");
+        } else bottomNotify("You are not currently paralyzed!");
+    },
+
+    description: "Cures paralysis",
+
+    cost: 150,
+
+    inShop: true
+});
 
 // EQUIPMENT
 var weaponNothing = new Equipment({

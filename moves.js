@@ -7,7 +7,7 @@ var defaultBlade = [];
 function Move(args) {
     this.name = args["name"];
     this.type = args["type"];
-    this.weapon = args["weapon"];
+    this.weapon = args["weapon"] || "unarmed";
     this.power = args["power"];
     this.ailments = args["ailments"];
     this.priority = args["priority"] || 0;
@@ -59,6 +59,19 @@ var moveSweepKick = new Move({
     power: 40,
     AP: 7,
     requiredProf: 10
+});
+
+var moveUppercut = new Move({
+    name: "UPPERCUT",
+    type: "physical",
+    weapon: "unarmed",
+    power: 50,
+    AP: 10,
+    requiredProf: 15,
+
+    ailments: {
+        paralyze: 20
+    }
 });
 
 /*----
