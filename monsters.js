@@ -15,7 +15,7 @@ var Monster = function(args) {
     this.spAMod = 0;
     this.defenseMod = 0;
     this.spDMod = 0;
-    this.speed = 0;
+    this.speedMod = 0;
 
     this.moveset = [];
 

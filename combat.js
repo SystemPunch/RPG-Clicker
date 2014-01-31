@@ -129,13 +129,13 @@ function doPlayerAttack(move) {
 
     // BEGIN PRE-ATTACK AILMENTS CHECKING
 
-    if(character.ailments.indexOf("paralyzed")) {
+    if(character.ailments.indexOf("paralyzed") !== -1) {
         if(randomFromInterval(1,4) === 1) {
             character.ailments.splice(character.ailments.indexOf("paralyzed"), 1);
             printToCombatLog("You are no longer paralyzed!");
         } else {
             if(randomFromInterval(1,4) === 1) {
-                printToCombatLog("You tried to attack, but can't fight off your paralysis!");
+                printToCombatLog("You tried to attack, but couldn't fight off your paralysis!");
                 return;
             }
         }
@@ -168,12 +168,12 @@ function doPlayerAttack(move) {
         if(move.ailments.hasOwnProperty("recoil")) {
             if(randomFromInterval(1,100) <= move.ailments.recoil) {
                 character.HP -= Math.round(damage/4);
-                printToCombatLog("You take "+ Math.round(damage/4) +" <strong>recoil damage!</strong>");
+                printToCombatLog("You take "+ Math.round(damage/4) +" <strong>RECOIL DAMAGE!</strong>");
             }
         } else if(move.ailments.hasOwnProperty("paralyze")) {
             if(randomFromInterval(1, 100) <= move.ailments.paralyze) {
                 if(enemy.ailments.indexOf("paralyzed") === -1) enemy.ailments.push("paralyzed");
-                printToCombatLog(enemy.name +" is now paralyzed!");
+                printToCombatLog(enemy.name +" is now <strong>paralyzed!</strong>");
             }
         }
     }
@@ -189,13 +189,13 @@ function doEnemyAttack(move) {
 
     // BEGIN PRE-ATTACK AILMENTS CHECKING
 
-    if(enemy.ailments.indexOf("paralyzed")) {
+    if(enemy.ailments.indexOf("paralyzed") !== -1) {
         if(randomFromInterval(1,4) === 1) {
             enemy.ailments.splice(enemy.ailments.indexOf("paralyzed"), 1);
             printToCombatLog(enemy.name +"is no longer paralyzed!");
         } else {
             if(randomFromInterval(1,4) === 1) {
-                printToCombatLog(enemy.name +" tried to attack, but can't fight off their paralysis!");
+                printToCombatLog(enemy.name +" tried to attack, but couldn't fight off their paralysis!");
                 return;
             }
         }
@@ -223,12 +223,12 @@ function doEnemyAttack(move) {
         if(move.ailments.hasOwnProperty("recoil")) {
             if(randomFromInterval(1,100) <= move.ailments.recoil) {
                 enemy.HP -= Math.round(damage/4);
-                printToCombatLog(enemy.name +" takes "+ Math.round(damage/4) +" <strong>recoil damage!</strong>");
+                printToCombatLog(enemy.name +" takes "+ Math.round(damage/4) +" <strong>RECOIL DAMGE!</strong>");
             }
         } else if(move.ailments.hasOwnProperty("paralyze")) {
             if(randomFromInterval(1, 100) <= move.ailments.paralyze) {
                 if(character.ailments.indexOf("paralyzed") === -1) character.ailments.push("paralyzed");
-                printToCombatLog("You are now paralyzed!");
+                printToCombatLog("You are now <strong>PARALYZED!</strong>");
             }
         }
     }
