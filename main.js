@@ -12,6 +12,7 @@ $(function () {
     });
 
     // INITIALIZE DEFAULTS
+    defaultSettings = $.extend(true, {}, settings);
     defaultCharacter = $.extend(true, {}, character);
     defaultPlaceMine = $.extend(true, {}, placeMine);
     defaultUpgrades = $.extend(true, [], upgrades);
@@ -19,20 +20,22 @@ $(function () {
     defaultBlade = $.extend(true, [], blade);
 
     loadGame();
-    window.setInterval(updateGame, 100);
+    updateGame();
 
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.3";
+var VERSION = "0.3.4";
 
 var settings = {
-    autoSave: "ON"
+    autoSave: "ON",
+
+    saveInterval: 120000,
+    saveTimer: 0,
+    timeSinceLastSave: this.saveTimer / 1000
 };
 
-var defaultSettings = {
-    autoSave: "ON"
-};
+var defaultSettings;
 
 function updateCharacterPanel() {
     $("#charName").html(character.name);
@@ -99,10 +102,6 @@ function updateCharacterPanel() {
     $("#gameStats").append(gameStatsTable);
 }
 
-var saveInterval = 120000;
-var saveTimer = 0;
-var timeSinceLastSave = saveTimer / 1000;
-
 function toggleAutoSaving() {
     if (settings.autoSave === "ON") settings.autoSave = "OFF";
     else settings.autoSave = "ON";
@@ -117,17 +116,17 @@ function updateGame() {
     checkVersion();
 
     if (settings.autoSave === "ON") {
-        if (saveTimer >= saveInterval) {
+        if (settings.saveTimer >= settings.saveInterval) {
             saveGame();
         }
     }
 
-    saveTimer += 100;
+    settings.saveTimer += 100;
 
     $("#autoSaveStatus").html(settings.autoSave);
 
-    timeSinceLastSave = saveTimer / 1000;
-    $("#timeSinceLastSave").html(timeSinceLastSave.toFixed(1));
+    settings.timeSinceLastSave = settings.saveTimer / 1000;
+    $("#timeSinceLastSave").html(settings.timeSinceLastSave.toFixed(1));
 
     if(!inCombat && character.HP < character.maxHP) {
         character.HP += character.autoheal/10;
@@ -135,6 +134,8 @@ function updateGame() {
     }
 
     updateHealthBars();
+
+    setTimeout(updateGame, 100);
 }
 
 function bottomNotify(text, type, time) {
@@ -221,7 +222,7 @@ function saveGame() {
 
     bottomNotify("Game saved!", "info");
 
-    saveTimer = 0;
+    settings.saveTimer = 0;
 
     return saveState;
 }
