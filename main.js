@@ -25,7 +25,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.4";
+var VERSION = "0.3.5";
 
 var settings = {
     autoSave: "ON",
@@ -61,7 +61,7 @@ function updateCharacterPanel() {
         "<tr><td>Special Defense</td><td>"+ character.spD +"</td></tr>" +
         "<tr><td>Speed</td><td>"+ character.speed +"</td></tr>" +
         "<tr><td>&nbsp;</td><td></td></tr>" +
-        "<tr><td>HP Regen/second</td><td>"+ character.autoheal +"</td></tr></tbody>");
+        "<tr><td>HP Regen/second</td><td>"+ character.autoheal.toFixed(2) +"</td></tr></tbody>");
 
     $("#characterStats").empty();
     $("#characterStats").append(characterTable);
@@ -135,10 +135,27 @@ function updateGame() {
 
     updateHealthBars();
 
+    if(!$(".alert").length && notifications.length) {
+        var note = notifications[0];
+        showNotification(note.text, note.type, note.time);
+    }
+
     setTimeout(updateGame, 100);
 }
 
+var notifications = [];
+
 function bottomNotify(text, type, time) {
+    var note = {
+        text: text,
+        type: type,
+        time: time || 0
+    };
+
+    notifications.push(note);
+}
+
+function showNotification(text, type, time) {
     var t = time || 3000;
     var notificationBar = $(document.createElement("div"));
 
@@ -149,7 +166,8 @@ function bottomNotify(text, type, time) {
     notificationBar.append(text);
 
     $(".noteContainer").append(notificationBar);
-    var n = $(".alert:last");
+    notifications.shift();
+    var n = notificationBar;
 
     window.setTimeout(function () {
         n.fadeOut("slow", function () {
