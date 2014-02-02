@@ -29,7 +29,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.7";
+var VERSION = "0.3.8";
 
 var settings = {
     autoSave: "ON",
@@ -213,6 +213,8 @@ function newGame() {
 }
 
 function checkVersion() {
+    console.log("Checking version...");
+
     $("#version").html(VERSION);
 
     var currentVersion = $.ajax({
@@ -232,6 +234,8 @@ function checkVersion() {
         .done(function(d) {
             $("#devVersion").html(d);
         });
+
+    settings.versionTimer = 0;
 }
 
 function saveGame() {
