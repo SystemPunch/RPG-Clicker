@@ -32,6 +32,10 @@ var monsters = {
     populateList: function() {
         $("#monsterList").empty();
 
+        this.list.sort(function(a, b) {
+            return a.level - b.level;
+        });
+
         for(var i=0; i<this.list.length; i++) {
             var $mon = $(document.createElement("option"));
 
@@ -77,6 +81,23 @@ monGoblin.lootTable.push([potionAP1, 20]);
 monGoblin.lootTable.push([weaponCrackedKnife, 5]);
 monsters.list.push(monGoblin);
 
+var monLesserDryadArcher = new Monster({
+    name: "Lesser Dryad Archer",
+    HP: 38,
+    level: 5,
+    attack: 24,
+    spA: 18,
+    defense: 12,
+    spD: 16,
+    speed: 14
+});
+monLesserDryadArcher.moveset.push(moveQuickDraw);
+monLesserDryadArcher.moveset.push(moveEnergyBlast1);
+monLesserDryadArcher.lootTable.push([potionHP1, 10]);
+monLesserDryadArcher.lootTable.push([potionAP1, 25]);
+monLesserDryadArcher.lootTable.push([weaponWarpedBow, 5]);
+monsters.list.push(monLesserDryadArcher);
+
 var monCorruptedGnome = new Monster({
     name: "Corrupted Gnome",
     HP: 60,
@@ -103,3 +124,9 @@ var monCorruptedCentaur = new Monster({
     spD: 42,
     speed: 60
 });
+monCorruptedCentaur.moveset.push(moveQuickDraw);
+monCorruptedCentaur.moveset.push(moveTrample);
+monCorruptedCentaur.lootTable.push([weaponWarpedBow, 15]);
+monCorruptedCentaur.lootTable.push([potionHP1, 25]);
+monCorruptedCentaur.lootTable.push([potionAP1, 20]);
+monsters.list.push(monCorruptedCentaur);

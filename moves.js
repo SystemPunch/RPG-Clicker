@@ -72,7 +72,7 @@ var moveSweepKick = new Move({
     AP: 7,
     requiredProf: 10,
 
-    description: "You sweep the opponent's leg, catching them off-guard."
+    description: "The user sweeps their opponent's leg, catching them off-guard."
 });
 
 var moveUppercut = new Move({
@@ -88,6 +88,20 @@ var moveUppercut = new Move({
     },
 
     description: "An uppercut to the opponent's chin, potentially stunning them."
+});
+
+var moveTrample = new Move({
+    name: "TRAMPLE",
+    type: "physical",
+    weapon: "unarmed",
+    power: 50,
+    AP: 10,
+
+    ailments: {
+        paralyze: 20
+    },
+
+    description: "The user tramples over their enemy, beating and battering them."
 });
 
 /*----
@@ -119,7 +133,22 @@ var moveQuickDraw = new Move({
 
     priority: 1,
 
-    description: "Using your range and agility to your advantage, you strike more quickly than usual."
+    description: "The user's range and agility allows them to strike more quickly than usual."
+});
+
+/*---
+Magic
+---*/
+
+var moveEnergyBlast1 = new Move({
+    name: "ENERGY BLAST I",
+    type: "special",
+    weapon: "magic",
+    power: 50,
+    AP: 10,
+    requiredProf: 5,
+
+    description: "The user releases a blast of energy from their palms, knocking their opponents back."
 });
 
 function unlockMoves(prof) {
