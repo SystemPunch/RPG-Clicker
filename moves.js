@@ -1,8 +1,14 @@
 var unarmed = [];
 var blade = [];
+var bow = [];
+var shield = [];
+var magic = [];
 
 var defaultUnarmed = [];
 var defaultBlade = [];
+var defaultBow = [];
+var defaultShield = [];
+var defaultMagic = [];
 
 function Move(args) {
     this.name = args["name"];
