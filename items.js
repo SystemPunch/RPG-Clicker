@@ -178,6 +178,21 @@ var weaponCrackedKnife = new Equipment({
     description: "A cracked knife. Probably not all that effective."
 });
 
+//////////
+// BOWS //
+//////////
+var weaponWarpedBow = new Equipment({
+    name: "Warped Bow",
+    id: 5,
+    slot: "weapon",
+    weaponType: "bow",
+
+    attackMod: 10,
+    speedMod: 5,
+
+    description: "An old bow warped by time."
+});
+
 function updateInventory() {
     $("#equipmentList").empty();
     $("#consumableList").empty();

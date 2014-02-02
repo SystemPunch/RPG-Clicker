@@ -17,6 +17,8 @@ function Move(args) {
     this.requiredProf = args.requiredProf || 0;
 
     if(this.requiredProf) eval(this.weapon).push(this);
+
+    this.description = args.description;
 }
 
 // Ya'll motherfuckers know what this is
@@ -42,6 +44,8 @@ var movePunch = new Move({
     weapon: "unarmed",
     power: 30,
     AP: 5,
+
+    description: "A simple punch."
 });
 
 var moveBite = new Move({
@@ -49,7 +53,9 @@ var moveBite = new Move({
     type: "physical",
     weapon: "unarmed",
     power: 30,
-    AP: 5
+    AP: 5,
+
+    description: "A fierce bite."
 });
 
 var moveSweepKick = new Move({
@@ -58,7 +64,9 @@ var moveSweepKick = new Move({
     weapon: "unarmed",
     power: 40,
     AP: 7,
-    requiredProf: 10
+    requiredProf: 10,
+
+    description: "You sweep the opponent's leg, catching them off-guard."
 });
 
 var moveUppercut = new Move({
@@ -71,7 +79,9 @@ var moveUppercut = new Move({
 
     ailments: {
         paralyze: 20
-    }
+    },
+
+    description: "An uppercut to the opponent's chin, potentially stunning them."
 });
 
 /*----
@@ -84,7 +94,26 @@ var moveStab = new Move({
     weapon: "blade",
     power: 50,
     AP: 8,
-    requiredProf: 5
+    requiredProf: 5,
+
+    description: "A painful stab."
+});
+
+/*--
+Bows
+--*/
+
+var moveQuickDraw = new Move({
+    name: "QUICK DRAW",
+    type: "physical",
+    weapon: "bow",
+    power: 45,
+    AP: 8,
+    requiredProf: 5,
+
+    priority: 1,
+
+    description: "Using your range and agility to your advantage, you strike more quickly than usual."
 });
 
 function unlockMoves(prof) {

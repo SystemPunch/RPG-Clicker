@@ -92,3 +92,14 @@ monCorruptedGnome.moveset.push(moveSweepKick);
 monCorruptedGnome.lootTable.push([potionHP1, 30]);
 monCorruptedGnome.lootTable.push([potionAP1, 35]);
 monsters.list.push(monCorruptedGnome);
+
+var monCorruptedCentaur = new Monster({
+    name: "Corrupted Centaur",
+    HP: 90,
+    level: 20,
+    attack: 60,
+    spA: 42,
+    defense: 36,
+    spD: 42,
+    speed: 60
+});

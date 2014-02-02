@@ -25,14 +25,17 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.5";
+var VERSION = "0.3.6";
 
 var settings = {
     autoSave: "ON",
 
     saveInterval: 120000,
     saveTimer: 0,
-    timeSinceLastSave: this.saveTimer / 1000
+    timeSinceLastSave: this.saveTimer / 1000,
+
+    versionInterval: 30000,
+    versionTimer: 0
 };
 
 var defaultSettings;
@@ -113,7 +116,11 @@ function updateGame() {
 
     updateCharacterPanel();
 
-    checkVersion();
+    if (settings.versionTimer >= settings.versionInterval) {
+        checkVersion();
+    }
+
+    settings.versionTimer += 100;
 
     if (settings.autoSave === "ON") {
         if (settings.saveTimer >= settings.saveInterval) {
@@ -297,8 +304,10 @@ function randomFromInterval(from, to) {
 }
 
 function fixSaveFile() {
-    if(character.equipped.weapon.weaponType === undefined) character.equipped.weapon = weaponFists;
-    if(character.moveset[0].maxAP !== undefined) character.moveset = [movePunch];
+    if(character.equipped.weapon === undefined) character.equipped.weapon = weaponNothing;
+    if(character.equipped.body === undefined) character.equipped.body = bodyNothing;
+    if(character.equipped.hands === undefined) character.equipped.hands = handsNothing;
+    if(character.equipped.feet === undefined) character.equipped.feet = feetNothing;
 }
 
 String.prototype.capitalize = function() {
