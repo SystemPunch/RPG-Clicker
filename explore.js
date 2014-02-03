@@ -13,11 +13,11 @@ var world = {
         explore: function() {
             var result = randomFromInterval(1, 100);
 
-            if(result <= 20) {
+            if(result <= 25) {
                 // Fight Rat
-            } else if(result <= 40) {
-                // Fight Goblin
             } else if(result <= 50) {
+                // Fight Goblin
+            } else if(result <= 60) {
                 // Some random thing
             } else if(result <= 70) {
                 // Another random thing
