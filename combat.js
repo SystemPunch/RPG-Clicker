@@ -167,7 +167,7 @@ function doPlayerAttack(move) {
     if(move.hasOwnProperty("ailments") && move.ailments !== undefined) {
         if(move.ailments.hasOwnProperty("recoil")) {
             if(randomFromInterval(1,100) <= move.ailments.recoil) {
-                character.HP -= Math.round(damage/4);
+                character.setHP(character.HP - Math.round(damage/4));
                 printToCombatLog("You take "+ Math.round(damage/4) +" <strong>RECOIL DAMAGE!</strong>");
             }
         } else if(move.ailments.hasOwnProperty("paralyze")) {
@@ -215,7 +215,7 @@ function doEnemyAttack(move) {
     summary += " It inflicted "+ damage +" damage!";
 
     printToCombatLog(summary);
-    character.HP -= damage;
+    character.setHP(character.HP - damage);
 
     // BEGIN POST-ATTACK AILMENTS APPLYING
 

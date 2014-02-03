@@ -68,6 +68,11 @@ var character = {
 
     moveset: [movePunch],
 
+    setHP: function(amount) {
+        this.HP = amount;
+        updateCharacterPanel();
+    },
+
     gainProfXP: function(prof) {
         this[prof +"XP"]++;
         if(this[prof +"XP"] >= this[prof +"XPNeeded"]) {
@@ -135,7 +140,7 @@ var character = {
     gainXP: function (num) {
         this.currentXP += num;
         if (this.currentXP >= this.neededXP) this.levelUp();
-        else updateCharacterPanel();
+        updateCharacterPanel();
     },
 
     gainGold: function (num) {

@@ -11,6 +11,10 @@ $(function () {
         $(this).tab("show");
     });
 
+    $("#dismissAll").click(function(e) {
+        e.alert("close");
+    });
+
     // INITIALIZE DEFAULTS
     defaultSettings = $.extend(true, {}, settings);
     defaultCharacter = $.extend(true, {}, character);
@@ -29,7 +33,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.10";
+var VERSION = "0.3.11";
 
 var settings = {
     autoSave: "ON",
@@ -45,12 +49,6 @@ var settings = {
 var defaultSettings;
 
 function updateCharacterPanel() {
-    $("#charName").html(character.name);
-    $("#level").html("Level " + character.level);
-    $("#XP").html(Math.round(character.currentXP) + " / " + character.neededXP + " XP");
-
-    $("#gold").html(Math.floor(character.gold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " gold");
-
     var characterTable = $(document.createElement("table"));
     characterTable.attr({
         class: "table table-condensed"
@@ -70,9 +68,6 @@ function updateCharacterPanel() {
         "<tr><td>&nbsp;</td><td></td></tr>" +
         "<tr><td>HP Regen/second</td><td>"+ character.autoheal.toFixed(2) +"</td></tr></tbody>");
 
-    $("#characterStats").empty();
-    $("#characterStats").append(characterTable);
-
     var proficienciesTable = $(document.createElement("table"));
     proficienciesTable.attr({
         class: "table table-condensed"
@@ -84,9 +79,6 @@ function updateCharacterPanel() {
         "<tr><td>Bows</td><td>"+ character.bowProf +"</td></tr>" +
         "<tr><td>Shields</td><td>"+ character.shieldProf +"</td></tr>" +
         "<tr><td>Magic</td><td>"+ character.magicProf +"</td></tr></tbody>");
-
-    $("#proficiencies").empty();
-    $("#proficiencies").append(proficienciesTable);
 
     var gameStatsTable = $(document.createElement("table"));
     gameStatsTable.attr({
@@ -105,8 +97,14 @@ function updateCharacterPanel() {
         "<tr><td>&nbsp;</td><td></td></tr>" +
         "<tr><td>Total Clicks</td><td>"+ character.totalClicks +"</td></tr></tbody>");
 
-    $("#gameStats").empty();
-    $("#gameStats").append(gameStatsTable);
+    $("#charName").html(character.name);
+    $("#level").html("Level " + character.level);
+    $("#XP").html(Math.round(character.currentXP) + " / " + character.neededXP + " XP");
+    $("#gold").html(Math.floor(character.gold).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " gold");
+
+    $("#characterStats").html(characterTable);
+    $("#proficiencies").html(proficienciesTable);
+    $("#gameStats").html(gameStatsTable);
 }
 
 function toggleAutoSaving() {
@@ -115,10 +113,8 @@ function toggleAutoSaving() {
 }
 
 function updateGame() {
-    character.gainXP(character.XPS / 10.0);
-    character.gainGold(character.GPS / 10.0);
-
-    updateCharacterPanel();
+    if(character.XPS) character.gainXP(character.XPS / 10.0);
+    if(character.GPS) character.gainGold(character.GPS / 10.0);
 
     if (settings.versionTimer >= settings.versionInterval) {
         checkVersion();
@@ -140,8 +136,8 @@ function updateGame() {
     $("#timeSinceLastSave").html(settings.timeSinceLastSave.toFixed(1));
 
     if(!inCombat && character.HP < character.maxHP) {
-        character.HP += character.autoheal/10;
-        if(character.HP > character.maxHP) character.HP = character.maxHP;
+        character.setHP(character.HP + character.autoheal/10);
+        if(character.HP > character.maxHP) character.setHP(character.maxHP);
     }
 
     updateHealthBars();

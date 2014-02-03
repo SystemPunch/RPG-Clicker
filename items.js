@@ -127,8 +127,8 @@ var potionParalyzeHeal = new Consumable({
         if(character.ailments.indexOf("paralyzed") !== -1) {
             this.quantity--;
             character.ailments.splice(character.ailments.indexOf("paralyzed"), 1);
-            bottomNotify("You have cured your paralysis!");
-        } else bottomNotify("You are not currently paralyzed!");
+            bottomNotify("You have cured your paralysis!", "info");
+        } else bottomNotify("You are not currently paralyzed!", "warning");
     },
 
     description: "Cures paralysis",

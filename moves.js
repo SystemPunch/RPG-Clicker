@@ -169,5 +169,7 @@ function learnMove(move) {
         character.moveset.push(move);
         bottomNotify("You have learned a new "+ move.weapon +" skill: "+ move.name, "success");
         enableCombatUI();
+    } else {
+        eval(move.weapon).push(move);
     }
 }
