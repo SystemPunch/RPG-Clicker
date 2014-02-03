@@ -25,7 +25,7 @@ $(function() {
         buyItem(equipmentShop[index]);
     });
 
-    $("#equipmentList").on("click", "button", function(e) {
+    $("#equipmentList").on("click", "button.equip", function(e) {
         var index = +this.name;
 
         equipItem(character.inventory[index]);
@@ -231,20 +231,33 @@ function updateInventory() {
             itemRow.append("<td>"+ item.name +"</td>");
             itemRow.append("<td>"+ item.quantity +"</td>");
 
+            var infoButton = $(document.createElement("button"));
+            infoButton.attr({
+                type: "button",
+                class: "btn btn-default btn-xs"
+            });
+            infoButton.html("Info");
+            infoButton.popover({
+                html: true,
+                placement: "bottom",
+                title: item.name,
+                content: item.description +"<dl class='dl-horizontal'>" +
+                    "<dt>Attack</dt><dd>"+ item.attackMod +"</dd>" +
+                    "<dt>Special Attack</dt><dd>"+ item.spAMod +"</dd>" +
+                    "<dt>Defense</dt><dd>"+ item.defenseMod +"</dd>" +
+                    "<dt>Special Defense</dt><dd>"+ item.spDMod +"</dd>" +
+                    "<dt>Speed</dt><dd>"+ item.speedMod +"</dd></dl>"
+            });
+            itemRow.append($(document.createElement("td")).append(infoButton));
+
             var equipButton = $(document.createElement("button"));
             equipButton.attr({
                 type: "button",
-                class: "btn btn-default btn-xs",
+                class: "btn btn-default btn-xs equip",
                 name: i
             });
             equipButton.html("Equip");
-
             itemRow.append($(document.createElement("td")).append(equipButton));
-
-            $(itemRow).tooltip({
-                placement: "auto",
-                title: item.description
-            });
 
             $("#equipmentList").append(itemRow);
         }
@@ -362,6 +375,7 @@ function unequipItem(item) {
 
     character.calculateStatMods();
 
+    updateCharacterPanel();
     updateInventory();
 }
 
@@ -373,5 +387,6 @@ function equipItem(item) {
 
     item.quantity--;
 
+    updateCharacterPanel();
     updateInventory();
 }

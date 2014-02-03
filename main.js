@@ -34,7 +34,7 @@ $(function () {
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
 });
 
-var VERSION = "0.3.12";
+var VERSION = "0.3.13";
 
 var settings = {
     autoSave: "ON",
@@ -61,11 +61,11 @@ function updateCharacterPanel() {
         "<tr><td>"+ character.AP +" / "+ character.maxAP +" AP</td><td></td></tr>" +
         "<tr><td>"+ character.currentXP +" / "+ character.neededXP +" XP</td><td></td></tr>" +
         "<tr><td>&nbsp;</td><td></td></tr>" +
-        "<tr><td>Attack</td><td>"+ character.attack +"</td></tr>" +
-        "<tr><td>Special Attack</td><td>"+ character.spA +"</td></tr>" +
-        "<tr><td>Defense</td><td>"+ character.defense +"</td></tr>" +
-        "<tr><td>Special Defense</td><td>"+ character.spD +"</td></tr>" +
-        "<tr><td>Speed</td><td>"+ character.speed +"</td></tr>" +
+        "<tr><td>Attack</td><td>"+ character.attack +" <span class='text-success'>+"+ character.attackMod +"</span></td></tr>" +
+        "<tr><td>Special Attack</td><td>"+ character.spA +" <span class='text-success'>+"+ character.spAMod +"</span></td></tr>" +
+        "<tr><td>Defense</td><td>"+ character.defense +" <span class='text-success'>+"+ character.defenseMod +"</span></td></tr>" +
+        "<tr><td>Special Defense</td><td>"+ character.spD +" <span class='text-success'>+"+ character.spDMod +"</span></td></tr>" +
+        "<tr><td>Speed</td><td>"+ character.speed +" <span class='text-success'>+"+ character.speedMod +"</span></td></tr>" +
         "<tr><td>&nbsp;</td><td></td></tr>" +
         "<tr><td>HP Regen/second</td><td>"+ character.autoheal.toFixed(2) +"</td></tr></tbody>");
 
