@@ -29,6 +29,7 @@ $(function () {
     loadGame();
     updateGame();
     updateCharacterPanel();
+    updateUpgrades();
     checkVersion();
 
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
@@ -202,6 +203,8 @@ function newGame() {
     monsters.populateList();
 
     updateInventory();
+    updateCharacterPanel();
+    updateUpgrades();
 
     // Do this to make sure correct skills are displayed, otherwise skills from previous save will still be there until combat starts
     enableCombatUI();
