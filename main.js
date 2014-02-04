@@ -188,12 +188,15 @@ function showNotification(text, type, time) {
 function newGame() {
     window.localStorage.removeItem("saveState");
 
-    settings = defaultSettings;
-    character = defaultCharacter;
-    placeMine = defaultPlaceMine;
-    upgrades = defaultUpgrades;
-    unarmed = defaultUnarmed;
-    blade = defaultBlade;
+    settings = $.extend(true, {}, defaultSettings);
+    character = $.extend(true, {}, defaultCharacter);
+    placeMine = $.extend(true, {}, defaultPlaceMine);
+    upgrades = $.extend(true, [], defaultUpgrades);
+    unarmed = $.extend(true, [], defaultUnarmed);
+    blade = $.extend(true, [], defaultBlade);
+    bow = $.extend(true, [], defaultBow);
+    shield = $.extend(true, [], defaultShield);
+    magic = $.extend(true, [], defaultMagic);
     $("div#upgradesTab").html('<div id="upgradeCounter"></div>');
     unlockedUpgradesCount = 0;
 
