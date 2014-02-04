@@ -25,5 +25,17 @@ var world = {
                 // Nothing significant
             }
         }
+    },
+
+    forest2: {
+        name: "The Deeper Forest",
+
+        discovered: false,
+
+        levelRange: "5-10",
+
+        explore: function() {
+
+        }
     }
 };
