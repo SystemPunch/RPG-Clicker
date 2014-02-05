@@ -33,9 +33,16 @@ $(function () {
     checkVersion();
 
     bottomNotify("This is a VERY early version of the game. It may be riddled with bugs, and saves might break. If you find that your game isn't working properly, try resetting your save. If that doesn't work, please send me a bug report. This message will disappear after 15 seconds.", "warning", 15000);
+
+    ViewModel.character = ko.mapping.fromJS(character);
+
+    ko.applyBindings(ViewModel);
 });
 
-var VERSION = "0.3.13";
+var ViewModel = {
+    character: ""
+};
+var VERSION = "0.3.14";
 
 var settings = {
     autoSave: "ON",
@@ -51,7 +58,7 @@ var settings = {
 var defaultSettings;
 
 function updateCharacterPanel() {
-    var characterTable = $(document.createElement("table"));
+    /*var characterTable = $(document.createElement("table"));
     characterTable.attr({
         class: "table table-condensed"
     });
@@ -106,7 +113,9 @@ function updateCharacterPanel() {
 
     $("#characterStats").html(characterTable);
     $("#proficiencies").html(proficienciesTable);
-    $("#gameStats").html(gameStatsTable);
+    $("#gameStats").html(gameStatsTable);*/
+
+    ko.mapping.fromJS(character, ViewModel.character);
 }
 
 function toggleAutoSaving() {

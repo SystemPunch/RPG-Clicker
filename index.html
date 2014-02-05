@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
 
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="moves.js"></script>
@@ -76,9 +78,60 @@
         </ul>
         <div class="tab-content col-md-9">
             <div class="tab-pane fade in active" id="mainTab">
-                <div id="characterStats" class="col-md-3"></div>
-                <div id="proficiencies" class="col-md-3"></div>
-                <div id="gameStats" class="col-md-3"></div>
+                <div id="characterStats" class="col-md-3">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr><th data-bind="text: character.name"></th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Level <span data-bind="text: character.level"></span></td><td></td></tr>
+                            <tr><td><span data-bind="text: character.HP"></span> / <span data-bind="text: character.maxHP"></span> HP</td><td></td></tr>
+                            <tr><td><span data-bind="text: character.AP"></span> / <span data-bind="text: character.maxAP"></span> AP</td><td></td></tr>
+                            <tr><td><span data-bind="text: character.currentXP"></span> / <span data-bind="text: character.neededXP"></span> XP</td><td></td></tr>
+                            <tr><td>&nbsp;</td><td></td></tr>
+                            <tr><td>Attack</td><td><span data-bind="text: character.attack"></span> +<span class="text-success" data-bind="text: character.attackMod"></span></td></tr>
+                            <tr><td>Special Attack</td><td><span data-bind="text: character.spA"></span> +<span class="text-success" data-bind="text: character.spAMod"></span></td></tr>
+                            <tr><td>Defense</td><td><span data-bind="text: character.defense"></span> +<span class="text-success" data-bind="text: character.defenseMod"></span></td></tr>
+                            <tr><td>Special Defense</td><td><span data-bind="text: character.spD"></span> +<span class="text-success" data-bind="text: character.spDMod"></span></td></tr>
+                            <tr><td>Speed</td><td><span data-bind="text: character.speed"></span> +<span class="text-success" data-bind="text: character.speedMod"></span></td></tr>
+                            <tr><td>&nbsp;</td><td></td></tr>
+                            <tr><td>HP Regen/second</td><td data-bind="text: character.autoheal().toFixed(2)"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="proficiencies" class="col-md-3">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr><th>Proficiencies</th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Unarmed</td><td data-bind="text: character.unarmedProf"></td></tr>
+                            <tr><td>Blades</td><td data-bind="text: character.bladeProf"></td></tr>
+                            <tr><td>Bows</td><td data-bind="text: character.bowProf"></td></tr>
+                            <tr><td>Shields</td><td data-bind="text: character.shieldProf"></td></tr>
+                            <tr><td>Magic</td><td data-bind="text: character.magicProf"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="gameStats" class="col-md-3">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr><th>Game Stats</th><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>XP per Click</td><td data-bind="text: character.clickXP"></td></tr>
+                            <tr><td>XP per Second</td><td data-bind="text: character.XPS"></td></tr>
+                            <tr><td>&nbsp;</td><td></td></tr>
+                            <tr><td>Gold per Click</td><td data-bind="text: character.clickGold"></td></tr>
+                            <tr><td>Gold per Second</td><td data-bind="text: character.GPS"></td></tr>
+                            <tr><td>&nbsp;</td><td></td></tr>
+                            <tr><td>Enemies Killed</td><td data-bind="text: character.enemiesKilled"></td></tr>
+                            <tr><td>Times Died</td><td data-bind="text: character.timesDied"></td></tr>
+                            <tr><td>&nbsp;</td><td></td></tr>
+                            <tr><td>Total Clicks</td><td data-bind="text: character.totalClicks"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="tab-pane fade" id="inventoryTab">
                 <div class="row">
@@ -161,7 +214,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="exploreTab"></div>
+            <div class="tab-pane fade" id="exploreTab">COMING SOON</div>
             <div class="tab-pane fade" id="locationTab">
                 Places
             </div>
@@ -183,7 +236,7 @@
 
                 <p>
                     <button type="button" class="btn btn-primary"
-                            onclick="character.name = prompt('What is your name?') || character.name;">Change Character Name
+                            onclick="character.name = prompt('What is your name?') || character.name; updateCharacterPanel();">Change Character Name
                     </button>
                 </p>
                 <p>
@@ -210,6 +263,10 @@
             </div>
             <div class="tab-pane fade" id="changelogTab">
                 <h2><span style="text-decoration:underline;">Changelog</span></h2>
+                <h4 style="margin-bottom:0px;">Version 0.3.14</h4>
+                <ul style="margin-top:0px;">
+                    <li>Further reduced DOM manipulations with addition of Knockout</li>
+                </ul>
                 <h4 style="margin-bottom:0px;">Version 0.3.13</h4>
                 <ul style="margin-top:0px;">
                     <li>Added stat modifiers to main tab</li>
@@ -437,16 +494,16 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div id="charName"></div>
+                    <div id="charName" data-bind="text: character.name"></div>
                     <br />
-                    <div id="level"></div>
-                    <div id="XP"></div>
+                    <div id="level">Level <span data-bind="text: character.level"></span></div>
+                    <div id="XP"><span data-bind="text: character.currentXP"></span> / <span data-bind="text: character.neededXP"></span> XP</div>
                     <button type="button" class="btn btn-primary btn-xs" onclick="character.clickXPButton()">Gain
                         XP
                     </button>
                     <br/><br/>
 
-                    <div id="gold"></div>
+                    <div id="gold"><span data-bind="text: character.gold"></span> gold</div>
                     <button type="button" class="btn btn-primary btn-xs" onclick="character.clickGoldButton()">
                         Gain Gold
                     </button>
