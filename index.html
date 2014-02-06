@@ -1,9 +1,65 @@
 <!DOCTYPE html>
+<!--suppress HtmlUnknownAttribute -->
 <html>
 <head>
     <title></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap.min.css" />
+    <!-- Bootstrap Theme CSS -->
+    <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap-theme.min.css" />
+    <!-- Navbar Fixed Top CSS -->
+    <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap-navbar-fixed-top.css" />
+    <!-- Sticky Footer CSS -->
+    <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap-sticky-footer.css" />
 </head>
 <body>
 
+<div id="wrap">
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">SystemPunch</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="//systempunch.com/rpg-clicker">RPG Clicker</a></li>
+                    <li><a href="//systempunch.com/nba-superstars">NBA Superstars</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="//systempunch.com/blog">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div data-bind="text: character.name"></div>
+                    <br />
+                    <div>Level <span data-bind="text: character.level"></span></div>
+                    <div><span data-bind="text: character.XP"></span> / <span data-bind="text: character.XPNeeded"></span></div>
+                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { character.gainXP(character.XPPerClick()) }">Gain XP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="//systempunch.com/resources/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="//systempunch.com/resources/js/knockout-3.0.0.js"></script>
+
+<script type="text/javascript" src="game.js"></script>
 </body>
 </html>
