@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap-navbar-fixed-top.css" />
     <!-- Sticky Footer CSS -->
     <link rel="stylesheet" href="//systempunch.com/resources/css/bootstrap-sticky-footer.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -41,6 +44,79 @@
     </div>
     <div id="content">
         <div class="col-md-9">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#mainTab" data-toggle="tab">Main</a></li>
+                <li><a href="#inventoryTab" data-toggle="tab">Inventory</a></li>
+                <li><a href="#exploreTab" data-toggle="tab">Explore</a></li>
+                <li><a href="#perksTab" data-toggle="tab">Perks</a></li>
+                <li><a href="#optionsTab" data-toggle="tab">Options</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="mainTab">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr><th data-bind="text: character.name"></th><th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Level <span data-bind="text: character.level"></span></td><td></td></tr>
+                                        <tr><td><span data-bind="text: character.HP"></span> / <span data-bind="text: character.HPMax"></span> HP</td><td></td></tr>
+                                        <tr><td><span data-bind="text: character.AP"></span> / <span data-bind="text: character.APMax"></span> AP</td><td></td></tr>
+                                        <tr><td><span data-bind="text: character.XP"></span> / <span data-bind="text: character.XPNeeded"></span> XP</td><td></td></tr>
+                                        <tr><td>&nbsp;</td><td></td></tr>
+                                        <tr><td>Attack</td><td><span data-bind="text: character.attack"></span> <span class="text-success">+<span data-bind="text: character.attackMod"></span></span></td></tr>
+                                        <tr><td>Special Attack</td><td><span data-bind="text: character.specialAttack"></span> <span class="text-success">+<span data-bind="text: character.specialAttackMod"></span></span></td></tr>
+                                        <tr><td>Defense</td><td><span data-bind="text: character.defense"></span> <span class="text-success">+<span data-bind="text: character.defenseMod"></span></span></td></tr>
+                                        <tr><td>Special Defense</td><td><span data-bind="text: character.specialDefense"></span> <span class="text-success">+<span data-bind="text: character.specialDefenseMod"></span></span></td></tr>
+                                        <tr><td>Speed</td><td><span data-bind="text: character.speed"></span> <span class="text-success">+<span data-bind="text: character.speedMod"></span></span></td></tr>
+                                        <tr><td>&nbsp;</td><td></td></tr>
+                                        <tr><td>HP Regen/second</td><td data-bind="text: character.HPRegen().toFixed(2)"></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr><th>Profiencies</th><th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Unarmed</td><td data-bind="text: character.unarmedProf"></td></tr>
+                                        <tr><td>Blades</td><td data-bind="text: character.bladeProf"></td></tr>
+                                        <tr><td>Bows</td><td data-bind="text: character.bowProf"></td></tr>
+                                        <tr><td>Shields</td><td data-bind="text: character.shieldProf"></td></tr>
+                                        <tr><td>Magic</td><td data-bind="text: character.magicProf"></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr><th>Game Stats</th><th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>XP per Click</td><td data-bind="text: character.XPPerClick"></td></tr>
+                                        <tr><td>XP per Second</td><td data-bind="text: character.XPS"></td></tr>
+                                        <tr><td>&nbsp;</td><td></td></tr>
+                                        <tr><td>Gold per Click</td><td data-bind="text: character.goldPerClick"></td></tr>
+                                        <tr><td>Gold per Second</td><td data-bind="text: character.GPS"></td></tr>
+                                        <tr><td>&nbsp;</td><td></td></tr>
+                                        <tr><td>Enemies Killed</td><td data-bind="text: character.enemiesKilled"></td></tr>
+                                        <tr><td>Times Died</td><td data-bind="text: character.timesDied"></td></tr>
+                                        <tr><td>&nbsp;</td><td></td></tr>
+                                        <tr><td>Total Clicks</td><td data-bind="text: character.totalClicks"></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="inventoryTab"></div>
+                <div class="tab-pane fade" id="exploreTab"></div>
+                <div class="tab-pane fade" id="perksTab"></div>
+                <div class="tab-pane fade" id="optionsTab"></div>
+            </div>
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -49,7 +125,11 @@
                     <br />
                     <div>Level <span data-bind="text: character.level"></span></div>
                     <div><span data-bind="text: character.XP"></span> / <span data-bind="text: character.XPNeeded"></span></div>
-                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { character.gainXP(character.XPPerClick()) }">Gain XP</button>
+                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { character.gainXP(character.XPPerClick()); character.totalClicks(character.totalClicks() + 1) }">Gain XP</button>
+                    <br />
+                    <br />
+                    <div><span data-bind="text: character.gold"></span> gold</div>
+                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { character.gainGold(character.goldPerClick()); character.totalClicks(character.totalClicks() + 1) }">Gain Gold</button>
                 </div>
             </div>
         </div>
@@ -64,5 +144,6 @@
 <script type="text/javascript" src="namespaces.js"></script>
 <script type="text/javascript" src="character.js"></script>
 <script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="app.js"></script>
 </body>
 </html>
