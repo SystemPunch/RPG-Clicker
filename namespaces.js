@@ -1,3 +1,3 @@
-window.Game = {
+window.App = {
     ViewModels: {}
 };
