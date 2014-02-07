@@ -1,5 +1,6 @@
 App.ViewModels.Game = function() {
     var self = this;
 
-    self.character = new App.ViewModels.Character();
+    self.Character = new App.ViewModels.Character();
+    self.Items = new App.ViewModels.Items();
 };
