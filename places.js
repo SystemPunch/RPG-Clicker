@@ -27,9 +27,10 @@ var placeMine = {
 
     hireWorker: function () {
         if (this.workerCost <= character.gold) {
-            character.gold -= this.workerCost;
+            character.gainGold(-(this.workerCost));
             this.numWorkers++;
             this.workerCost *= 1.1;
+            this.workerCost = Math.floor(this.workerCost);
             this.calculateGoldBonus();
             updateDiv(this.generateDiv());
         } else bottomNotify("You can't afford that worker!", "warning");
@@ -39,7 +40,7 @@ var placeMine = {
 
     upgradePick: function () {
         if (this.upgradeCost <= character.gold) {
-            character.gold -= this.upgradeCost;
+            character.gainGold(-(this.upgradeCost));
             this.pickGrade++;
             this.calculateGoldBonus();
             updateDiv(this.generateDiv());
@@ -78,7 +79,7 @@ var placeMine = {
             buyButton.value = "Buy - " + this.cost + " gold";
             buyButton.onclick = function () {
                 if (!placeMine.owned && placeMine.cost <= character.gold) {
-                    character.gold -= placeMine.cost;
+                    character.gainGold(-(placeMine.cost));
                     placeMine.owned = true;
                     updateDiv(placeMine.generateDiv());
                 }

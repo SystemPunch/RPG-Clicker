@@ -17,7 +17,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickXP++;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickXP + " XP per click!", "info");
 
@@ -43,7 +43,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickGold++;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickGold + " gold per click!", "info");
 
@@ -68,7 +68,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickXP += 2;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickXP + " XP per click!", "info");
 
@@ -93,7 +93,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickGold += 2;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickGold + " gold per click!", "info");
 
@@ -118,7 +118,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickXP += 4;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickXP + " XP per click!", "info");
 
@@ -143,7 +143,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickGold += 4;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickGold + " gold per click!", "info");
 
@@ -168,7 +168,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickXP += 8;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickXP + " XP per click!", "info");
 
@@ -193,7 +193,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickGold += 8;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickGold + " gold per click!", "info");
 
@@ -218,7 +218,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickXP += 16;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickXP + " XP per click!", "info");
 
@@ -243,7 +243,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function () {
             character.clickGold += 16;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now gain " + character.clickGold + " gold per click!", "info");
 
@@ -268,7 +268,7 @@ var upgrades = [            // All upgrades stored in here
         buy: function() {
             character.autoheal += 0.1;
 
-            character.gold -= this.cost;
+            character.gainGold(-(this.cost));
 
             bottomNotify("You now recover "+ (character.autoheal).toFixed(2) +" HP per second!", "info");
 

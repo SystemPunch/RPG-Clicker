@@ -503,7 +503,7 @@
                     </button>
                     <br/><br/>
 
-                    <div id="gold"><span data-bind="text: character.gold"></span> gold</div>
+                    <div id="gold"><span data-bind="text: Math.floor(character.gold())"></span> gold</div>
                     <button type="button" class="btn btn-primary btn-xs" onclick="character.clickGoldButton()">
                         Gain Gold
                     </button>
