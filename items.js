@@ -31,4 +31,25 @@ App.ViewModels.Equipment = function(itemData) {
 
 App.ViewModels.Items = function() {
     var self = this;
+    var consumable = App.ViewModels.Consumable;
+    var equipment = App.ViewModels.Equipment;
+
+    self.potionHP1 = new consumable({
+        name: "Vitality Tincture I",
+        id: 0,
+        effect: function() {
+
+        },
+        description: "Restores 20 HP",
+        cost: 100
+    });
+
+    self.crackedKnife = new equipment({
+        name: "Cracked Knife",
+        id: 0,
+        slot: "weapon",
+        weaponType: "blade",
+        attackMod: 10,
+        description: "A cracked knife"
+    });
 };
