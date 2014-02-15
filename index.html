@@ -53,7 +53,7 @@
                 <div class="tab-pane fade in active" id="mainTab">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th data-bind="text: Character.name"></th><th></th></tr>
@@ -74,7 +74,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th>Profiencies</th><th></th></tr>
@@ -88,7 +88,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th>Game Stats</th><th></th></tr>
@@ -126,7 +126,7 @@
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
                                             <td><button type="button" class="btn btn-default btn-xs">Info</button></td>
-                                            <td><button type="button" class="btn btn-default btn-xs">Equip</button></td>
+                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: equip.bind($data, $parent.Character)">Equip</button></td>
                                         </tr>
                                         <!-- /ko -->
                                     </tbody>
@@ -141,7 +141,7 @@
                                         <tr>
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
-                                            <td><button type="button" class="btn btn-default btn-xs">Use</button></td>
+                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: effect.bind($data, $parent.Character)">Use</button></td>
                                         </tr>
                                         <!-- /ko -->
                                     </tbody>
@@ -152,7 +152,7 @@
                                 <table class="table table-hover">
                                     <thead><tr><th>Name</th><th>Quantity</th></tr></thead>
                                     <tbody data-bind="foreach: Character.inventory">
-                                        <!-- ko if: type === "crafting || type === "enchanting" -->
+                                        <!-- ko if: type === "crafting" || type === "enchanting" -->
                                         <tr>
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
@@ -183,6 +183,117 @@
                     <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character.gainGold(Character.goldPerClick()); Character.totalClicks(Character.totalClicks() + 1) }">Gain Gold</button>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Equipment</div>
+                <div class="panel-body">
+                    <div class="panel-group" id="equippedList">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#equippedList" href="#equippedWeapon" class="collapsed">Weapon</a></h4></div>
+                            <div class="panel-collapse collapse" id="equippedWeapon">
+                                <div class="panel-body">
+                                    <dl>
+                                        <dt data-bind="text: Character.equipped.weapon().name"></dt>
+                                        <dd data-bind="text: Character.equipped.weapon().description"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Attack</dt>
+                                        <dd data-bind="text: Character.equipped.weapon().attackMod">
+                                        <dt>Special Attack</dt>
+                                        <dd data-bind="text: Character.equipped.weapon().specialAttackMod">
+                                        <dt>Defense</dt>
+                                        <dd data-bind="text: Character.equipped.weapon().defenseMod">
+                                        <dt>Special Defense</dt>
+                                        <dd data-bind="text: Character.equipped.weapon().specialDefenseMod">
+                                        <dt>Speed</dt>
+                                        <dd data-bind="text: Character.equipped.weapon().speedMod">
+                                    </dl>
+                                    <!-- ko if: Character.equipped.weapon().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-block" data-bind="click: Character.equipped.weapon().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#equippedList" href="#equippedBody" class="collapsed">Body</a></h4></div>
+                            <div class="panel-collapse collapse" id="equippedBody">
+                                <div class="panel-body">
+                                    <dl>
+                                        <dt data-bind="text: Character.equipped.body().name"></dt>
+                                        <dd data-bind="text: Character.equipped.body().description"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Attack</dt>
+                                        <dd data-bind="text: Character.equipped.body().attackMod">
+                                        <dt>Special Attack</dt>
+                                        <dd data-bind="text: Character.equipped.body().specialAttackMod">
+                                        <dt>Defense</dt>
+                                        <dd data-bind="text: Character.equipped.body().defenseMod">
+                                        <dt>Special Defense</dt>
+                                        <dd data-bind="text: Character.equipped.body().specialDefenseMod">
+                                        <dt>Speed</dt>
+                                        <dd data-bind="text: Character.equipped.body().speedMod">
+                                    </dl>
+                                    <!-- ko if: Character.equipped.body().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.body().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#equippedList" href="#equippedHands" class="collapsed">Hands</a></h4></div>
+                            <div class="panel-collapse collapse" id="equippedHands">
+                                <div class="panel-body">
+                                    <dl>
+                                        <dt data-bind="text: Character.equipped.hands().name"></dt>
+                                        <dd data-bind="text: Character.equipped.hands().description"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Attack</dt>
+                                        <dd data-bind="text: Character.equipped.hands().attackMod">
+                                        <dt>Special Attack</dt>
+                                        <dd data-bind="text: Character.equipped.hands().specialAttackMod">
+                                        <dt>Defense</dt>
+                                        <dd data-bind="text: Character.equipped.hands().defenseMod">
+                                        <dt>Special Defense</dt>
+                                        <dd data-bind="text: Character.equipped.hands().specialDefenseMod">
+                                        <dt>Speed</dt>
+                                        <dd data-bind="text: Character.equipped.hands().speedMod">
+                                    </dl>
+                                    <!-- ko if: Character.equipped.hands().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.hands().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#equippedList" href="#equippedFeet" class="collapsed">Feet</a></h4></div>
+                            <div class="panel-collapse collapse" id="equippedFeet">
+                                <div class="panel-body">
+                                    <dl>
+                                        <dt data-bind="text: Character.equipped.feet().name"></dt>
+                                        <dd data-bind="text: Character.equipped.feet().description"></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt>Attack</dt>
+                                        <dd data-bind="text: Character.equipped.feet().attackMod">
+                                        <dt>Special Attack</dt>
+                                        <dd data-bind="text: Character.equipped.feet().specialAttackMod">
+                                        <dt>Defense</dt>
+                                        <dd data-bind="text: Character.equipped.feet().defenseMod">
+                                        <dt>Special Defense</dt>
+                                        <dd data-bind="text: Character.equipped.feet().specialDefenseMod">
+                                        <dt>Speed</dt>
+                                        <dd data-bind="text: Character.equipped.feet().speedMod">
+                                    </dl>
+                                    <!-- ko if: Character.equipped.feet().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.feet().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -193,8 +304,8 @@
 <script type="text/javascript" src="//systempunch.com/resources/js/underscore-min.js"></script>
 
 <script type="text/javascript" src="namespaces.js"></script>
-<script type="text/javascript" src="character.js"></script>
 <script type="text/javascript" src="items.js"></script>
+<script type="text/javascript" src="character.js"></script>
 <script type="text/javascript" src="game.js"></script>
 <script type="text/javascript" src="app.js"></script>
 

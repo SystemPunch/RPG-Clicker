@@ -65,6 +65,12 @@ App.ViewModels.Character = function() {
     self.goldPerClick = ko.observable(1);
     self.GPS = ko.observable(0);
     self.inventory = ko.observableArray();
+    self.equipped = {
+        weapon: ko.observable(App.ViewModels.Items.Equipment.weaponNothing),
+        body: ko.observable(App.ViewModels.Items.Equipment.bodyNothing),
+        hands: ko.observable(App.ViewModels.Items.Equipment.handsNothing),
+        feet: ko.observable(App.ViewModels.Items.Equipment.feetNothing)
+    };
 
     // Misc.
     self.enemiesKilled = ko.observable(0);
@@ -117,7 +123,7 @@ App.ViewModels.Character = function() {
         if(_(self.inventory()).find(function(i) {
             return i.type === item.type && i.id === item.id;
         })) item.quantity(item.quantity() - (amount || 1));
-        if(item.quantity() <= 0) _(self.inventory()).reject(function(i) {
+        if(item.quantity() <= 0) self.inventory.remove(function(i) {
             return i.type === item.type && i.id === item.id;
         });
     }
