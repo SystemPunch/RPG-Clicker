@@ -105,4 +105,20 @@ App.ViewModels.Character = function() {
     self.gainGold = function(amount) {
         self.gold(self.gold() + amount);
     };
+
+    self.gainItem = function(item, amount) {
+        if(_(self.inventory()).find(function(i) {
+            return i.type === item.type && i.id === item.id;
+        }) === undefined) self.inventory.push(item);
+        item.quantity(item.quantity() + (amount || 1));
+    };
+
+    self.removeItem = function(item, amount) {
+        if(_(self.inventory()).find(function(i) {
+            return i.type === item.type && i.id === item.id;
+        })) item.quantity(item.quantity() - (amount || 1));
+        if(item.quantity() <= 0) _(self.inventory()).reject(function(i) {
+            return i.type === item.type && i.id === item.id;
+        });
+    }
 };

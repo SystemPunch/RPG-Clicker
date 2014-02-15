@@ -1,3 +1,7 @@
 td:last-child {
     text-align: right;
 }
+
+.nav-tabs {
+    margin-bottom: 10px;
+}
