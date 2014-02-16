@@ -5,3 +5,10 @@ td:last-child {
 .nav-tabs {
     margin-bottom: 10px;
 }
+
+#notificationContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
