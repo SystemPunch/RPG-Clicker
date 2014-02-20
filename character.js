@@ -60,6 +60,10 @@ App.ViewModels.Character = function() {
         return 5 * Math.pow(1.1, self.magicProf());
     });
 
+    // Combat
+    self.moveset = [];
+    self.ailments = [];
+
     // Gold/Inventory
     self.gold = ko.observable(0);
     self.goldPerClick = ko.observable(1);

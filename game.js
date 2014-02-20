@@ -8,6 +8,7 @@ App.ViewModels.Game = function() {
 
     self.Character = new App.ViewModels.Character();
     self.Items = App.ViewModels.Items;
+    self.Monsters = new App.ViewModels.Monsters();
 
     self.Loop = function() {
         var now = self.perf.now();

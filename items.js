@@ -6,11 +6,11 @@ App.ViewModels.Item.Consumable = function(itemData) {
     self.type = "consumable";
     self.quantity = ko.observable(0);
     self.name = itemData.name;
+    self.description = itemData.description || "";
     self.id = itemData.id;
     self.effect = function(user) {
         if(itemData.effect(user)) user.removeItem(self);
     };
-    self.description = itemData.description || "";
     self.cost = itemData.cost || 0;
 };
 
@@ -20,6 +20,7 @@ App.ViewModels.Item.Equipment = function(itemData) {
     self.type = "equipment";
     self.quantity = ko.observable(0);
     self.name = itemData.name;
+    self.description = itemData.description || "";
     self.id = itemData.id;
     self.slot = itemData.slot;
     self.weaponType = itemData.weaponType || "unarmed";
@@ -29,8 +30,6 @@ App.ViewModels.Item.Equipment = function(itemData) {
     self.defenseMod = itemData.defenseMod || 0;
     self.specialDefenseMod = itemData.specialDefenseMod || 0;
     self.speedMod = itemData.speedMod || 0;
-
-    self.description = itemData.description || "";
 
     self.equip = function(user) {
         if(user.equipped["" + self.slot]() instanceof App.ViewModels.Item.Equipment) user.equipped["" + self.slot]().unequip(user);
@@ -53,6 +52,7 @@ App.ViewModels.Items = new function() {
     self.Consumables = {
         potionHP1: new consumable({
             name: "Vitality Tincture I",
+            description: "Restores 20 HP",
             id: 0,
             effect: function(user) {
                 if(user.HP() >= user.HPMax()) return false;
@@ -60,12 +60,12 @@ App.ViewModels.Items = new function() {
                 if(user.HP() > user.HPMax()) user.HP(user.HPMax());
                 return true;
             },
-            description: "Restores 20 HP",
             cost: 100
         }),
 
         potionAP1: new consumable({
             name: "Energy Tincture I",
+            description: "Restores 20 AP",
             id: 1,
             effect: function(user) {
                 if(user.HP() >= user.HPMax()) return false;
@@ -73,16 +73,15 @@ App.ViewModels.Items = new function() {
                 if(user.AP() > user.APMax()) user.AP(user.APMax);
                 return true;
             },
-            description: "Restores 20 AP",
             cost: 100
         }),
 
         potionParalyzeHeal: new consumable({
             name: "Smelling Salts",
+            description: "Cures paralysis",
             id: 2,
             effect: function() {
             },
-            description: "Cures paralysis",
             cost: 150
         })
     };
@@ -90,49 +89,49 @@ App.ViewModels.Items = new function() {
     self.Equipment = {
         weaponNothing: new equipment({
             name: "Nothing",
+            description: "You're unarmed!",
             id: 0,
-            slot: "weapon",
-            description: "You're unarmed!"
+            slot: "weapon"
         }),
 
         bodyNothing: new equipment({
             name: "Nothing",
+            description: "You're naked!",
             id: 1,
-            slot: "body",
-            description: "You're naked!"
+            slot: "body"
         }),
 
         handsNothing: new equipment({
             name: "Nothing",
+            description: "Your bare hands!",
             id: 2,
-            slot: "hands",
-            description: "Your bare hands!"
+            slot: "hands"
         }),
 
         feetNothing: new equipment({
             name: "Nothing",
+            description: "You're barefoot!",
             id: 3,
-            slot: "feet",
-            description: "You're barefoot!"
+            slot: "feet"
         }),
 
         crackedKnife: new equipment({
             name: "Cracked Knife",
+            description: "A cracked knife. Probably not all that effective.",
             id: 4,
             slot: "weapon",
             weaponType: "blade",
-            attackMod: 10,
-            description: "A cracked knife. Probably not all that effective."
+            attackMod: 10
         }),
 
         warpedBow: new equipment({
             name: "Warped Bow",
+            description: "An old bow warped by time.",
             id: 5,
             slot: "weapon",
             weaponType: "bow",
             attackMod: 10,
-            speedMod: 5,
-            description: "An old bow warped by time."
+            speedMod: 5
         })
     };
 };
