@@ -93,19 +93,21 @@ App.ViewModels.Character = function() {
         var stat = "";
 
         while(whichStats.length < 3) {
-            which = stats[randomFromInterval(0, stats.length-1)];
+            which = stats[App.randomFromInterval(0, stats.length-1)];
             if(whichStats.indexOf(which) === -1) whichStats.push(which);
         }
 
         for(var i=0; i<whichStats.length; i++) {
             stat = whichStats[i];
-            self[stat](self[stat]() + randomFromInterval(2, 4));
+            self[stat](self[stat]() + App.randomFromInterval(2, 4));
         }
 
-        self.HPMax(self.HPMax() + randomFromInterval(2, 4));
-        self.APMax(self.APMax() + randomFromInterval(2, 4));
+        self.HPMax(self.HPMax() + App.randomFromInterval(2, 4));
+        self.APMax(self.APMax() + App.randomFromInterval(2, 4));
         self.HP(self.HPMax());
         self.AP(self.APMax());
+
+        Game.queueNotification("You have gained a level! You are now level " + self.level() + "!", "success");
     };
 
     self.gainGold = function(amount) {

@@ -53,7 +53,7 @@
                 <div class="tab-pane fade in active" id="mainTab">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th data-bind="text: Character.name"></th><th></th></tr>
@@ -62,7 +62,7 @@
                                         <tr><td>Level <span data-bind="text: Character.level"></span></td><td></td></tr>
                                         <tr><td><span data-bind="text: Character.HP"></span> / <span data-bind="text: Character.HPMax"></span> HP</td><td></td></tr>
                                         <tr><td><span data-bind="text: Character.AP"></span> / <span data-bind="text: Character.APMax"></span> AP</td><td></td></tr>
-                                        <tr><td><span data-bind="text: Character.XP"></span> / <span data-bind="text: Character.XPNeeded"></span> XP</td><td></td></tr>
+                                        <tr><td><span data-bind="text: Math.floor(Character.XP())"></span> / <span data-bind="text: Character.XPNeeded"></span> XP</td><td></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
                                         <tr><td>Attack</td><td><span data-bind="text: Character.attack"></span> <span class="text-success">+<span data-bind="text: Character.attackMod"></span></span></td></tr>
                                         <tr><td>Special Attack</td><td><span data-bind="text: Character.specialAttack"></span> <span class="text-success">+<span data-bind="text: Character.specialAttackMod"></span></span></td></tr>
@@ -74,7 +74,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th>Profiencies</th><th></th></tr>
@@ -88,7 +88,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr><th>Game Stats</th><th></th></tr>
@@ -175,11 +175,11 @@
                     <div data-bind="text: Character.name"></div>
                     <br />
                     <div>Level <span data-bind="text: Character.level"></span></div>
-                    <div><span data-bind="text: Character.XP"></span> / <span data-bind="text: Character.XPNeeded"></span></div>
+                    <div><span data-bind="text: Math.floor(Character.XP())"></span> / <span data-bind="text: Character.XPNeeded"></span></div>
                     <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character.gainXP(Character.XPPerClick()); Character.totalClicks(Character.totalClicks() + 1) }">Gain XP</button>
                     <br />
                     <br />
-                    <div><span data-bind="text: Character.gold"></span> gold</div>
+                    <div><span data-bind="text: Math.floor(Character.gold())"></span> gold</div>
                     <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character.gainGold(Character.goldPerClick()); Character.totalClicks(Character.totalClicks() + 1) }">Gain Gold</button>
                 </div>
             </div>
