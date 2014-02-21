@@ -26,13 +26,6 @@ App.ViewModels.Character = function() {
     self.specialDefense = ko.observable(10);
     self.speed = ko.observable(10);
 
-    // Stat mods
-    self.attackMod = ko.observable(0);
-    self.specialAttackMod = ko.observable(0);
-    self.defenseMod = ko.observable(0);
-    self.specialDefenseMod = ko.observable(0);
-    self.speedMod = ko.observable(0);
-
     // Proficiencies
     self.unarmedProf = ko.observable(1);
     self.unarmedProfXP = 0;
@@ -61,7 +54,7 @@ App.ViewModels.Character = function() {
     });
 
     // Combat
-    self.moveset = [];
+    self.moveset = [App.ViewModels.Moves.punch];
     self.ailments = [];
 
     // Gold/Inventory
@@ -75,6 +68,23 @@ App.ViewModels.Character = function() {
         hands: ko.observable(App.ViewModels.Items.Equipment.handsNothing),
         feet: ko.observable(App.ViewModels.Items.Equipment.feetNothing)
     };
+
+    // Stat mods
+    self.attackMod = ko.computed(function() {
+        return self.equipped.weapon().attackMod + self.equipped.body().attackMod + self.equipped.hands().attackMod + self.equipped.feet().attackMod;
+    });
+    self.specialAttackMod = ko.computed(function() {
+        return self.equipped.weapon().specialAttackMod + self.equipped.body().specialAttackMod + self.equipped.hands().specialAttackMod + self.equipped.feet().specialAttackMod;
+    });
+    self.defenseMod = ko.computed(function() {
+        return self.equipped.weapon().defenseMod + self.equipped.body().defenseMod + self.equipped.hands().defenseMod + self.equipped.feet().defenseMod;
+    });
+    self.specialDefenseMod = ko.computed(function() {
+        return self.equipped.weapon().specialDefenseMod + self.equipped.body().specialDefenseMod + self.equipped.hands().specialDefenseMod + self.equipped.feet().specialDefenseMod;
+    });
+    self.speedMod = ko.computed(function() {
+        return self.equipped.weapon().speedMod + self.equipped.body().speedMod + self.equipped.hands().speedMod + self.equipped.feet().speedMod;
+    });
 
     // Misc.
     self.enemiesKilled = ko.observable(0);
@@ -132,5 +142,28 @@ App.ViewModels.Character = function() {
         if(item.quantity() <= 0) self.inventory.remove(function(i) {
             return i.type === item.type && i.id === item.id;
         });
-    }
+    };
+
+    self.learnMove = function(move) {
+
+    };
+
+    self.Init = function() {
+        self.name("Grabnar");
+        self.level(1);
+        self.XP(0);
+        self.XPPerClick(1);
+        self.XPS(0);
+        self.HP(30);
+        self.HPMax(30);
+        self.HPRegen(0.2);
+        self.AP(100);
+        self.APMax(100);
+        self.attack(10);
+        self.specialAttack(10);
+        self.defense(10);
+        self.specialDefense(10);
+        self.speed(10);
+
+    };
 };

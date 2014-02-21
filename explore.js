@@ -1,3 +1,2 @@
 App.ViewModels.Explore = function() {
-
 };

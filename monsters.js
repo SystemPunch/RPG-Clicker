@@ -24,6 +24,8 @@ App.ViewModels.Monster = function(monsterData) {
 App.ViewModels.Monsters = function() {
     var self = this;
     var Monster = App.ViewModels.Monster;
+    var Moves = App.ViewModels.Moves;
+    var Items = App.ViewModels.Items;
 
     self.list = [];
 
@@ -35,7 +37,27 @@ App.ViewModels.Monsters = function() {
         specialAttack: 2,
         defense: 6,
         specialDefense: 2,
-        speed: 8
+        speed: 8,
+
+        moveset: [Moves.bite],
+        lootTable: [[Items.Consumables.potionHP1, 5],
+                    [Items.Consumables.potionAP1, 10]]
+    });
+
+    self.forestGoblin = new Monster({
+        name: "Forest Goblin",
+        level: 5,
+        HP: 40,
+        attack: 20,
+        specialAttack: 10,
+        defense: 16,
+        specialDefense: 10,
+        speed: 12,
+
+        moveset: [Moves.punch, Moves.stab, Moves.uppercut],
+        lootTable: [[Items.Consumables.potionHP1, 15],
+                    [Items.Consumables.potionAP1, 20],
+                    [Items.Equipment.crackedKnife, 5]]
     });
 
     self.lesserDryadArcher = new Monster({
@@ -46,7 +68,12 @@ App.ViewModels.Monsters = function() {
         specialAttack: 18,
         defense: 12,
         specialDefense: 16,
-        speed: 18
+        speed: 18,
+
+        moveset: [Moves.quickDraw, Moves.energyBlast1],
+        lootTable: [[Items.Consumables.potionHP1, 10],
+                    [Items.Consumables.potionAP1, 25],
+                    [Items.Equipment.warpedBow, 5]]
     });
 
     self.corruptedGnome = new Monster({
@@ -57,7 +84,11 @@ App.ViewModels.Monsters = function() {
         specialAttack: 18,
         defense: 50,
         specialDefense: 28,
-        speed: 22
+        speed: 22,
+
+        moveset: [Moves.punch, Moves.sweepKick],
+        lootTable: [[Items.Consumables.potionHP1, 30],
+                    [Items.Consumables.potionAP1, 35]]
     });
 
     self.corruptedCentaur = new Monster({
@@ -68,6 +99,11 @@ App.ViewModels.Monsters = function() {
         specialAttack: 42,
         defense: 36,
         specialDefense: 42,
-        speed: 60
+        speed: 60,
+
+        moveset: [Moves.punch, Moves.quickDraw, Moves.trample],
+        lootTable: [[Items.Consumables.potionHP1, 25],
+                    [Items.Consumables.potionAP1, 20],
+                    [Items.Equipment.warpedBow, 15]]
     });
 };
