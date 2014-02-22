@@ -6,16 +6,14 @@ App.ViewModels.Game = function() {
     self.time = self.perf.now();
     self.FPS = 0.0;
 
-    self.Character = new App.ViewModels.Character();
-    //self.Items = App.ViewModels.Items;
-    //self.Monsters = new App.ViewModels.Monsters();
+    self.Character = ko.observable(new App.ViewModels.Character());
 
     self.Loop = function() {
         var now = self.perf.now();
         var delta = now - self.time || 0;
 
-        self.Character.gainXP(self.Character.XPS() * delta/1000);
-        self.Character.gainGold(self.Character.GPS() * delta/1000);
+        self.Character().gainXP(self.Character().XPS() * delta/1000);
+        self.Character().gainGold(self.Character().GPS() * delta/1000);
 
         self.FPS = (1000/delta).toFixed(1);
         self.time = now;

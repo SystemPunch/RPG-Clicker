@@ -56,21 +56,21 @@
                             <div class="col-md-4">
                                 <table class="table table-condensed">
                                     <thead>
-                                        <tr><th data-bind="text: Character.name"></th><th></th></tr>
+                                        <tr><th data-bind="text: Character().name"></th><th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>Level <span data-bind="text: Character.level"></span></td><td></td></tr>
-                                        <tr><td><span data-bind="text: Character.HP"></span> / <span data-bind="text: Character.HPMax"></span> HP</td><td></td></tr>
-                                        <tr><td><span data-bind="text: Character.AP"></span> / <span data-bind="text: Character.APMax"></span> AP</td><td></td></tr>
-                                        <tr><td><span data-bind="text: Math.floor(Character.XP())"></span> / <span data-bind="text: Character.XPNeeded"></span> XP</td><td></td></tr>
+                                        <tr><td>Level <span data-bind="text: Character().level"></span></td><td></td></tr>
+                                        <tr><td><span data-bind="text: Character().HP"></span> / <span data-bind="text: Character().HPMax"></span> HP</td><td></td></tr>
+                                        <tr><td><span data-bind="text: Character().AP"></span> / <span data-bind="text: Character().APMax"></span> AP</td><td></td></tr>
+                                        <tr><td><span data-bind="text: Math.floor(Character().XP())"></span> / <span data-bind="text: Character().XPNeeded"></span> XP</td><td></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
-                                        <tr><td>Attack</td><td><span data-bind="text: Character.attack"></span> <span class="text-success">+<span data-bind="text: Character.attackMod"></span></span></td></tr>
-                                        <tr><td>Special Attack</td><td><span data-bind="text: Character.specialAttack"></span> <span class="text-success">+<span data-bind="text: Character.specialAttackMod"></span></span></td></tr>
-                                        <tr><td>Defense</td><td><span data-bind="text: Character.defense"></span> <span class="text-success">+<span data-bind="text: Character.defenseMod"></span></span></td></tr>
-                                        <tr><td>Special Defense</td><td><span data-bind="text: Character.specialDefense"></span> <span class="text-success">+<span data-bind="text: Character.specialDefenseMod"></span></span></td></tr>
-                                        <tr><td>Speed</td><td><span data-bind="text: Character.speed"></span> <span class="text-success">+<span data-bind="text: Character.speedMod"></span></span></td></tr>
+                                        <tr><td>Attack</td><td><span data-bind="text: Character().attack"></span> <span class="text-success">+<span data-bind="text: Character().attackMod"></span></span></td></tr>
+                                        <tr><td>Special Attack</td><td><span data-bind="text: Character().specialAttack"></span> <span class="text-success">+<span data-bind="text: Character().specialAttackMod"></span></span></td></tr>
+                                        <tr><td>Defense</td><td><span data-bind="text: Character().defense"></span> <span class="text-success">+<span data-bind="text: Character().defenseMod"></span></span></td></tr>
+                                        <tr><td>Special Defense</td><td><span data-bind="text: Character().specialDefense"></span> <span class="text-success">+<span data-bind="text: Character().specialDefenseMod"></span></span></td></tr>
+                                        <tr><td>Speed</td><td><span data-bind="text: Character().speed"></span> <span class="text-success">+<span data-bind="text: Character().speedMod"></span></span></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
-                                        <tr><td>HP Regen/second</td><td data-bind="text: Character.HPRegen().toFixed(2)"></td></tr>
+                                        <tr><td>HP Regen/second</td><td data-bind="text: Character().HPRegen().toFixed(2)"></td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -80,11 +80,11 @@
                                         <tr><th>Profiencies</th><th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>Unarmed</td><td data-bind="text: Character.unarmedProf"></td></tr>
-                                        <tr><td>Blades</td><td data-bind="text: Character.bladeProf"></td></tr>
-                                        <tr><td>Bows</td><td data-bind="text: Character.bowProf"></td></tr>
-                                        <tr><td>Shields</td><td data-bind="text: Character.shieldProf"></td></tr>
-                                        <tr><td>Magic</td><td data-bind="text: Character.magicProf"></td></tr>
+                                        <tr><td>Unarmed</td><td data-bind="text: Character().unarmedProf"></td></tr>
+                                        <tr><td>Blades</td><td data-bind="text: Character().bladeProf"></td></tr>
+                                        <tr><td>Bows</td><td data-bind="text: Character().bowProf"></td></tr>
+                                        <tr><td>Shields</td><td data-bind="text: Character().shieldProf"></td></tr>
+                                        <tr><td>Magic</td><td data-bind="text: Character().magicProf"></td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -94,16 +94,16 @@
                                         <tr><th>Game Stats</th><th></th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>XP per Click</td><td data-bind="text: Character.XPPerClick"></td></tr>
-                                        <tr><td>XP per Second</td><td data-bind="text: Character.XPS"></td></tr>
+                                        <tr><td>XP per Click</td><td data-bind="text: Character().XPPerClick"></td></tr>
+                                        <tr><td>XP per Second</td><td data-bind="text: Character().XPS"></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
-                                        <tr><td>Gold per Click</td><td data-bind="text: Character.goldPerClick"></td></tr>
-                                        <tr><td>Gold per Second</td><td data-bind="text: Character.GPS"></td></tr>
+                                        <tr><td>Gold per Click</td><td data-bind="text: Character().goldPerClick"></td></tr>
+                                        <tr><td>Gold per Second</td><td data-bind="text: Character().GPS"></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
-                                        <tr><td>Enemies Killed</td><td data-bind="text: Character.enemiesKilled"></td></tr>
-                                        <tr><td>Times Died</td><td data-bind="text: Character.timesDied"></td></tr>
+                                        <tr><td>Enemies Killed</td><td data-bind="text: Character().enemiesKilled"></td></tr>
+                                        <tr><td>Times Died</td><td data-bind="text: Character().timesDied"></td></tr>
                                         <tr><td>&nbsp;</td><td></td></tr>
-                                        <tr><td>Total Clicks</td><td data-bind="text: Character.totalClicks"></td></tr>
+                                        <tr><td>Total Clicks</td><td data-bind="text: Character().totalClicks"></td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -120,15 +120,13 @@
                                 <h4>Equipment</h4>
                                 <table class="table table-hover">
                                     <thead><tr><th>Name</th><th>Quantity</th><th></th><th></th></tr></thead>
-                                    <tbody data-bind="foreach: Character.inventory">
-                                        <!-- ko if: type === "equipment" -->
-                                        <tr>
+                                    <tbody data-bind="foreach: Character().inventory">
+                                        <tr data-bind="if: type === 'equipment'">
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
                                             <td><button type="button" class="btn btn-default btn-xs">Info</button></td>
-                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: equip.bind($data, $parent.Character)">Equip</button></td>
+                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: equip.bind($data, $parent.Character())">Equip</button></td>
                                         </tr>
-                                        <!-- /ko -->
                                     </tbody>
                                 </table>
                             </div>
@@ -136,14 +134,12 @@
                                 <h4>Consumables</h4>
                                 <table class="table table-hover">
                                     <thead><tr><th>Name</th><th>Quantity</th><th></th></tr></thead>
-                                    <tbody data-bind="foreach: Character.inventory">
-                                        <!-- ko if: type === "consumable" -->
-                                        <tr>
+                                    <tbody data-bind="foreach: Character().inventory">
+                                        <tr data-bind="if: type === 'consumable'">
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
-                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: effect.bind($data, $parent.Character)">Use</button></td>
+                                            <td><button type="button" class="btn btn-default btn-xs" data-bind="click: effect.bind($data, $parent.Character())">Use</button></td>
                                         </tr>
-                                        <!-- /ko -->
                                     </tbody>
                                 </table>
                             </div>
@@ -151,13 +147,11 @@
                                 <h4>Crafting/Enchanting</h4>
                                 <table class="table table-hover">
                                     <thead><tr><th>Name</th><th>Quantity</th></tr></thead>
-                                    <tbody data-bind="foreach: Character.inventory">
-                                        <!-- ko if: type === "crafting" || type === "enchanting" -->
-                                        <tr>
+                                    <tbody data-bind="foreach: Character().inventory">
+                                        <tr data-bind="if: (type === 'crafting' || type === 'enchanting')">
                                             <td data-bind="text: name"></td>
                                             <td data-bind="text: quantity()"></td>
                                         </tr>
-                                        <!-- /ko -->
                                     </tbody>
                                 </table>
                             </div>
@@ -166,16 +160,13 @@
                 </div>
                 <div class="tab-pane fade" id="exploreTab">
                     <div class="container">
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">PLACEHOLDER</button>
-                        </div>
-                        <div class="col-md-9">
-                            <p>Descriptions, combat, all that good stuff will go here.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="exploreLog">
+
+                                </div>
+                                <div id=""></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,15 +177,15 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div data-bind="text: Character.name"></div>
+                    <div data-bind="text: Character().name"></div>
                     <br />
-                    <div>Level <span data-bind="text: Character.level"></span></div>
-                    <div><span data-bind="text: Math.floor(Character.XP())"></span> / <span data-bind="text: Character.XPNeeded"></span></div>
-                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character.gainXP(Character.XPPerClick()); Character.totalClicks(Character.totalClicks() + 1) }">Gain XP</button>
+                    <div>Level <span data-bind="text: Character().level"></span></div>
+                    <div><span data-bind="text: Math.floor(Character().XP())"></span> / <span data-bind="text: Character().XPNeeded"></span></div>
+                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character().gainXP(Character().XPPerClick()); Character().totalClicks(Character().totalClicks() + 1) }">Gain XP</button>
                     <br />
                     <br />
-                    <div><span data-bind="text: Math.floor(Character.gold())"></span> gold</div>
-                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character.gainGold(Character.goldPerClick()); Character.totalClicks(Character.totalClicks() + 1) }">Gain Gold</button>
+                    <div><span data-bind="text: Math.floor(Character().gold())"></span> gold</div>
+                    <button type="button" class="btn btn-primary btn-xs" data-bind="click: function() { Character().gainGold(Character().goldPerClick()); Character().totalClicks(Character().totalClicks() + 1) }">Gain Gold</button>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -206,23 +197,23 @@
                             <div class="panel-collapse collapse" id="equippedWeapon">
                                 <div class="panel-body">
                                     <dl>
-                                        <dt data-bind="text: Character.equipped.weapon().name"></dt>
-                                        <dd data-bind="text: Character.equipped.weapon().description"></dd>
+                                        <dt data-bind="text: Character().equipped.weapon().name"></dt>
+                                        <dd data-bind="text: Character().equipped.weapon().description"></dd>
                                     </dl>
                                     <dl class="dl-horizontal">
                                         <dt>Attack</dt>
-                                        <dd data-bind="text: Character.equipped.weapon().attackMod">
+                                        <dd data-bind="text: Character().equipped.weapon().attackMod">
                                         <dt>Special Attack</dt>
-                                        <dd data-bind="text: Character.equipped.weapon().specialAttackMod">
+                                        <dd data-bind="text: Character().equipped.weapon().specialAttackMod">
                                         <dt>Defense</dt>
-                                        <dd data-bind="text: Character.equipped.weapon().defenseMod">
+                                        <dd data-bind="text: Character().equipped.weapon().defenseMod">
                                         <dt>Special Defense</dt>
-                                        <dd data-bind="text: Character.equipped.weapon().specialDefenseMod">
+                                        <dd data-bind="text: Character().equipped.weapon().specialDefenseMod">
                                         <dt>Speed</dt>
-                                        <dd data-bind="text: Character.equipped.weapon().speedMod">
+                                        <dd data-bind="text: Character().equipped.weapon().speedMod">
                                     </dl>
-                                    <!-- ko if: Character.equipped.weapon().name !== "Nothing" -->
-                                    <button type="button" class="btn btn-default btn-block" data-bind="click: Character.equipped.weapon().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- ko if: Character().equipped.weapon().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-block" data-bind="click: Character().equipped.weapon().unequip.bind($data, Character())">Unequip</button>
                                     <!-- /ko -->
                                 </div>
                             </div>
@@ -232,23 +223,23 @@
                             <div class="panel-collapse collapse" id="equippedBody">
                                 <div class="panel-body">
                                     <dl>
-                                        <dt data-bind="text: Character.equipped.body().name"></dt>
-                                        <dd data-bind="text: Character.equipped.body().description"></dd>
+                                        <dt data-bind="text: Character().equipped.body().name"></dt>
+                                        <dd data-bind="text: Character().equipped.body().description"></dd>
                                     </dl>
                                     <dl class="dl-horizontal">
                                         <dt>Attack</dt>
-                                        <dd data-bind="text: Character.equipped.body().attackMod">
+                                        <dd data-bind="text: Character().equipped.body().attackMod">
                                         <dt>Special Attack</dt>
-                                        <dd data-bind="text: Character.equipped.body().specialAttackMod">
+                                        <dd data-bind="text: Character().equipped.body().specialAttackMod">
                                         <dt>Defense</dt>
-                                        <dd data-bind="text: Character.equipped.body().defenseMod">
+                                        <dd data-bind="text: Character().equipped.body().defenseMod">
                                         <dt>Special Defense</dt>
-                                        <dd data-bind="text: Character.equipped.body().specialDefenseMod">
+                                        <dd data-bind="text: Character().equipped.body().specialDefenseMod">
                                         <dt>Speed</dt>
-                                        <dd data-bind="text: Character.equipped.body().speedMod">
+                                        <dd data-bind="text: Character().equipped.body().speedMod">
                                     </dl>
-                                    <!-- ko if: Character.equipped.body().name !== "Nothing" -->
-                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.body().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- ko if: Character().equipped.body().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character().equipped.body().unequip.bind($data, Character())">Unequip</button>
                                     <!-- /ko -->
                                 </div>
                             </div>
@@ -258,23 +249,23 @@
                             <div class="panel-collapse collapse" id="equippedHands">
                                 <div class="panel-body">
                                     <dl>
-                                        <dt data-bind="text: Character.equipped.hands().name"></dt>
-                                        <dd data-bind="text: Character.equipped.hands().description"></dd>
+                                        <dt data-bind="text: Character().equipped.hands().name"></dt>
+                                        <dd data-bind="text: Character().equipped.hands().description"></dd>
                                     </dl>
                                     <dl class="dl-horizontal">
                                         <dt>Attack</dt>
-                                        <dd data-bind="text: Character.equipped.hands().attackMod">
+                                        <dd data-bind="text: Character().equipped.hands().attackMod">
                                         <dt>Special Attack</dt>
-                                        <dd data-bind="text: Character.equipped.hands().specialAttackMod">
+                                        <dd data-bind="text: Character().equipped.hands().specialAttackMod">
                                         <dt>Defense</dt>
-                                        <dd data-bind="text: Character.equipped.hands().defenseMod">
+                                        <dd data-bind="text: Character().equipped.hands().defenseMod">
                                         <dt>Special Defense</dt>
-                                        <dd data-bind="text: Character.equipped.hands().specialDefenseMod">
+                                        <dd data-bind="text: Character().equipped.hands().specialDefenseMod">
                                         <dt>Speed</dt>
-                                        <dd data-bind="text: Character.equipped.hands().speedMod">
+                                        <dd data-bind="text: Character().equipped.hands().speedMod">
                                     </dl>
-                                    <!-- ko if: Character.equipped.hands().name !== "Nothing" -->
-                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.hands().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- ko if: Character().equipped.hands().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character().equipped.hands().unequip.bind($data, Character())">Unequip</button>
                                     <!-- /ko -->
                                 </div>
                             </div>
@@ -284,23 +275,23 @@
                             <div class="panel-collapse collapse" id="equippedFeet">
                                 <div class="panel-body">
                                     <dl>
-                                        <dt data-bind="text: Character.equipped.feet().name"></dt>
-                                        <dd data-bind="text: Character.equipped.feet().description"></dd>
+                                        <dt data-bind="text: Character().equipped.feet().name"></dt>
+                                        <dd data-bind="text: Character().equipped.feet().description"></dd>
                                     </dl>
                                     <dl class="dl-horizontal">
                                         <dt>Attack</dt>
-                                        <dd data-bind="text: Character.equipped.feet().attackMod">
+                                        <dd data-bind="text: Character().equipped.feet().attackMod">
                                         <dt>Special Attack</dt>
-                                        <dd data-bind="text: Character.equipped.feet().specialAttackMod">
+                                        <dd data-bind="text: Character().equipped.feet().specialAttackMod">
                                         <dt>Defense</dt>
-                                        <dd data-bind="text: Character.equipped.feet().defenseMod">
+                                        <dd data-bind="text: Character().equipped.feet().defenseMod">
                                         <dt>Special Defense</dt>
-                                        <dd data-bind="text: Character.equipped.feet().specialDefenseMod">
+                                        <dd data-bind="text: Character().equipped.feet().specialDefenseMod">
                                         <dt>Speed</dt>
-                                        <dd data-bind="text: Character.equipped.feet().speedMod">
+                                        <dd data-bind="text: Character().equipped.feet().speedMod">
                                     </dl>
-                                    <!-- ko if: Character.equipped.feet().name !== "Nothing" -->
-                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character.equipped.feet().unequip.bind($data, Character)">Unequip</button>
+                                    <!-- ko if: Character().equipped.feet().name !== "Nothing" -->
+                                    <button type="button" class="btn btn-default btn-lg btn-block" data-bind="click: Character().equipped.feet().unequip.bind($data, Character())">Unequip</button>
                                     <!-- /ko -->
                                 </div>
                             </div>

@@ -147,23 +147,4 @@ App.ViewModels.Character = function() {
     self.learnMove = function(move) {
 
     };
-
-    self.Init = function() {
-        self.name("Grabnar");
-        self.level(1);
-        self.XP(0);
-        self.XPPerClick(1);
-        self.XPS(0);
-        self.HP(30);
-        self.HPMax(30);
-        self.HPRegen(0.2);
-        self.AP(100);
-        self.APMax(100);
-        self.attack(10);
-        self.specialAttack(10);
-        self.defense(10);
-        self.specialDefense(10);
-        self.speed(10);
-
-    };
 };

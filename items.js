@@ -36,11 +36,16 @@ App.ViewModels.Item.Equipment = function(itemData) {
 
         user.equipped["" + self.slot](self);
         user.removeItem(self);
+
+        Game.queueNotification("You have equipped " + self.name, "info");
     };
 
     self.unequip = function(user) {
         user.equipped["" + self.slot](App.ViewModels.Items.Equipment[self.slot + "Nothing"]);
-        if(self.name !== "Nothing") user.gainItem(self);
+        if(self.name !== "Nothing") {
+            user.gainItem(self);
+            Game.queueNotification("You have unequipped " + self.name, "info");
+        }
     }
 };
 
@@ -55,7 +60,10 @@ App.ViewModels.Items = new function() {
             description: "Restores 20 HP",
             id: 0,
             effect: function(user) {
-                if(user.HP() >= user.HPMax()) return false;
+                if(user.HP() >= user.HPMax()) {
+                    Game.queueNotification("You are already at full health!", "danger");
+                    return false;
+                }
                 user.HP(user.HP() + 20);
                 if(user.HP() > user.HPMax()) user.HP(user.HPMax());
                 return true;
@@ -68,9 +76,12 @@ App.ViewModels.Items = new function() {
             description: "Restores 20 AP",
             id: 1,
             effect: function(user) {
-                if(user.HP() >= user.HPMax()) return false;
+                if(user.AP() >= user.APMax()) {
+                    Game.queueNotification("You are already at full AP!", "danger");
+                    return false;
+                }
                 user.AP(user.AP() + 20);
-                if(user.AP() > user.APMax()) user.AP(user.APMax);
+                if(user.AP() > user.APMax()) user.AP(user.APMax());
                 return true;
             },
             cost: 100
@@ -80,7 +91,11 @@ App.ViewModels.Items = new function() {
             name: "Smelling Salts",
             description: "Cures paralysis",
             id: 2,
-            effect: function() {
+            effect: function(user) {
+                if(user.ailments.indexOf("paralyzed") >= 0) {
+                    user.ailments.splice(user.ailments.indexOf("paralyzed"), 1);
+                    Game.queueNotification("You have cured your paralysis!", "success");
+                } else Game.queueNotification("You are not currently paralyzed!", "danger");
             },
             cost: 150
         })

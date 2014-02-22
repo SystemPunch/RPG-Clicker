@@ -1,3 +1,7 @@
+body {
+    overflow-y: scroll;
+}
+
 td:last-child {
     text-align: right;
 }
